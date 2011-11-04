@@ -29,6 +29,15 @@ $ rake generate
 $ rake deploy
 ```
 
+#### 保存源代码
+因为发布的只是生成的静态页面，  
+需要在项目里建立source分支用于保存整个项目源代码（配置、markdown文件等）。
+```
+$ git add .
+$ git commit -m 'blog'
+$ git push origin source
+```
+
 ## 参考
 [Octopress官方文档](http://octopress.org/docs/)  
 [markdown语法](http://daringfireball.net/projects/markdown/syntax)
