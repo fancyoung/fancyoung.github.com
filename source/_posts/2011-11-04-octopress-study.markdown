@@ -46,6 +46,14 @@ $ git commit -m 'blog'
 $ git push origin source
 ```
 
+## 更多设置
+#### 添加"关于我"
+- 在`source`下新建`about`目录，并在里面添加`index.markdown`文件。
+- 编辑导航条`source/_includes/custom/navigation.html`
+- 注意:`index.markdown`文件需要加上头，否则会找不到。
+
+
+
 ## Bug Fix
 
 #### 不能进行deploy  
