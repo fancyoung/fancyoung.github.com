@@ -48,9 +48,9 @@ $ git push origin source
 
 ## 更多设置
 #### 添加"关于我"
-- 在`source`下新建`about`目录，并在里面添加`index.markdown`文件。
-- 编辑导航条`source/_includes/custom/navigation.html`
-- 注意:`index.markdown`文件需要加上头，否则会找不到。
+在`source`下新建`about`目录，并在里面添加`index.markdown`文件。  
+编辑导航条`source/_includes/custom/navigation.html`  
+注意:`index.markdown`文件需要加上头，否则会找不到。  
 
 
 
@@ -58,9 +58,7 @@ $ git push origin source
 
 #### 不能进行deploy  
 有次发现`$ rake deploy`不能发布，但是预览正常。检查github上source分支代码已更新，但master仍为老代码。
-发现是因为`_config.yml`文件中url设置错误。
-之前手动设置为`http://fancyoung.com`，修改回`http://fancyoung.github.com`后解决问题。
-也可尝试执行`$ rake setup_github_pages`来修复发布。
+发现是因为代码是新从github下clone下来的，需要执行`$ rake setup_github_pages`进行初始化。
 
 ## 参考
 [Octopress官方文档](http://octopress.org/docs/)  
