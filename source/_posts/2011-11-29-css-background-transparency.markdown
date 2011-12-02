@@ -3,7 +3,7 @@ layout: post
 title: "CSS实现背景透明完美解决方案"
 date: 2011-11-29 16:44
 comments: true
-categories: [前端, 翻译] 
+categories: [前端, 翻译]
 published: true
 ---
 
@@ -72,7 +72,7 @@ published: true
 
 还有一种更快的方法就是利用JavaScript,
 只需要在浏览器控制行里输入
-``` javascript 计算透明值
+```
 Math.floor(0.6 * 255).toString(16);
 ```
 便能得出结果.
@@ -113,7 +113,7 @@ for coming up with countless alternatives for hex conversion, and explaining bas
 
 ## 译者总结
 大家使用时可直接复制下面代码:
-``` css 半透明CCS模板
+```
 /* 白色背景,透明度0.6 */
 .alpha60 {
   background: rgb(255, 255, 255);

@@ -3,7 +3,7 @@ layout: post
 title: "Ruby on Rails使用时灵异的Bug"
 date: 2011-11-17 20:33
 comments: true
-categories: 
+categories: [Ruby]
 ---
 > 送给敬爱的GFW
 

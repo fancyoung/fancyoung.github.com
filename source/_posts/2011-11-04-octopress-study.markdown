@@ -3,8 +3,9 @@ layout: post
 title: "技术博客利器——Octopress"
 date: 2011-11-04 12:59
 comments: true
-categories: 
+categories: [Ruby]
 ---
+
 ## Octopress简介
 > Octopress is a framework designed by Brandon Mathis for Jekyll, the blog aware static site generator powering Github Pages.  
 

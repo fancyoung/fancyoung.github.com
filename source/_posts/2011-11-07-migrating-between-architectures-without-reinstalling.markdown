@@ -3,11 +3,12 @@ layout: post
 title: "将Arch Linux从32位升到64位"
 date: 2011-11-07 14:37
 comments: true
-categories: 
+categories: [翻译]
 ---
 
 - 翻译自Arch Wiki：[Migrating Between Architectures Without Reinstalling](https://wiki.archlinux.org/index.php/Migrating_Between_Architectures_Without_Reinstalling)
 - i686为32位，x86_64位64位
+- 升级有风险，操作须谨慎。本人使用文中方法2升级时无意间重启了电脑，催悲了。
 
 ## 准备工作
 ### 确认为64位平台

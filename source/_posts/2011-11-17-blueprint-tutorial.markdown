@@ -3,9 +3,11 @@ layout: post
 title: "Blueprint教程"
 date: 2011-11-17 13:15
 comments: true
-categories: "前端"
+categories: [前端, 翻译]
 ---
-（本文为官网教程翻译）
+
+翻译自: [Blueprint CSS Framework Tutorial](https://github.com/joshuaclayton/blueprint-css/wiki/Quick-start-tutorial)
+
 Blueprint是个好框架，本教程会深入介绍你可以用它来做什么，也会说到什么时候不适合用。
 
 ## Blueprint简介
