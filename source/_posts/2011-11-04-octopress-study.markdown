@@ -58,8 +58,10 @@ $ git push origin source
 ## Bug Fix
 
 #### 不能进行deploy  
-有次发现`$ rake deploy`不能发布，但是预览正常。检查github上source分支代码已更新，但master仍为老代码。
-发现是因为代码是新从github下clone下来的，需要执行`$ rake setup_github_pages`进行初始化。
+问题：有次发现`$ rake deploy`不能发布，但是预览正常。检查github上source分支代码已更新，但master仍为老代码。  
+原因：发现是因为代码是新从github下clone下来的，未进行初始化deploy。  
+解决：需要执行`$ rake setup_github_pages`进行初始化。  
+注意：rake操作应该在source分支下进行，若是刚从github里clone下来的，请先执行`$ git checkout source`。
 
 ## 参考
 [Octopress官方文档](http://octopress.org/docs/)  

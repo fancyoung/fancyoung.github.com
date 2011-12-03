@@ -124,3 +124,6 @@ for coming up with countless alternatives for hex conversion, and explaining bas
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99ffffff, endColorstr=#99ffffff)";
 }
 ```
+最后来个效果图,顺便试试jsfiddle的嵌入:  
+{% jsfiddle nMKGs result,html,css %}
+
