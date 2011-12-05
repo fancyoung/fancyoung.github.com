@@ -1,2 +1,24 @@
 // This File is imported last, and will override other styles in the cascade
 // Add styles here to make changes without digging in too much
+html {
+  background: #07634e url(/images/background_board.jpg);
+}
+
+body > header {
+  margin: 30px 0;
+  @include border-radius(.4em);
+  background: rgb(0, 0, 0);
+  background: rgba(0, 0, 0, 0.3);
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#4c000000, endColorstr=#4c000000);
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#4c000000, endColorstr=#4c000000)";
+  h1, h2 {
+    a, a:visited, a:hover {
+      color: #aeb2b2;
+    }
+  }
+}
+
+body > nav {
+  border-top: 0;
+  @include border-top-radius(.4em);
+}
