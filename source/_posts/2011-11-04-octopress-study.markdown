@@ -9,6 +9,8 @@ categories: [Ruby]
 ## Octopress简介
 > Octopress is a framework designed by Brandon Mathis for Jekyll, the blog aware static site generator powering Github Pages.  
 
+<!--more-->
+
 #### 优点
 用文件方式储存数据，无需数据库  
 以静态方式发布，可直接挂在github等地方  

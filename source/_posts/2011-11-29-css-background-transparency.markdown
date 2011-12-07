@@ -26,6 +26,8 @@ published: true
 尤其考虑到图片不能太小以避免
 [IE下24位PNG图透明时引起的内存泄漏](http://robertnyman.com/2009/05/26/serious-memory-leak-issue-with-24-bit-png-images-with-alpha-transparency-in-internet-explorer/).
 
+<!--more-->
+
 ## 解决方案
 这里提供一种方法:
 [RGBa colors](http://en.wikipedia.org/wiki/RGBA_color_space).

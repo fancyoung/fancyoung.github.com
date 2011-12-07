@@ -5,6 +5,9 @@ date: 2011-11-04 11:31
 comments: true
 categories: 
 ---
+
+<!--more-->
+
 - 在项目根目录下建立一文件，名为`CNAME`，里面写上域名，如`fancyoung.com`
 或者在命令行里执行：
 ```
