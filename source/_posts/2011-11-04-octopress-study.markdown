@@ -55,15 +55,25 @@ $ git push origin source
 编辑导航条`source/_includes/custom/navigation.html`  
 注意:`index.markdown`文件需要加上头，否则会找不到。  
 
+#### 首页只显示摘要
+- 在文中加入`<!--more-->`来控制摘要截取位置
+- 修改`_config.yml`里的`excerpt_link`控制链接文字
 
+#### 部署到Github
+操作步骤参考：[Deploying to Github Pages](http://octopress.org/docs/deploying/github/)  
+如果你有自己的域名，可参考：[Github Page绑定自己域名](http://fancyoung.com/blog/host-to-github/)
 
 ## Bug Fix
 
-#### 不能进行deploy  
+#### 不能进行deploy(Github)  
 问题：有次发现`$ rake deploy`不能发布，但是预览正常。检查github上source分支代码已更新，但master仍为老代码。  
 原因：发现是因为代码是新从github下clone下来的，未进行初始化deploy。  
 解决：需要执行`$ rake setup_github_pages`进行初始化。  
 注意：rake操作应该在source分支下进行，若是刚从github里clone下来的，请先执行`$ git checkout source`。
+
+#### 修改的样式preview时不生效
+问题：预览时发现之前设置成功的自定义样式不生效，变回默认样式。  
+解决：`$ rake generate`即可，会重新生成css。  
 
 ## 参考
 [Octopress官方文档](http://octopress.org/docs/)  
