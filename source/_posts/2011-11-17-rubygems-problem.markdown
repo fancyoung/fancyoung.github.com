@@ -14,13 +14,16 @@ categories: [Ruby]
 据说是因为rubygems.org用的是Amazon的S3服务，而部分s3服务器被GFW拦于墙外。
 
 ## 解决
-- 2012.12.31更新：淘宝提供了镜像  
-`$ gem sources -a http://ruby.taobao.org/`
+- 2012.12.31更新：淘宝提供了[镜像](http://ruby.taobao.org/)  
+添加source地址:
+先`$ gem sources -a http://ruby.taobao.org/`,  
+用`$ gem sources -l`查看source列表,  
+然后用`$ gem sources -r 不需要的source地址`命令来删除之前的.
 
-- 曾经解决方案，单独下载安装包  
-  可能需要安装的包  
-  multi_json  
-  activesupport  
+- <del>曾经解决方案，单独下载安装包</del>  
+  <del>可能需要安装的包</del>  
+  <del>multi_json</del>  
+  <del>activesupport</del> 
 
 ## 链接
 [Rubygems](http://rubygems.org/)
