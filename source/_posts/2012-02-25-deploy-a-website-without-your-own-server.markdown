@@ -124,8 +124,10 @@ production:
 `$ git push heroku master`
 
 #### 绑定自己的域名
-添加Heroku插件(Add-on): Custom Domain.   
-Heroku里添加插件需要先用信用卡(需国际信用卡)认证.   
+<del>添加Heroku插件(Add-on): Custom Domain.</del>  
+<del>Heroku里添加插件需要先用信用卡(需国际信用卡)认证.</del>  
+(根据@joel 提醒，现在已可以直接设置，无需插件，  
+Custom Domains已打上REPLACED标记。)
 
 配置过程中, 发现3个IP都ping不通, 发现是被墙.   
 最后用过设置CNAME的方式完成配置.   
