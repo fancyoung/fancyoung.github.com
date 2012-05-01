@@ -75,6 +75,12 @@ $ git push origin source
 问题：预览时发现之前设置成功的自定义样式不生效，变回默认样式。  
 解决：`$ rake generate`即可，会重新生成css。  
 
+####  无法update octopress
+每过一段时间，可能需要[更新一下Octopress版本](http://octopress.org/docs/updating/)，
+问题：执行`$ git pull octopress master`时报错：`fatal: 'octopress' does not appear to be a git repository`
+原因：没有相应远程分支（第一次生成博客的项目中才有？）。打开`.git/config`查看，应该不包含`[remote "octopress"]`块。
+解决：手动添加，或者在命令行执行：`$ git remote add octopress https://github.com/imathis/octopress.git`
+
 ## 参考
 [Octopress官方文档](http://octopress.org/docs/)  
 [markdown语法](http://daringfireball.net/projects/markdown/syntax)
