@@ -33,6 +33,15 @@ Bug出现需要同时满足以下3个条件:
 </style>
 <link href="../css/bootstrap-responsive.css" rel="stylesheet">
 ```
+Rails3.2的Asset Pipeline就更方便了，放在import中即可（我用的是Sass）
+```
+@import compass
+$baseFontSize: 15px
+@import compass_twitter_bootstrap
+body
+  padding-top: 60px
+@import compass_twitter_bootstrap_responsive
+```
 
 #### 结论
 我在某项目中因为使用的是customize出来的单个css文件, 所以采用了解决方案1.  
