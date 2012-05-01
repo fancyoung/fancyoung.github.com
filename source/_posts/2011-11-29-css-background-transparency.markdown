@@ -129,3 +129,6 @@ for coming up with countless alternatives for hex conversion, and explaining bas
 最后来个效果图,顺便试试jsfiddle的嵌入:  
 {% jsfiddle nMKGs result,html,css %}
 
+(2012-05-01 更新)  
+因为自己用的是Sass，所以封装了一下，Sass的功能很强大：  
+[Sass中通过mixin封装透明背景模块](/blog/better-transparentize-mixin-for-sass)
