@@ -36,6 +36,9 @@ $ git add README
 ```
 $ git ci -m '-'
 ```
+
+<!--more-->
+
 #### 4
 在`.git/config`文件里添加
 ```

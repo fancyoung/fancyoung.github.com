@@ -21,6 +21,8 @@ $ rvm gem update
 ```
 不过我2次都引发了下面几个问题
 
+<!--more-->
+
 ## `$ bundle install RedCloth`时报错
 #### 现象:
 无法make，出错提示为：
