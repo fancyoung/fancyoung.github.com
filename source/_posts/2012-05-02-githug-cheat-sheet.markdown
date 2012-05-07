@@ -14,8 +14,8 @@ categories:
 ## 准备
 安装Githug：`$ gem install githug`。  
 安装完成后直接执行`$ githug`开始游戏，同一条命令进入下一关。  
-`$ github hint`查看过关提示，  
-当操作错误无法过关时，可以`$ github reset`重置当前关卡。
+`$ githug hint`查看过关提示，  
+当操作错误无法过关时，可以`$ githug reset`重置当前关卡。
 
 ## 开始
 #### 0
