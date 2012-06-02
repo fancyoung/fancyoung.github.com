@@ -24,4 +24,8 @@ categories:
 * 2  
 问题：`ssh root@localhost`并输入密码后报`permission denied`  
 原因：发现直接用`su`也不行（之前一直都只是sudo），因为没设root密码  
-解决：`sudo passwd root`
+解决：`sudo passwd root`  
+注：
+`/etc/ssh/sshd_config`中有个参数`PermitRootLogin`需设置为`yes`。  
+虽然有安全问题，不过是本机，问题不大。  
+修改配置后需重启服务：`sudo /etc/init.d/ssh restart`
