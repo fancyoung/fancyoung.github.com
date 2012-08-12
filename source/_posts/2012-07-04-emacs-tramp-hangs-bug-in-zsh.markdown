@@ -3,7 +3,7 @@ layout: post
 title: "解决Emacs远程连接时卡住的bug"
 date: 2012-07-04 00:14
 comments: true
-categories: 
+categories: [Emacs, 问题解决]
 ---
 
 前几天终于买了Linode的VPS，配置过程中遇见一个灵异问题：  

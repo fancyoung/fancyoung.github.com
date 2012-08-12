@@ -3,7 +3,7 @@ layout: post
 title: "Github Page绑定自己域名"
 date: 2011-11-04 11:31
 comments: true
-categories: 
+categories: [Github]
 ---
 
 <!--more-->

@@ -3,7 +3,7 @@ layout: post
 title: "用Emacs远程编辑文件及相关笔记"
 date: 2012-06-02 10:16
 comments: true
-categories: 
+categories: [Emacs]
 ---
 
 #### Emacs编辑远程文件

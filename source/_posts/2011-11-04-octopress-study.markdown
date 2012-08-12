@@ -3,7 +3,7 @@ layout: post
 title: "技术博客利器——Octopress"
 date: 2011-11-04 12:59
 comments: true
-categories: [Ruby]
+categories: [Octopress, 教程, 常用, 问题解决]
 ---
 
 ## Octopress简介

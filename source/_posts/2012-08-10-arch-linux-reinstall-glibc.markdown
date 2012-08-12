@@ -3,7 +3,7 @@ layout: post
 title: "Arch升级失败后修复glibc记录"
 date: 2012-08-10 00:27
 comments: true
-categories: [Arch Linux, 经验]
+categories: [Arch Linux, 问题解决]
 ---
 ## 起因
 `$ pacman -Syu`时提示错误，

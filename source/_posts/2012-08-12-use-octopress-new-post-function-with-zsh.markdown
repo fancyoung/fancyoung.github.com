@@ -3,8 +3,7 @@ layout: post
 title: "Octopress在zsh下无法新建博客的问题"
 date: 2012-08-12 16:50
 comments: true
-categories: [Ruby]
-published: false
+categories: [Octopress, 问题解决, Ruby]
 ---
 执行：`$ rake new_post["arch-linux-reinstall-glibc.markdown"]`
 
