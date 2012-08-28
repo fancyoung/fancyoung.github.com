@@ -3,7 +3,7 @@ layout: post
 title: "Githug通关全攻略"
 date: 2012-05-02 12:49
 comments: true
-categories: 
+categories: [Github]
 ---
 [Githug](https://github.com/Gazler/githug)将git的入门与游戏相结合，太有意思了。  
 游戏过程中少不了网上查找资料，man，难度4以后不停的hint。  

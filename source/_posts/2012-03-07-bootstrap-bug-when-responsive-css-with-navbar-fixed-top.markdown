@@ -3,7 +3,7 @@ layout: post
 title: "Bootstrap使用响应式设计(Responsive design)时导航条上部有空白的解决方案"
 date: 2012-03-07 17:32
 comments: true
-categories: [Bug]
+categories: [Bootstrap, 问题解决]
 ---
 
 #### 原因

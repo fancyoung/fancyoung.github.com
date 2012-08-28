@@ -3,7 +3,7 @@ layout: post
 title: "将Arch Linux从32位升到64位"
 date: 2011-11-07 14:37
 comments: true
-categories: [翻译]
+categories: [Arch Linux, 翻译]
 ---
 
 - 翻译自Arch Wiki：[Migrating Between Architectures Without Reinstalling](https://wiki.archlinux.org/index.php/Migrating_Between_Architectures_Without_Reinstalling)

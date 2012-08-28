@@ -15,4 +15,6 @@ group :development do
   gem 'liquid', '~> 2.3.0'
 end
 
+gem 'sass', '3.1.17'
+
 gem 'sinatra', '~> 1.3.2'
