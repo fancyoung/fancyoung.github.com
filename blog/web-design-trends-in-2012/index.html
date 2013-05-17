@@ -1,0 +1,426 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>2012十大Web设计趋势 - 没有标题的博客</title>
+  <meta name="author" content="思扬">
+
+  
+  <meta name="description" content="本不想取这么俗的标题,
+可原文正好推荐了10个.
+这回就不翻译原文,
+记点自己的看法. 1. 响应式Web设计(Responsive Web Design) 简单的说就是动态适应当前各种分辨率及设备(电脑, Pad, 手机, &#8230;)的页面方案.
+常用的有弹性布局. 另, &#8220; &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://fancyoung.com/blog/web-design-trends-in-2012/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="没有标题的博客" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-1694311-5']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">没有标题的博客</a></h1>
+  
+    <h2>记录与分享</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:fancyoung.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">关于我</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">2012十大Web设计趋势</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-12-15T15:03:00+00:00" pubdate data-updated="true">Dec 15<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>本不想取这么俗的标题,
+可原文正好推荐了10个.<br/>
+这回就不翻译原文,
+记点自己的看法.</p>
+
+<!--more-->
+
+
+<h4>1. 响应式Web设计(Responsive Web Design)</h4>
+
+<p>简单的说就是动态适应当前各种分辨率及设备(电脑, Pad, 手机, &#8230;)的页面方案.<br/>
+常用的有弹性布局. 另, &#8220;弹性图片&#8221;是个很有意思的东西.<br/>
+<a href="http://beforweb.com/node/6">什么是响应式Web设计？怎样进行？</a><br/>
+绝对是将来的方向,
+但考虑到技术和设计的实现复杂度,
+暂时还是用定宽网格吧.</p>
+
+<h4>2. 固定导航条(Fixed-Position Navigation)</h4>
+
+<p>如果不是ie6不支持<code>position:fixed</code>,<br/>
+估计每个网站都会放几个固定元素.<br/>
+常见的有: 顶部导航条, 底部工具条, &#8220;回到顶部&#8221;.</p>
+
+<h4>3. 圆(Circles)</h4>
+
+<p>圆圆的东西总能戳中人们的萌点,<br/>
+比如: <a href="http://columnfivemedia.com/">columnfivemedia.com</a><br/>
+网站用了两种方式实现圆:<br/>
+顶部的两个圈圈用的是透明背景的png图,
+中部并排的四个圈圈通过圆角实现
+(只需将圆角设定大于宽/高的一半即可).</p>
+
+<p>这个网站有意思的还有将鼠标指到圈圈上时,图片会动起来.<br/>
+实现方法也非常简单,利用了CSS spirit.<br/>
+将一张静态图和一张动态图拼接成git图,
+再通过CSS实现显示部分.<br/>
+(不用两张图是为了能同时加载, 以避免鼠标指上去时第二张图还没有加载.)</p>
+
+<iframe style="width: 420px; height: 230px" src="http://jsfiddle.net/zr4ac/embedded/result,html,css/light/"></iframe>
+
+
+<h4>4. 大矢量图(Big Vector Art)</h4>
+
+<h4>5. 多列菜单(Multi-Column Menus)</h4>
+
+<h4>6. jQuery/CSS3/HTML5动画(Animation)</h4>
+
+<h4>7. 缎带&amp;横幅(Ribbons &amp; Banner Graphics)</h4>
+
+<p>一秒钟网页立体化, 元素变卡片.<br/>
+可与固定位置配合使用(如:<a href="http://edgeguides.rubyonrails.org/getting_started.html">RoR教程, 见右上角的&#8221;edge&#8221;</a>).<br/>
+你应该在某处已经看过了, 放几张图片例子:
+<a href="http://365psd.com/day/2-23/"><img src="http://www.webpagescreenshot.info/img/184189-1216201135658am.png"></a>
+<a href="http://365psd.com/day/2-183/"><img src="http://www.webpagescreenshot.info/img/491988-1216201135455am.png"></a></p>
+
+<h4>8. 自定义字体风格(Custom Font Faces)</h4>
+
+<p>这点就先不看了。人家只有26个字母，算上大小写也才52个。</p>
+
+<h4>9. 信息可视化(Infographics)</h4>
+
+<p>没技术含量, 就不写了.
+<a href="http://www.cnblogs.com/lhb25/archive/2011/03/19/1988526.html">数据之美：Infographics 终极探索</a></p>
+
+<h4>10. 专注于简约(Focus on Simplicity)</h4>
+
+<h4>11. 视差滚动(Parallax Scrolling)</h4>
+
+<p>这个是我自己加的，因为实在太炫了。<br/>
+据说这是最经典的视差滚动：<a href="http://www.nikebetterworld.com/">Nike Better World</a><br/>
+每页都有很多创意元素：<a href="http://www.beetle.com/">某汽车网站</a><br/>
+从开发角度讲难度并不高，可能会有点点繁琐，<br/>
+我想它没排进前十的原因大约是对设计者要求太高。<br/>
+来份教程：<a href="http://coding.smashingmagazine.com/2011/07/12/behind-the-scenes-of-nike-better-world/">Behind The Scenes Of Nike Better World</a></p>
+
+<h2>参考</h2>
+
+<p>原文：<a href="http://webdesignledger.com/tips/web-design-trends-in-2012">Web Design Trends in 2012</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">思扬</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-12-15T15:03:00+00:00" pubdate data-updated="true">Dec 15<span>th</span>, 2011</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/前端/'>前端</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  <!-- JiaThis Button BEGIN -->
+  <div id="ckepop">
+    <span class="jiathis_txt">分享到：</span>
+    <a class="jiathis_button_tsina">新浪微博</a>
+    <a class="jiathis_button_googleplus">Google+</a>
+    <a class="jiathis_button_tumblr">Tumblr</a>
+    <a class="jiathis_button_evernote">EverNote</a>
+    <a class="jiathis_button_readitlater">Read It Later</a>
+
+    <a href="http://www.jiathis.com/share?uid=1614610" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+    <a class="jiathis_counter_style"></a>
+  </div>
+  <script type="text/javascript" >
+    var jiathis_config={
+      data_track_clickback:true,
+      summary:"",
+      hideMore:false
+    }
+  </script>
+  <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js?uid=1614610" charset="utf-8"></script>
+  <style>
+    .sharing .flash-video {
+    border: 0
+    }
+  </style>
+  <!-- JiaThis Button END -->
+
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/css-background-transparency/" title="Previous Post: CSS实现背景透明完美解决方案">&laquo; CSS实现背景透明完美解决方案</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/deploy-a-website-without-your-own-server/" title="Next Post: 将一切放在云端">将一切放在云端 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>简介</h1>
+  <p>我的技术博客</p>
+  <p>o(∩_∩)o</p>
+</section>
+<section>
+  <h1>常用链接</h1>
+  <ul>
+    <li>
+      <a href="http://iaieye.com" target="_blank">IAIEYE-我的时间线网站</a>
+    </li>
+    <li>
+      <a href="https://github.com/fancyoung/fancy-emacs/wiki/shortcut" target="_blank">Emacs快捷键</a>
+    </li>
+  </ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/use-octopress-new-post-function-with-zsh/">Octopress在zsh下无法新建博客的问题</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/arch-linux-reinstall-glibc/">Arch升级失败后修复glibc记录</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/tmux-study/">tmux使用</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/emacs-tramp-hangs-bug-in-zsh/">解决Emacs远程连接时卡住的bug</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/edit-remote-file-with-emacs/">用Emacs远程编辑文件及相关笔记</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/fancyoung">@fancyoung</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'fancyoung',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+<section>
+  <h1>技术博客</h1>
+  <ul>
+    <li>
+      <a href="http://ejohn.org/">John Resig</a>
+      <p>jQuery创始人</p>
+    </li>
+    <li>
+      <a href="http://davidwalsh.name/">David Walsh Blog</a>
+      <p>Mootools开发者</p>
+    </li>
+    <li>
+      <a href="http://lifesinger.wordpress.com/">岁月如歌</a>
+      <p>需翻墙</p>
+    </li>
+  </ul>
+</section>
+<section>
+  <h1>其它博客</h1>
+  <ul>
+    <li>
+      <a href="http://blog.sina.com.cn/twocold">韩寒</a>
+    </li>
+    <li>
+      <a href="http://blog.sina.com.cn/fangzhouzi">方舟子</a>
+    </li>
+    <li>
+      <a href="http://thisisdongdongqiang.com/">东东枪</a>
+    </li>
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - 思扬 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'fancyoung';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://fancyoung.com/blog/web-design-trends-in-2012/';
+        var disqus_url = 'http://fancyoung.com/blog/web-design-trends-in-2012/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: 常用 | 没有标题的博客]]></title>
+  <link href="http://fancyoung.com/blog/categories/常用/atom.xml" rel="self"/>
+  <link href="http://fancyoung.com/"/>
+  <updated>2013-05-17T06:17:09+00:00</updated>
+  <id>http://fancyoung.com/</id>
+  <author>
+    <name><![CDATA[思扬]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[CSS实现背景透明完美解决方案]]></title>
+    <link href="http://fancyoung.com/blog/css-background-transparency/"/>
+    <updated>2011-11-29T16:44:00+00:00</updated>
+    <id>http://fancyoung.com/blog/css-background-transparency</id>
+    <content type="html"><![CDATA[<p>翻译自: <a href="http://robertnyman.com/2010/01/11/css-background-transparency-without-affecting-child-elements-through-rgba-and-filters/">CSS Background Transparency Without Affecting Child Elements, Through RGBa And Filters</a></p>
+
+<p>当今的大部分网页设计都包含了半透明的元素.但用CSS实现想要的效果却没那么简单.</p>
+
+<h2>现存的问题</h2>
+
+<p>如果我们想要一个半透明背景,有两种实现方式:<br/>
+- 利用CSS和opacity属性<br/>
+- 建立一个24位PNG背景图片<br/>
+用opacity的问题除了
+<a href="http://robertnyman.com/2008/09/16/you-want-css-opacity-to-go-with-that-well-suit-yourself/">需要通过麻烦的语法来兼容所有浏览器</a>,
+还有不单该元素自身背景透明了,它的子元素也会透明.
+所以里面所有的文字也是透明的,这一般不是想要的效果.
+你可以做一些CSS trick,通过建立额外的元素来解决这个问题,但这种解决方案很恶心.</p>
+
+<p>用PNG的问题是会额外增加HTTP请求,
+而且图片比几行css代码要大得多-
+尤其考虑到图片不能太小以避免
+<a href="http://robertnyman.com/2009/05/26/serious-memory-leak-issue-with-24-bit-png-images-with-alpha-transparency-in-internet-explorer/">IE下24位PNG图透明时引起的内存泄漏</a>.</p>
+
+<!--more-->
+
+
+<h2>解决方案</h2>
+
+<p>这里提供一种方法:
+<a href="http://en.wikipedia.org/wiki/RGBA_color_space">RGBa colors</a>.
+它的美妙之处在于你可以通过设置RGB值和透明值,轻松的实现颜色透明.
+代码如下:
+<code>
+.alpha60 {
+  /* 用于不支持RGBa的浏览器 */
+  background: rgb(0, 0, 0);
+  /* RGBa, 透明度0.6 */
+  background: rgba(0, 0, 0, 0.6);
+}
+</code>
+透明将只对背景生效,很好很强大,对吧:)</p>
+
+<h3>继续</h3>
+
+<p>不幸的是IE不支持RGBa(IE678都不行).
+幸运的是微软在2000年时疯狂的给IE加上了各种过滤器.
+其中有一个是<a href="http://msdn.microsoft.com/en-us/library/ms532997(VS.85).aspx">渐变过滤器(the gradient filter)</a>,
+我们只需要把开始结束都设置成一个颜色就可以了.
+你现在会想,"那我们怎么将其透明呢?".
+你只需要用16进制值来定义颜色就可以了.
+下面是用渐变过滤器实现和上面同等透明效果的代码:
+<code>
+.alpha60 {
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
+}
+</code>
+你可以看到定义里的8位16进制数字,
+前两位代表透明度,接下来两位是红色,接着就是绿色和蓝色.
+注意两位16进制颜色的范围是0~255(ff).
+那我们怎么将<code>0.6</code>转化为16进制数呢?</p>
+
+<p>这里就需要用到一些数学知识了.
+基本上,我们只需要将需要的透明度(比如0.6)乘以255,再转化为16进制即可.
+还有一个简单的办法是利用
+<a href="http://www.google.com/help/features.html">Google’s Search Features</a>,
+你只需要在Google里搜索
+<a href="http://www.google.se/search?q=0.6+*+255+in+hex">0.6 * 255 in hex</a>
+就能得到答案.
+不过Google计算器仿佛只能处理整数,而
+<a href="http://www.google.se/search?q=0.3+*+255+in+hex">0.3 * 255 in hex</a>
+它便无法得出结果.</p>
+
+<p>还有一种更快的方法就是利用JavaScript,
+只需要在浏览器控制行里输入
+<code>
+Math.floor(0.6 * 255).toString(16);
+</code>
+便能得出结果.</p>
+
+<h3>整合</h3>
+
+<p>根据上面的方法,我们来写一个完整的实现:
+<code>
+.alpha60 {
+  /* Fallback for web browsers that doesn't support RGBa */
+  background: rgb(0, 0, 0);
+  /* RGBa with 0.6 opacity */
+  background: rgba(0, 0, 0, 0.6);
+  /* For IE 5.5 - 7*/
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
+  /* For IE 8*/
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
+}
+</code>
+注意,我们还需要额外为IE定义<code>background: transparent</code>,
+我们可以通过条件注释来解决.</p>
+
+<h2>浏览器支持</h2>
+
+<p>支持RGBa的有:<br/>
+- firefox 3+<br/>
+- Safari 2+<br/>
+- Opera 10<br/>
+IE过滤器支持IE5.5及以上版本.</p>
+
+<p>所以这种方式几乎支持了所有浏览器.</p>
+
+<h3>感谢</h3>
+
+<p>Thanks to <a href="http://css-tricks.com/rgba-browser-support/">RGBa Browser Support</a> and
+<a href="http://leaverou.me/2009/02/bulletproof-cross-browser-rgba-backgrounds/">Bulletproof, cross-browser RGBA backgrounds, today</a>
+for the information and inspiration.</p>
+
+<p>Thanks to <a href="http://friendlybit.com/">Emil Stenström</a> and <a href="http://kodfabrik.se/">Pelle Wessman</a>
+for coming up with countless alternatives for hex conversion, and explaining basic math to stupid me.</p>
+
+<h2>译者总结</h2>
+
+<p>大家使用时可直接复制下面代码:
+<code>
+/* 白色背景,透明度0.6 */
+.alpha60 {
+  background: rgb(255, 255, 255);
+  background: rgba(255, 255, 255, 0.6);
+  background: transparent\9;
+  zoom: 1;
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99ffffff, endColorstr=#99ffffff);
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99ffffff, endColorstr=#99ffffff)";
+}
+</code>
+最后来个效果图,顺便试试jsfiddle的嵌入:<br/>
+<iframe style="width: 100%; height: 300px" src="http://jsfiddle.net/nMKGs/embedded/result,html,css/light/"></iframe></p>
+
+<p>(2012-05-01 更新)<br/>
+因为自己用的是Sass，所以封装了一下，Sass的功能很强大：<br/>
+<a href="/blog/better-transparentize-mixin-for-sass">Sass中通过mixin封装透明背景模块</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[技术博客利器——Octopress]]></title>
+    <link href="http://fancyoung.com/blog/octopress-study/"/>
+    <updated>2011-11-04T12:59:00+00:00</updated>
+    <id>http://fancyoung.com/blog/octopress-study</id>
+    <content type="html"><![CDATA[<h2>Octopress简介</h2>
+
+<blockquote><p><a href="https://github.com/imathis/octopress">Octopress</a> is a framework designed by Brandon Mathis for <a href="https://github.com/mojombo/jekyll">Jekyll</a>, the blog aware static site generator powering Github Pages.</p></blockquote>
+
+<!--more-->
+
+
+<h4>优点</h4>
+
+<p>用文件方式储存数据，无需数据库<br/>
+以静态方式发布，可直接挂在github等地方<br/>
+用markdown格式写博客<br/>
+可以轻松的配置和发布</p>
+
+<h2>常用命令</h2>
+
+<h4>注意</h4>
+
+<p>有些机子上运行可能会报错，需要在命令前加上<code>bundle exec</code></p>
+
+<h4>添加文章</h4>
+
+<p><code>
+$ rake new_post["title"]
+</code>
+运行后会通过<code>title</code>生成相关文件、链接，可在文件里修改显示出来的标题。<br/>
+<code>title</code>可以使用中文，会自动转化为拼音（个人不建议，因为链接会比较无意义）。</p>
+
+<p><code>
+$ rake generate       #发布文件到public目录
+$ rake watch          #监控source和sass目录的变动
+$ rake preview        #启动服务器并监控变动，通过http://localhost:4000预览
+</code></p>
+
+<h4>发布</h4>
+
+<p><code>
+$ rake generate
+$ rake deploy
+</code></p>
+
+<h4>保存源代码</h4>
+
+<p>因为发布的只是生成的静态页面，<br/>
+需要在项目里建立source分支用于保存整个项目源代码（配置、markdown文件等）。
+<code>
+$ git add .
+$ git commit -m 'blog'
+$ git push origin source
+</code></p>
+
+<h2>更多设置</h2>
+
+<h4>添加"关于我"</h4>
+
+<p>在<code>source</code>下新建<code>about</code>目录，并在里面添加<code>index.markdown</code>文件。<br/>
+编辑导航条<code>source/_includes/custom/navigation.html</code><br/>
+注意:<code>index.markdown</code>文件需要加上头，否则会找不到。</p>
+
+<h4>首页只显示摘要</h4>
+
+<ul>
+<li>在文中加入<code>&lt;!--more--&gt;</code>来控制摘要截取位置</li>
+<li>修改<code>_config.yml</code>里的<code>excerpt_link</code>控制链接文字</li>
+</ul>
+
+
+<h4>部署到Github</h4>
+
+<p>操作步骤参考：<a href="http://octopress.org/docs/deploying/github/">Deploying to Github Pages</a><br/>
+如果你有自己的域名，可参考：<a href="http://fancyoung.com/blog/host-to-github/">Github Page绑定自己域名</a></p>
+
+<h2>Bug Fix</h2>
+
+<h4>不能进行deploy(Github)</h4>
+
+<p>问题：有次发现<code>$ rake deploy</code>不能发布，但是预览正常。检查github上source分支代码已更新，但master仍为老代码。<br/>
+原因：发现是因为代码是新从github下clone下来的，未进行初始化deploy。<br/>
+解决：需要执行<code>$ rake setup_github_pages</code>进行初始化。<br/>
+注意：rake操作应该在source分支下进行，若是刚从github里clone下来的，请先执行<code>$ git checkout source</code>。</p>
+
+<h4>修改的样式preview时不生效</h4>
+
+<p>问题：预览时发现之前设置成功的自定义样式不生效，变回默认样式。<br/>
+解决：<code>$ rake generate</code>即可，会重新生成css。</p>
+
+<h4>无法update octopress</h4>
+
+<p>每过一段时间，可能需要<a href="http://octopress.org/docs/updating/">更新一下Octopress版本</a>，<br/>
+问题：执行<code>$ git pull octopress master</code>时报错：<code>fatal: 'octopress' does not appear to be a git repository</code><br/>
+原因：没有相应远程分支（第一次生成博客的项目中才有？）。打开<code>.git/config</code>查看，应该不包含<code>[remote "octopress"]</code>块。<br/>
+解决：手动添加，或者在命令行执行：<code>$ git remote add octopress https://github.com/imathis/octopress.git</code></p>
+
+<h2>参考</h2>
+
+<p><a href="http://octopress.org/docs/">Octopress官方文档</a><br/>
+<a href="http://daringfireball.net/projects/markdown/syntax">markdown语法</a></p>
+]]></content>
+  </entry>
+  
+</feed>

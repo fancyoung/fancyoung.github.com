@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: 问题解决 | 没有标题的博客]]></title>
+  <link href="http://fancyoung.com/blog/categories/问题解决/atom.xml" rel="self"/>
+  <link href="http://fancyoung.com/"/>
+  <updated>2013-05-17T06:17:09+00:00</updated>
+  <id>http://fancyoung.com/</id>
+  <author>
+    <name><![CDATA[思扬]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress在zsh下无法新建博客的问题]]></title>
+    <link href="http://fancyoung.com/blog/use-octopress-new-post-function-with-zsh/"/>
+    <updated>2012-08-12T16:50:00+00:00</updated>
+    <id>http://fancyoung.com/blog/use-octopress-new-post-function-with-zsh</id>
+    <content type="html"><![CDATA[<p>执行：<code>$ rake new_post["arch-linux-reinstall-glibc.markdown"]</code></p>
+
+<p>报错：<code>zsh: no matches found: new_post[arch-linux-reinstall-glibc]</code></p>
+
+<p>原因：zsh中若出现‘*’, ‘(’, ‘|’, ‘&lt;’, ‘[’, or ‘?’符号，则将其识别为查找文件名的通配符</p>
+
+<p>快速解决：用引号括起来<code>$ rake "new_post[arch-linux-reinstall-glibc.markdown]"</code></p>
+
+<p>彻底解决：取消zsh的通配(GLOB),
+在<code>.zshrc</code>中加入<code>alias rake="noglob rake"</code></p>
+
+<hr />
+
+<p>PS：在git回滚操作<code>git reset --soft HEAD^</code>时出现报错：
+<code>zsh: no matches found HEAD^</code>，</p>
+
+<p>也为同样原因，因为<code>^</code>也为正则中的符号，
+需要转义为<code>git reset --soft HEAD\^</code>。</p>
+
+<h2>参考</h2>
+
+<p><a href="https://github.com/imathis/octopress/issues/117">Not compatible with Zsh</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Arch升级失败后修复glibc记录]]></title>
+    <link href="http://fancyoung.com/blog/arch-linux-reinstall-glibc/"/>
+    <updated>2012-08-10T00:27:00+00:00</updated>
+    <id>http://fancyoung.com/blog/arch-linux-reinstall-glibc</id>
+    <content type="html"><![CDATA[<h2>起因</h2>
+
+<p><code>$ pacman -Syu</code>时提示错误，
+因为Arch前段时间将<code>/lib</code>目录链到了<code>/usr/lib</code>，
+见公告<a href="http://www.archlinux.org/news/the-lib-directory-becomes-a-symlink/">The /lib directory becomes a symlink</a>。
+当时没有看到这篇公告，而在网上搜到某贴说使用<code>--force</code>参数，
+结果执行完后系统挂掉，因<code>glibc</code>不存在，所有命令行不可使用。</p>
+
+<h2>解决方法</h2>
+
+<ul>
+<li>从光盘启动Arch。</li>
+<li><code>$ fdisk -l</code>查看磁盘状态，
+我的系统分区为<code>/dev/sda6</code>。</li>
+<li>创建目录：<code>$ mkdir /root/tmp_disk</code>。</li>
+<li>mount分区，我机子上是：<code>$ mount /dev/sda6 /root/tmp_disk</code>。</li>
+<li>下载<a href="http://www.archlinux.org/packages/?q=glibc">相应的</a><code>glibc</code>安装包（网络或U盘，配置网络参考下面相关部分）,
+我的为<a href="http://www.archlinux.org/packages/core/x86_64/glibc/">x86_64 v2.16.0-2</a>，
+所以<code>wget http://www.archlinux.org/packages/core/x86_64/glibc/download/</code></li>
+<li>安装<code>pacman -U glibc-2.16.0-2-x86_64.pkg.tar.xz -r /root/tmp_disk</code></li>
+<li><code>pacman -Su</code></li>
+</ul>
+
+
+<h4>注意</h4>
+
+<h2>其它</h2>
+
+<h4>配置网络</h4>
+
+<p>用启动光盘进入系统后，需要配置网络来下载最新glibc。
+配置<code>/etc/rc.conf</code>
+<code>
+interface=eth0
+address=192.168.0.2
+netmask=255.255.255.0
+gateway=192.168.22.1
+</code>
+配置<code>/etc/resolv.conf</code>
+<code>
+nameserver 8.8.8.8
+</code>
+最后重启网络服务<code>$ /etc/rc.d/network restart</code></p>
+
+<h4>目录</h4>
+
+<p><code>/lib</code>、<code>/lib64</code>皆应软链到<code>/usr/lib</code>目录。
+在修复过程中查看<code>/lib</code>发现里面只有一个<code>modules</code>目录，
+将其移至<code>/usr/lib</code>里后建立软链。
+系统正常运行，但之后执行<code>pacman</code>后无法升级。
+移除<code>/usr/lib/modules</code>目录后<code>$ pacman -Su</code>解决问题。</p>
+
+<h4>时间错误的解决</h4>
+
+<p>遇到报错
+```
+<strong><strong><strong><strong><strong><strong><em>****** FILESYSTEM CHECK FAILED </em></strong></strong></strong></strong></strong></strong>
+* Please repair manually and reboot. Note that the root *
+* filesystem is currently mounted read-only. To remount *
+* it read-write type: mount -n -o remount,rw / *
+* When you exit the mantenance shel the system will *
+* reboot automatically. *</p>
+
+<hr />
+
+<p>```
+因为BIOS时间设置有问题。</p>
+
+<h2>参考</h2>
+
+<p><a href="https://bbs.archlinux.org/viewtopic.php?id=142459">bug修复方案：How to re-install glibc?</a></p>
+
+<p><a href="https://wiki.archlinux.org/index.php/Configuring_Network">Arch网络配置：Configuring Network</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[解决Emacs远程连接时卡住的bug]]></title>
+    <link href="http://fancyoung.com/blog/emacs-tramp-hangs-bug-in-zsh/"/>
+    <updated>2012-07-04T00:14:00+00:00</updated>
+    <id>http://fancyoung.com/blog/emacs-tramp-hangs-bug-in-zsh</id>
+    <content type="html"><![CDATA[<p>前几天终于买了Linode的VPS，配置过程中遇见一个灵异问题：<br/>
+Emacs无法远程SSH编辑文件，状态一直卡在<code>Tramp: Waiting for prompts from remote shell</code>。</p>
+
+<p>折腾了好久，终于定位到zsh的配置oh-my-zsh上。<br/>
+最后查到原来Emacs Wiki上已经有解决方案，在<code>.zshrc</code>底部加上：
+<code>
+if [[ "$TERM" == "dumb" ]]
+then
+  unsetopt zle
+  unsetopt prompt_cr
+  unsetopt prompt_subst
+  unfunction precmd
+  unfunction preexec
+  PS1='$ '
+fi
+</code></p>
+
+<p>参考：<a href="http://emacswiki.org/emacs/TrampMode#toc6">TrampMode Troubleshooting</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Bootstrap使用响应式设计(Responsive design)时导航条上部有空白的解决方案]]></title>
+    <link href="http://fancyoung.com/blog/bootstrap-bug-when-responsive-css-with-navbar-fixed-top/"/>
+    <updated>2012-03-07T17:32:00+00:00</updated>
+    <id>http://fancyoung.com/blog/bootstrap-bug-when-responsive-css-with-navbar-fixed-top</id>
+    <content type="html"><![CDATA[<h4>原因</h4>
+
+<p>Bug出现需要同时满足以下3个条件:<br/>
+- 顶部导航条navbar使用class<code>navbar-fixed-top</code><br/>
+- 参考Bootstrap官方网站, 给body添加样式<code>padding-top: 60px;</code><br/>
+- 使用响应式(Responsive design), 并且处在此状态下(默认为宽度&lt;=980时触发)</p>
+
+<h4>解决方案1</h4>
+
+<p>给此段样式加上条件<br/>
+```
+@media (min-width: 981px) {</p>
+
+<pre><code>body {
+    padding-top: 60px;
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<h4>解决方案2</h4>
+
+<p>将bootstrap-responsive.css放在body样式之后<br/>
+```
+<link href="../css/bootstrap.css" rel="stylesheet"></p>
+
+
+
+<p><link href="../css/bootstrap-responsive.css" rel="stylesheet">
+<code>
+Rails3.2的Asset Pipeline就更方便了，放在import中即可（我用的是Sass）
+</code>
+@import compass
+$baseFontSize: 15px
+@import compass_twitter_bootstrap
+body
+  padding-top: 60px
+@import compass_twitter_bootstrap_responsive
+```</p>
+
+<h4>结论</h4>
+
+<p>我在某项目中因为使用的是customize出来的单个css文件, 所以采用了解决方案1.<br/>
+在另一RoR项目中考虑使用解决方案2.</p>
+
+<h4>参考</h4>
+
+<p><a href="https://github.com/twitter/bootstrap/issues/1570">navbar-fixed-top breaks when using responsive css</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[技术博客利器——Octopress]]></title>
+    <link href="http://fancyoung.com/blog/octopress-study/"/>
+    <updated>2011-11-04T12:59:00+00:00</updated>
+    <id>http://fancyoung.com/blog/octopress-study</id>
+    <content type="html"><![CDATA[<h2>Octopress简介</h2>
+
+<blockquote><p><a href="https://github.com/imathis/octopress">Octopress</a> is a framework designed by Brandon Mathis for <a href="https://github.com/mojombo/jekyll">Jekyll</a>, the blog aware static site generator powering Github Pages.</p></blockquote>
+
+<!--more-->
+
+
+<h4>优点</h4>
+
+<p>用文件方式储存数据，无需数据库<br/>
+以静态方式发布，可直接挂在github等地方<br/>
+用markdown格式写博客<br/>
+可以轻松的配置和发布</p>
+
+<h2>常用命令</h2>
+
+<h4>注意</h4>
+
+<p>有些机子上运行可能会报错，需要在命令前加上<code>bundle exec</code></p>
+
+<h4>添加文章</h4>
+
+<p><code>
+$ rake new_post["title"]
+</code>
+运行后会通过<code>title</code>生成相关文件、链接，可在文件里修改显示出来的标题。<br/>
+<code>title</code>可以使用中文，会自动转化为拼音（个人不建议，因为链接会比较无意义）。</p>
+
+<p><code>
+$ rake generate       #发布文件到public目录
+$ rake watch          #监控source和sass目录的变动
+$ rake preview        #启动服务器并监控变动，通过http://localhost:4000预览
+</code></p>
+
+<h4>发布</h4>
+
+<p><code>
+$ rake generate
+$ rake deploy
+</code></p>
+
+<h4>保存源代码</h4>
+
+<p>因为发布的只是生成的静态页面，<br/>
+需要在项目里建立source分支用于保存整个项目源代码（配置、markdown文件等）。
+<code>
+$ git add .
+$ git commit -m 'blog'
+$ git push origin source
+</code></p>
+
+<h2>更多设置</h2>
+
+<h4>添加"关于我"</h4>
+
+<p>在<code>source</code>下新建<code>about</code>目录，并在里面添加<code>index.markdown</code>文件。<br/>
+编辑导航条<code>source/_includes/custom/navigation.html</code><br/>
+注意:<code>index.markdown</code>文件需要加上头，否则会找不到。</p>
+
+<h4>首页只显示摘要</h4>
+
+<ul>
+<li>在文中加入<code>&lt;!--more--&gt;</code>来控制摘要截取位置</li>
+<li>修改<code>_config.yml</code>里的<code>excerpt_link</code>控制链接文字</li>
+</ul>
+
+
+<h4>部署到Github</h4>
+
+<p>操作步骤参考：<a href="http://octopress.org/docs/deploying/github/">Deploying to Github Pages</a><br/>
+如果你有自己的域名，可参考：<a href="http://fancyoung.com/blog/host-to-github/">Github Page绑定自己域名</a></p>
+
+<h2>Bug Fix</h2>
+
+<h4>不能进行deploy(Github)</h4>
+
+<p>问题：有次发现<code>$ rake deploy</code>不能发布，但是预览正常。检查github上source分支代码已更新，但master仍为老代码。<br/>
+原因：发现是因为代码是新从github下clone下来的，未进行初始化deploy。<br/>
+解决：需要执行<code>$ rake setup_github_pages</code>进行初始化。<br/>
+注意：rake操作应该在source分支下进行，若是刚从github里clone下来的，请先执行<code>$ git checkout source</code>。</p>
+
+<h4>修改的样式preview时不生效</h4>
+
+<p>问题：预览时发现之前设置成功的自定义样式不生效，变回默认样式。<br/>
+解决：<code>$ rake generate</code>即可，会重新生成css。</p>
+
+<h4>无法update octopress</h4>
+
+<p>每过一段时间，可能需要<a href="http://octopress.org/docs/updating/">更新一下Octopress版本</a>，<br/>
+问题：执行<code>$ git pull octopress master</code>时报错：<code>fatal: 'octopress' does not appear to be a git repository</code><br/>
+原因：没有相应远程分支（第一次生成博客的项目中才有？）。打开<code>.git/config</code>查看，应该不包含<code>[remote "octopress"]</code>块。<br/>
+解决：手动添加，或者在命令行执行：<code>$ git remote add octopress https://github.com/imathis/octopress.git</code></p>
+
+<h2>参考</h2>
+
+<p><a href="http://octopress.org/docs/">Octopress官方文档</a><br/>
+<a href="http://daringfireball.net/projects/markdown/syntax">markdown语法</a></p>
+]]></content>
+  </entry>
+  
+</feed>
