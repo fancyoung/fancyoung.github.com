@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Github | 没有标题的博客]]></title>
   <link href="http://fancyoung.com/blog/categories/github/atom.xml" rel="self"/>
   <link href="http://fancyoung.com/"/>
-  <updated>2013-05-17T06:23:08+00:00</updated>
+  <updated>2013-05-17T06:53:44+00:00</updated>
   <id>http://fancyoung.com/</id>
   <author>
     <name><![CDATA[思扬]]></name>
@@ -25,8 +25,8 @@
 希望大家不需要使用到这篇博客吧。</p>
 
 <p>因关卡随时处于更新状态，可能会稍有不同<br/>
-<del>- 最后更新时间2012-11-14</del><br/>
-- 最后更新时间2013-05-17</p>
+<del>&ndash; 最后更新时间2012-11-14</del><br/>
+&ndash; 最后更新时间2013-05-17</p>
 
 <h2>准备</h2>
 
@@ -84,7 +84,7 @@ $ git config user.email xxx@gmail.com
 - 扩展  
 使用`--global`参数修改本机全局设置
 </code>
-$ git config --global user.name = xxx
+$ git config &mdash;global user.name = xxx
 <code>``
 - 问题  
 命令行里不要带等号</code>$ git config user.name = xxx<code>,
@@ -303,12 +303,12 @@ $ git bisect run make test
 
 <h4>37 仅stage一个文件的一部分</h4>
 
-<p>查看文件可知需要stage的是第二行（...the first feature）。
+<p>查看文件可知需要stage的是第二行（&hellip;the first feature）。
 <code>
 $ git add -p feature.rb
 </code>
 出现提示如何处理，输入<code>e</code>来编辑提交内容，<br/>
-在弹出编辑页面删除第5行（...the first feature），
+在弹出编辑页面删除第5行（&hellip;the first feature），
 因为不在本次stage操作内，保存退出。</p>
 
 <h4>38 查看操作历史</h4>

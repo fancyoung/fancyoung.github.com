@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Arch Linux | 没有标题的博客]]></title>
   <link href="http://fancyoung.com/blog/categories/arch-linux/atom.xml" rel="self"/>
   <link href="http://fancyoung.com/"/>
-  <updated>2013-05-17T06:23:08+00:00</updated>
+  <updated>2013-05-17T06:53:44+00:00</updated>
   <id>http://fancyoung.com/</id>
   <author>
     <name><![CDATA[思扬]]></name>
@@ -157,14 +157,14 @@ $ pacman -S lib32-glibc
 </ol>
 
 
-<p>MOUNTED_INSTALL='/mnt'
-TEMP_FILE='/tmp/packages.list'</p>
+<p>MOUNTED_INSTALL=&lsquo;/mnt&rsquo;
+TEMP_FILE=&lsquo;/tmp/packages.list&rsquo;</p>
 
-<p>pacman --root $MOUNTED_INSTALL -Sy
-pacman --root $MOUNTED_INSTALL -Qqet > $TEMP_FILE</p>
+<p>pacman &mdash;root $MOUNTED_INSTALL -Sy
+pacman &mdash;root $MOUNTED_INSTALL -Qqet > $TEMP_FILE</p>
 
 <p>for PKG in $(cat $TEMP_FILE) ; do
-   pacman --root $MOUNTED_INSTALL -S $PKG --noconfirm
+   pacman &mdash;root $MOUNTED_INSTALL -S $PKG &mdash;noconfirm
 done</p>
 
 <p>exit 0
@@ -269,7 +269,7 @@ $ pacman -Rcn busybox lib32-glibc
 <code>
 $ mv /etc/makepkg.conf /etc/makepkg.conf.backup &amp;&amp; mv /etc/makepkg.conf.pacnew /etc/makepkg.conf
 </code>
-It might also be a good idea to just get a list of "new" additions to /etc. You can get a list with the following command:
+It might also be a good idea to just get a list of &ldquo;new&rdquo; additions to /etc. You can get a list with the following command:
 <code>
 $ find /etc/ -type f -name \*.pac\*
 </code></p>

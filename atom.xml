@@ -4,7 +4,7 @@
   <title><![CDATA[没有标题的博客]]></title>
   <link href="http://fancyoung.com/atom.xml" rel="self"/>
   <link href="http://fancyoung.com/"/>
-  <updated>2013-05-17T06:23:08+00:00</updated>
+  <updated>2013-05-17T06:53:44+00:00</updated>
   <id>http://fancyoung.com/</id>
   <author>
     <name><![CDATA[思扬]]></name>
@@ -225,7 +225,7 @@
 </thead>
 <tbody>
 <tr>
-<td>&#8221;/%     </td>
+<td>&ldquo;/%     </td>
 <td> 上下/左右分割面板</td>
 </tr>
 <tr>
@@ -470,8 +470,8 @@ Emacs无法远程SSH编辑文件，状态一直卡在<code>Tramp: Waiting for pr
 希望大家不需要使用到这篇博客吧。</p>
 
 <p>因关卡随时处于更新状态，可能会稍有不同<br/>
-<del>- 最后更新时间2012-11-14</del><br/>
-- 最后更新时间2013-05-17</p>
+<del>&ndash; 最后更新时间2012-11-14</del><br/>
+&ndash; 最后更新时间2013-05-17</p>
 
 <h2>准备</h2>
 
@@ -532,7 +532,7 @@ Emacs无法远程SSH编辑文件，状态一直卡在<code>Tramp: Waiting for pr
 
 
 <p>回答时分别输入<code>xxx</code>和<code>xxx@gmail.com</code><br/>
-- 扩展<br/>
+&ndash; 扩展<br/>
 使用<code>--global</code>参数修改本机全局设置</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -779,14 +779,14 @@ Emacs无法远程SSH编辑文件，状态一直卡在<code>Tramp: Waiting for pr
 
 <h4>37 仅stage一个文件的一部分</h4>
 
-<p>查看文件可知需要stage的是第二行（&#8230;the first feature）。</p>
+<p>查看文件可知需要stage的是第二行（&hellip;the first feature）。</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>$ git add -p feature.rb</span></code></pre></td></tr></table></div></figure>
 
 
 <p>出现提示如何处理，输入<code>e</code>来编辑提交内容，<br/>
-在弹出编辑页面删除第5行（&#8230;the first feature），
+在弹出编辑页面删除第5行（&hellip;the first feature），
 因为不在本次stage操作内，保存退出。</p>
 
 <h4>38 查看操作历史</h4>
@@ -873,10 +873,10 @@ Emacs无法远程SSH编辑文件，状态一直卡在<code>Tramp: Waiting for pr
 <h2>分析</h2>
 
 <p>需要做的工作有：<br/>
-- 颜色和透明值应该通过参数传入<br/>
-- 需要能计算出rgba值：<code>rgb(255, 255, 255)</code><br/>
-- 需要计算出IE下的值<code>#99ffffff</code><br/>
-- 封装成minix模块，以便调用</p>
+&ndash; 颜色和透明值应该通过参数传入<br/>
+&ndash; 需要能计算出rgba值：<code>rgb(255, 255, 255)</code><br/>
+&ndash; 需要计算出IE下的值<code>#99ffffff</code><br/>
+&ndash; 封装成minix模块，以便调用</p>
 
 <h2>过程</h2>
 
@@ -942,9 +942,9 @@ Emacs无法远程SSH编辑文件，状态一直卡在<code>Tramp: Waiting for pr
     <content type="html"><![CDATA[<h4>原因</h4>
 
 <p>Bug出现需要同时满足以下3个条件:<br/>
-- 顶部导航条navbar使用class<code>navbar-fixed-top</code><br/>
-- 参考Bootstrap官方网站, 给body添加样式<code>padding-top: 60px;</code><br/>
-- 使用响应式(Responsive design), 并且处在此状态下(默认为宽度&lt;=980时触发)</p>
+&ndash; 顶部导航条navbar使用class<code>navbar-fixed-top</code><br/>
+&ndash; 参考Bootstrap官方网站, 给body添加样式<code>padding-top: 60px;</code><br/>
+&ndash; 使用响应式(Responsive design), 并且处在此状态下(默认为宽度&lt;=980时触发)</p>
 
 <h4>解决方案1</h4>
 
@@ -1098,7 +1098,7 @@ Ruby下的接口gem包有: RMagick和Mini magick.<br/>
 
 <h2>域名</h2>
 
-<p>额&#8230;<br/>
+<p>额&hellip;<br/>
 这个实在太重要了.<br/>
 想了几年终于想到一个还不错的域名,
 <a href="http://iaieye.com">iaieye.com</a>,
@@ -1108,16 +1108,16 @@ Ruby下的接口gem包有: RMagick和Mini magick.<br/>
 
 <p>没有自己服务器,
 所以一切这么解决:<br/>
-- 代码交给Github <br/>
+&ndash; 代码交给Github <br/>
 Github就不介绍了, 最好, 没有之一. <br/>
 需要注意的是免费版不能加私密项目.<br/>
 国内最近有个GitCafe, 观望中.
-- 项目放在Heroku<br/>
-- 数据库用MongoHQ<br/>
+&ndash; 项目放在Heroku<br/>
+&ndash; 数据库用MongoHQ<br/>
 免费16M, 先用着吧.
 MongoLab免费240M,
 不过我喜欢前者的Icon.<br/>
-- 图片存到又拍云(UpYun)<br/>
+&ndash; 图片存到又拍云(UpYun)<br/>
 前段时间才发现国内已经有一些云服务了.
 又拍云的口碑不错, 还支持图片处理, 先用用看.<br/>
 盛大云仿佛也不错, 有云主机和MongoIC,
@@ -1188,8 +1188,8 @@ Custom Domains已打上REPLACED标记。)</p>
 
 <h4>1. 响应式Web设计(Responsive Web Design)</h4>
 
-<p>简单的说就是动态适应当前各种分辨率及设备(电脑, Pad, 手机, &#8230;)的页面方案.<br/>
-常用的有弹性布局. 另, &#8220;弹性图片&#8221;是个很有意思的东西.<br/>
+<p>简单的说就是动态适应当前各种分辨率及设备(电脑, Pad, 手机, &hellip;)的页面方案.<br/>
+常用的有弹性布局. 另, &ldquo;弹性图片&#8221;是个很有意思的东西.<br/>
 <a href="http://beforweb.com/node/6">什么是响应式Web设计？怎样进行？</a><br/>
 绝对是将来的方向,
 但考虑到技术和设计的实现复杂度,
@@ -1199,7 +1199,7 @@ Custom Domains已打上REPLACED标记。)</p>
 
 <p>如果不是ie6不支持<code>position:fixed</code>,<br/>
 估计每个网站都会放几个固定元素.<br/>
-常见的有: 顶部导航条, 底部工具条, &#8220;回到顶部&#8221;.</p>
+常见的有: 顶部导航条, 底部工具条, &ldquo;回到顶部&rdquo;.</p>
 
 <h4>3. 圆(Circles)</h4>
 
@@ -1271,8 +1271,8 @@ Custom Domains已打上REPLACED标记。)</p>
 <h2>现存的问题</h2>
 
 <p>如果我们想要一个半透明背景,有两种实现方式:<br/>
-- 利用CSS和opacity属性<br/>
-- 建立一个24位PNG背景图片<br/>
+&ndash; 利用CSS和opacity属性<br/>
+&ndash; 建立一个24位PNG背景图片<br/>
 用opacity的问题除了
 <a href="http://robertnyman.com/2008/09/16/you-want-css-opacity-to-go-with-that-well-suit-yourself/">需要通过麻烦的语法来兼容所有浏览器</a>,
 还有不单该元素自身背景透明了,它的子元素也会透明.
@@ -1316,7 +1316,7 @@ Custom Domains已打上REPLACED标记。)</p>
 幸运的是微软在2000年时疯狂的给IE加上了各种过滤器.
 其中有一个是<a href="http://msdn.microsoft.com/en-us/library/ms532997(VS.85).aspx">渐变过滤器(the gradient filter)</a>,
 我们只需要把开始结束都设置成一个颜色就可以了.
-你现在会想,&#8221;那我们怎么将其透明呢?&#8221;.
+你现在会想,&ldquo;那我们怎么将其透明呢?&rdquo;.
 你只需要用16进制值来定义颜色就可以了.
 下面是用渐变过滤器实现和上面同等透明效果的代码:</p>
 
@@ -1385,9 +1385,9 @@ Custom Domains已打上REPLACED标记。)</p>
 <h2>浏览器支持</h2>
 
 <p>支持RGBa的有:<br/>
-- firefox 3+<br/>
-- Safari 2+<br/>
-- Opera 10<br/>
+&ndash; firefox 3+<br/>
+&ndash; Safari 2+<br/>
+&ndash; Opera 10<br/>
 IE过滤器支持IE5.5及以上版本.</p>
 
 <p>所以这种方式几乎支持了所有浏览器.</p>
@@ -1561,7 +1561,7 @@ Grid: 提供一组样式来制作网格。</p>
 </span><span class='line'>&lt;![endif]--&gt;</span></code></pre></td></tr></table></div></figure>
 
 
-<p>（原文提示XHTML需要用&#8221;/>&#8221;结束标签，上面代码中我已经直接加上了）</p>
+<p>（原文提示XHTML需要用&#8221;/>&ldquo;结束标签，上面代码中我已经直接加上了）</p>
 
 <h2>使用Blueprint里的CSS</h2>
 
@@ -2003,7 +2003,7 @@ For x86_64</p>
 </pre></td><td class='code'><pre><code class=''><span class='line'>$ mv /etc/makepkg.conf /etc/makepkg.conf.backup && mv /etc/makepkg.conf.pacnew /etc/makepkg.conf</span></code></pre></td></tr></table></div></figure>
 
 
-<p>It might also be a good idea to just get a list of &#8220;new&#8221; additions to /etc. You can get a list with the following command:</p>
+<p>It might also be a good idea to just get a list of &ldquo;new&rdquo; additions to /etc. You can get a list with the following command:</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>$ find /etc/ -type f -name \*.pac\*</span></code></pre></td></tr></table></div></figure>

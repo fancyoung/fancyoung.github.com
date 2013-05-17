@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Bootstrap | 没有标题的博客]]></title>
   <link href="http://fancyoung.com/blog/categories/bootstrap/atom.xml" rel="self"/>
   <link href="http://fancyoung.com/"/>
-  <updated>2013-05-17T06:23:08+00:00</updated>
+  <updated>2013-05-17T06:53:44+00:00</updated>
   <id>http://fancyoung.com/</id>
   <author>
     <name><![CDATA[思扬]]></name>
@@ -21,9 +21,9 @@
     <content type="html"><![CDATA[<h4>原因</h4>
 
 <p>Bug出现需要同时满足以下3个条件:<br/>
-- 顶部导航条navbar使用class<code>navbar-fixed-top</code><br/>
-- 参考Bootstrap官方网站, 给body添加样式<code>padding-top: 60px;</code><br/>
-- 使用响应式(Responsive design), 并且处在此状态下(默认为宽度&lt;=980时触发)</p>
+&ndash; 顶部导航条navbar使用class<code>navbar-fixed-top</code><br/>
+&ndash; 参考Bootstrap官方网站, 给body添加样式<code>padding-top: 60px;</code><br/>
+&ndash; 使用响应式(Responsive design), 并且处在此状态下(默认为宽度&lt;=980时触发)</p>
 
 <h4>解决方案1</h4>
 

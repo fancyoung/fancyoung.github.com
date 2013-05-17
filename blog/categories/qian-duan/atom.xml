@@ -2,9 +2,9 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: 前端 | 没有标题的博客]]></title>
-  <link href="http://fancyoung.com/blog/categories/前端/atom.xml" rel="self"/>
+  <link href="http://fancyoung.com/blog/categories/qian-duan/atom.xml" rel="self"/>
   <link href="http://fancyoung.com/"/>
-  <updated>2013-05-17T06:23:08+00:00</updated>
+  <updated>2013-05-17T06:53:44+00:00</updated>
   <id>http://fancyoung.com/</id>
   <author>
     <name><![CDATA[思扬]]></name>
@@ -38,10 +38,10 @@
 <h2>分析</h2>
 
 <p>需要做的工作有：<br/>
-- 颜色和透明值应该通过参数传入<br/>
-- 需要能计算出rgba值：<code>rgb(255, 255, 255)</code><br/>
-- 需要计算出IE下的值<code>#99ffffff</code><br/>
-- 封装成minix模块，以便调用</p>
+&ndash; 颜色和透明值应该通过参数传入<br/>
+&ndash; 需要能计算出rgba值：<code>rgb(255, 255, 255)</code><br/>
+&ndash; 需要计算出IE下的值<code>#99ffffff</code><br/>
+&ndash; 封装成minix模块，以便调用</p>
 
 <h2>过程</h2>
 
@@ -52,7 +52,7 @@
 
 <h1>Sass</h1>
 
-<p>alpha = (color.alpha * 255).round.to_s(16).rjust(2, '0')</p>
+<p>alpha = (color.alpha * 255).round.to_s(16).rjust(2, &lsquo;0&rsquo;)</p>
 
 <h1>等价于JS中的：</h1>
 
@@ -101,8 +101,8 @@
 
 <h4>1. 响应式Web设计(Responsive Web Design)</h4>
 
-<p>简单的说就是动态适应当前各种分辨率及设备(电脑, Pad, 手机, ...)的页面方案.<br/>
-常用的有弹性布局. 另, "弹性图片"是个很有意思的东西.<br/>
+<p>简单的说就是动态适应当前各种分辨率及设备(电脑, Pad, 手机, &hellip;)的页面方案.<br/>
+常用的有弹性布局. 另, &ldquo;弹性图片"是个很有意思的东西.<br/>
 <a href="http://beforweb.com/node/6">什么是响应式Web设计？怎样进行？</a><br/>
 绝对是将来的方向,
 但考虑到技术和设计的实现复杂度,
@@ -112,7 +112,7 @@
 
 <p>如果不是ie6不支持<code>position:fixed</code>,<br/>
 估计每个网站都会放几个固定元素.<br/>
-常见的有: 顶部导航条, 底部工具条, "回到顶部".</p>
+常见的有: 顶部导航条, 底部工具条, &ldquo;回到顶部&rdquo;.</p>
 
 <h4>3. 圆(Circles)</h4>
 
@@ -182,8 +182,8 @@
 <h2>现存的问题</h2>
 
 <p>如果我们想要一个半透明背景,有两种实现方式:<br/>
-- 利用CSS和opacity属性<br/>
-- 建立一个24位PNG背景图片<br/>
+&ndash; 利用CSS和opacity属性<br/>
+&ndash; 建立一个24位PNG背景图片<br/>
 用opacity的问题除了
 <a href="http://robertnyman.com/2008/09/16/you-want-css-opacity-to-go-with-that-well-suit-yourself/">需要通过麻烦的语法来兼容所有浏览器</a>,
 还有不单该元素自身背景透明了,它的子元素也会透明.
@@ -220,7 +220,7 @@
 幸运的是微软在2000年时疯狂的给IE加上了各种过滤器.
 其中有一个是<a href="http://msdn.microsoft.com/en-us/library/ms532997(VS.85).aspx">渐变过滤器(the gradient filter)</a>,
 我们只需要把开始结束都设置成一个颜色就可以了.
-你现在会想,"那我们怎么将其透明呢?".
+你现在会想,&ldquo;那我们怎么将其透明呢?&rdquo;.
 你只需要用16进制值来定义颜色就可以了.
 下面是用渐变过滤器实现和上面同等透明效果的代码:
 <code>
@@ -272,9 +272,9 @@ Math.floor(0.6 * 255).toString(16);
 <h2>浏览器支持</h2>
 
 <p>支持RGBa的有:<br/>
-- firefox 3+<br/>
-- Safari 2+<br/>
-- Opera 10<br/>
+&ndash; firefox 3+<br/>
+&ndash; Safari 2+<br/>
+&ndash; Opera 10<br/>
 IE过滤器支持IE5.5及以上版本.</p>
 
 <p>所以这种方式几乎支持了所有浏览器.</p>
@@ -396,7 +396,7 @@ Grid: 提供一组样式来制作网格。</p>
 
 
 <p>```
-（原文提示XHTML需要用"/>"结束标签，上面代码中我已经直接加上了）</p>
+（原文提示XHTML需要用"/>&ldquo;结束标签，上面代码中我已经直接加上了）</p>
 
 <h2>使用Blueprint里的CSS</h2>
 

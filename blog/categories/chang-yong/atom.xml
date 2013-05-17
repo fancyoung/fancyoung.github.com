@@ -2,9 +2,9 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: 常用 | 没有标题的博客]]></title>
-  <link href="http://fancyoung.com/blog/categories/常用/atom.xml" rel="self"/>
+  <link href="http://fancyoung.com/blog/categories/chang-yong/atom.xml" rel="self"/>
   <link href="http://fancyoung.com/"/>
-  <updated>2013-05-17T06:23:08+00:00</updated>
+  <updated>2013-05-17T06:53:44+00:00</updated>
   <id>http://fancyoung.com/</id>
   <author>
     <name><![CDATA[思扬]]></name>
@@ -25,8 +25,8 @@
 <h2>现存的问题</h2>
 
 <p>如果我们想要一个半透明背景,有两种实现方式:<br/>
-- 利用CSS和opacity属性<br/>
-- 建立一个24位PNG背景图片<br/>
+&ndash; 利用CSS和opacity属性<br/>
+&ndash; 建立一个24位PNG背景图片<br/>
 用opacity的问题除了
 <a href="http://robertnyman.com/2008/09/16/you-want-css-opacity-to-go-with-that-well-suit-yourself/">需要通过麻烦的语法来兼容所有浏览器</a>,
 还有不单该元素自身背景透明了,它的子元素也会透明.
@@ -63,7 +63,7 @@
 幸运的是微软在2000年时疯狂的给IE加上了各种过滤器.
 其中有一个是<a href="http://msdn.microsoft.com/en-us/library/ms532997(VS.85).aspx">渐变过滤器(the gradient filter)</a>,
 我们只需要把开始结束都设置成一个颜色就可以了.
-你现在会想,"那我们怎么将其透明呢?".
+你现在会想,&ldquo;那我们怎么将其透明呢?&rdquo;.
 你只需要用16进制值来定义颜色就可以了.
 下面是用渐变过滤器实现和上面同等透明效果的代码:
 <code>
@@ -115,9 +115,9 @@ Math.floor(0.6 * 255).toString(16);
 <h2>浏览器支持</h2>
 
 <p>支持RGBa的有:<br/>
-- firefox 3+<br/>
-- Safari 2+<br/>
-- Opera 10<br/>
+&ndash; firefox 3+<br/>
+&ndash; Safari 2+<br/>
+&ndash; Opera 10<br/>
 IE过滤器支持IE5.5及以上版本.</p>
 
 <p>所以这种方式几乎支持了所有浏览器.</p>

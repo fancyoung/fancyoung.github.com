@@ -18,13 +18,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://fancyoung.com/blog/css-background-transparency/">
+  <link rel="canonical" href="http://fancyoung.com/blog/css-background-transparency">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="/javascripts/ender.js"></script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <link href="/atom.xml" rel="alternate" title="没有标题的博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
@@ -110,8 +111,8 @@
 <h2>现存的问题</h2>
 
 <p>如果我们想要一个半透明背景,有两种实现方式:<br/>
-- 利用CSS和opacity属性<br/>
-- 建立一个24位PNG背景图片<br/>
+&ndash; 利用CSS和opacity属性<br/>
+&ndash; 建立一个24位PNG背景图片<br/>
 用opacity的问题除了
 <a href="http://robertnyman.com/2008/09/16/you-want-css-opacity-to-go-with-that-well-suit-yourself/">需要通过麻烦的语法来兼容所有浏览器</a>,
 还有不单该元素自身背景透明了,它的子元素也会透明.
@@ -155,7 +156,7 @@
 幸运的是微软在2000年时疯狂的给IE加上了各种过滤器.
 其中有一个是<a href="http://msdn.microsoft.com/en-us/library/ms532997(VS.85).aspx">渐变过滤器(the gradient filter)</a>,
 我们只需要把开始结束都设置成一个颜色就可以了.
-你现在会想,&#8221;那我们怎么将其透明呢?&#8221;.
+你现在会想,&ldquo;那我们怎么将其透明呢?&rdquo;.
 你只需要用16进制值来定义颜色就可以了.
 下面是用渐变过滤器实现和上面同等透明效果的代码:</p>
 
@@ -224,9 +225,9 @@
 <h2>浏览器支持</h2>
 
 <p>支持RGBa的有:<br/>
-- firefox 3+<br/>
-- Safari 2+<br/>
-- Opera 10<br/>
+&ndash; firefox 3+<br/>
+&ndash; Safari 2+<br/>
+&ndash; Opera 10<br/>
 IE过滤器支持IE5.5及以上版本.</p>
 
 <p>所以这种方式几乎支持了所有浏览器.</p>
@@ -299,7 +300,7 @@ for coming up with countless alternatives for hex conversion, and explaining bas
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/前端/'>前端</a>, <a class='category' href='/blog/categories/常用/'>常用</a>, <a class='category' href='/blog/categories/翻译/'>翻译</a>
+    <a class='category' href='/blog/categories/qian-duan/'>前端</a>, <a class='category' href='/blog/categories/chang-yong/'>常用</a>, <a class='category' href='/blog/categories/fan-yi/'>翻译</a>
   
 </span>
 
@@ -307,33 +308,6 @@ for coming up with countless alternatives for hex conversion, and explaining bas
     </p>
     
       <div class="sharing">
-  <!-- JiaThis Button BEGIN -->
-  <div id="ckepop">
-    <span class="jiathis_txt">分享到：</span>
-    <a class="jiathis_button_tsina">新浪微博</a>
-    <a class="jiathis_button_googleplus">Google+</a>
-    <a class="jiathis_button_tumblr">Tumblr</a>
-    <a class="jiathis_button_evernote">EverNote</a>
-    <a class="jiathis_button_readitlater">Read It Later</a>
-
-    <a href="http://www.jiathis.com/share?uid=1614610" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
-    <a class="jiathis_counter_style"></a>
-  </div>
-  <script type="text/javascript" >
-    var jiathis_config={
-      data_track_clickback:true,
-      summary:"",
-      hideMore:false
-    }
-  </script>
-  <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js?uid=1614610" charset="utf-8"></script>
-  <style>
-    .sharing .flash-video {
-    border: 0
-    }
-  </style>
-  <!-- JiaThis Button END -->
-
   
   
   
@@ -390,7 +364,7 @@ for coming up with countless alternatives for hex conversion, and explaining bas
       </li>
     
       <li class="post">
-        <a href="/blog/tmux-study/">tmux使用</a>
+        <a href="/blog/tmux-study/">Tmux使用</a>
       </li>
     
       <li class="post">
@@ -413,7 +387,7 @@ for coming up with countless alternatives for hex conversion, and explaining bas
   <a href="https://github.com/fancyoung">@fancyoung</a> on GitHub
   
   <script type="text/javascript">
-    $.domReady(function(){
+    $(document).ready(function(){
         if (!window.jXHR){
             var jxhr = document.createElement('script');
             jxhr.type = 'text/javascript';

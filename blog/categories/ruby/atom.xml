@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ruby | 没有标题的博客]]></title>
   <link href="http://fancyoung.com/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://fancyoung.com/"/>
-  <updated>2013-05-17T06:23:08+00:00</updated>
+  <updated>2013-05-17T06:53:44+00:00</updated>
   <id>http://fancyoung.com/</id>
   <author>
     <name><![CDATA[思扬]]></name>
@@ -79,15 +79,15 @@ $ rvm gem update
 
 <p>无法make，出错提示为：
 ```
-Building native extensions.  This could take a while...
+Building native extensions.  This could take a while&hellip;
 ERROR:  Error installing RedCloth:</p>
 
 <pre><code>    ERROR: Failed to build gem native extension.
 </code></pre>
 
-<p>...
+<p>&hellip;
 make: /bin/install: Command not found
-...
+&hellip;
 ```</p>
 
 <h4>原因：</h4>
@@ -239,7 +239,7 @@ Ruby下的接口gem包有: RMagick和Mini magick.<br/>
 
 <h2>域名</h2>
 
-<p>额...<br/>
+<p>额&hellip;<br/>
 这个实在太重要了.<br/>
 想了几年终于想到一个还不错的域名,
 <a href="http://iaieye.com">iaieye.com</a>,
@@ -249,16 +249,16 @@ Ruby下的接口gem包有: RMagick和Mini magick.<br/>
 
 <p>没有自己服务器,
 所以一切这么解决:<br/>
-- 代码交给Github <br/>
+&ndash; 代码交给Github <br/>
 Github就不介绍了, 最好, 没有之一. <br/>
 需要注意的是免费版不能加私密项目.<br/>
 国内最近有个GitCafe, 观望中.
-- 项目放在Heroku<br/>
-- 数据库用MongoHQ<br/>
+&ndash; 项目放在Heroku<br/>
+&ndash; 数据库用MongoHQ<br/>
 免费16M, 先用着吧.
 MongoLab免费240M,
 不过我喜欢前者的Icon.<br/>
-- 图片存到又拍云(UpYun)<br/>
+&ndash; 图片存到又拍云(UpYun)<br/>
 前段时间才发现国内已经有一些云服务了.
 又拍云的口碑不错, 还支持图片处理, 先用用看.<br/>
 盛大云仿佛也不错, 有云主机和MongoIC,
