@@ -70,15 +70,11 @@ github_skip_forks: true
 
 # Twitter
 twitter_user:
-<<<<<<< HEAD
 twitter_tweet_count: 4
 twitter_show_replies: false
 twitter_follow_button: false
 twitter_show_follower_count: false
 twitter_tweet_button: false
-=======
-twitter_tweet_button: true
->>>>>>> e83dfccc4f6f2db6283918af1743e63278807089
 
 # Google +1
 google_plus_one: false
