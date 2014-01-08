@@ -38,6 +38,9 @@ $ rake preview        #启动服务器并监控变动，通过http://localhost:4
 ```
 $ rake generate
 $ rake deploy
+
+# 或者直接使用一条命令，看名字就知道是怎么回事了
+$ rake gen_deploy
 ```
 
 #### 保存源代码
