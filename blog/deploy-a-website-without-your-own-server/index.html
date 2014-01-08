@@ -1,0 +1,482 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>将一切放在云端 - 没有标题的博客</title>
+  <meta name="author" content="思扬">
+
+  
+  <meta name="description" content="Github
+Heroku
+MongoHQ
+UpYun
+name.com 一切在拖延症患者眼里都是障碍,
+尤其是: 技术, 设计, 域名, 服务器. 技术 语言 一个想法在脑子里几年了,
+首要问题是怎么做.
+从Java, PHP, Ruby一路走来,
+从Rails1, 2, 3, &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://fancyoung.com/blog/deploy-a-website-without-your-own-server">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="没有标题的博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-1694311-5']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">没有标题的博客</a></h1>
+  
+    <h2>记录与分享</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:fancyoung.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">关于我</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">将一切放在云端</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-25T00:17:00+00:00" pubdate data-updated="true">Feb 25<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><blockquote><p>Github<br/>
+Heroku<br/>
+MongoHQ<br/>
+UpYun<br/>
+name.com</p></blockquote>
+
+<p>一切在拖延症患者眼里都是障碍,
+尤其是: 技术, 设计, 域名, 服务器.</p>
+
+<h2>技术</h2>
+
+<h4>语言</h4>
+
+<p>一个想法在脑子里几年了,
+首要问题是怎么做.<br/>
+从Java, PHP, Ruby一路走来,
+从Rails1, 2, 3, 中途好几次刚建好项目便放弃.<br/>
+到今天的3.2.1, 看上去最佳解决方案已经出炉.
+同时还要忍住去捯饬NodeJS的冲动.</p>
+
+<p>数据库用MongoDB,
+单是不用像MySQL一样migrate的特性,
+就让我深深爱上它.</p>
+
+<h4>前端代码模板很有意思.</h4>
+
+<ul>
+<li>HTML<br/>
+先前流行的是HAML,
+我也很喜欢它的格式.<br/>
+不过这回还是玩玩SLiM吧,
+虽然它的可读性不如前者.</li>
+<li>CSS<br/>
+三选一: SASS, SCSS, LESS.<br/>
+选定SASS.
+一是因为之前用过比较熟,
+使用缩进的风格也是我喜欢的类型.<br/>
+一直不明白后来要推出SCSS这种不伦不类的东西.<br/>
+LESS偏向NodeJS系的, 以后有空再研究吧.</li>
+<li>JS<br/>
+CoffeeScript就先不考虑,
+JS是我最擅长的部分,
+就让我敲敲正常的代码吧.<br/>
+自从用jQuery后我就很少写真正的JS了,
+我恨jQuery!<br/>
+另外, UJS被Rails放弃也给我留下了一定的心理阴影.</li>
+</ul>
+
+
+<h4>功能模块</h4>
+
+<p>我不是个NB的程序员, 我最喜欢做的事是用别人的轮子.<br/>
+与抄袭不同, 这一切都是开源的.<br/>
+我懂得欣赏它们, 也知道该如何更好的去用, 这大概算是我的一个优点.</p>
+
+<ul>
+<li>jQuery<br/>
+虽然我恨他, 但还是先用着吧.
+怀念MooTools的日子.</li>
+<li>Mongoid<br/>
+Ruby里MongoDB的ODM(Object-Document-Mapper)框架.<br/>
+MongoMapper和Mongoid我选择了后者.</li>
+<li>devise<br/>
+用户身份验证(Authentication)模块.</li>
+<li>CarrierWave<br/>
+Rails的文件上传模块.<br/>
+其实Paperclip用的人更多, 不过不支持Mongoid.</li>
+<li>图片处理<br/>
+图片处理肯定离不开ImageMagick,
+Ruby下的接口gem包有: RMagick和Mini magick.<br/>
+不过这回我打算使用又拍云(UpYun)存储图片,
+顺便就把图片处理也交给它做吧, 后面还会提到.</li>
+</ul>
+
+
+<h2>设计</h2>
+
+<p>还好有Bootstrip,
+有了它前期可以把更多的精力放在功能上.<br/>
+轻量级的Blueprint也是一个很不错的选择.
+上天赐给我一名设计师吧!</p>
+
+<h2>域名</h2>
+
+<p>额&hellip;<br/>
+这个实在太重要了.<br/>
+想了几年终于想到一个还不错的域名,
+<a href="http://iaieye.com">iaieye.com</a>,
+这也是最近比较有动力的原因.</p>
+
+<h2>服务器</h2>
+
+<p>没有自己服务器,
+所以一切这么解决:<br/>
+&ndash; 代码交给Github <br/>
+Github就不介绍了, 最好, 没有之一. <br/>
+需要注意的是免费版不能加私密项目.<br/>
+国内最近有个GitCafe, 观望中.
+&ndash; 项目放在Heroku<br/>
+&ndash; 数据库用MongoHQ<br/>
+免费16M, 先用着吧.
+MongoLab免费240M,
+不过我喜欢前者的Icon.<br/>
+&ndash; 图片存到又拍云(UpYun)<br/>
+前段时间才发现国内已经有一些云服务了.
+又拍云的口碑不错, 还支持图片处理, 先用用看.<br/>
+盛大云仿佛也不错, 有云主机和MongoIC,
+不过备案是个大问题(有朋友推荐DNSPod来解决).</p>
+
+<h2>笔记</h2>
+
+<h4>配置文件里私密信息（尤其是密码不要进SVN）</h4>
+
+<ul>
+<li><p>用环境变量传递<br/>
+如: <code>uri: &lt;%= ENV['USERNAME'] %&gt;</code></p></li>
+<li><p>环境变量在Heroku里的设置<br/>
+添加: <code>$ heroku config:add USERNAME=fancyoung PASSWORD=123456 ......</code><br/>
+查看: <code>heroku config</code><br/>
+UpYun需要通过此方式配置</p></li>
+</ul>
+
+
+<h4>MongoHQ配置</h4>
+
+<p>修改配置文件: <code>config/mongoid.yml</code></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>...
+</span><span class='line'>production:
+</span><span class='line'>  uri: &lt;%= ENV['MONGOHQ_URL'] %&gt;
+</span><span class='line'>...</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>发布到Heroku</h4>
+
+<p><code>$ git push heroku master</code></p>
+
+<h4>绑定自己的域名</h4>
+
+<p><del>添加Heroku插件(Add-on): Custom Domain.</del><br/>
+<del>Heroku里添加插件需要先用信用卡(需国际信用卡)认证.</del><br/>
+(根据@joel 提醒，现在已可以直接设置，无需插件，<br/>
+Custom Domains已打上REPLACED标记。)</p>
+
+<p>配置过程中, 发现3个IP都ping不通, 发现是被墙. <br/>
+最后用过设置CNAME的方式完成配置.</p>
+
+<h2>参考</h2>
+
+<p><a href="http://devcenter.heroku.com/articles/mongohq">Heroku绑定MongoHQ方法</a><br/>
+<a href="http://devcenter.heroku.com/articles/custom-domains">用Heroku插件Custom Domain自定义域名</a><br/>
+<a href="http://devcenter.heroku.com/articles/config-vars">配置Heroku上的变量</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">思扬</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-25T00:17:00+00:00" pubdate data-updated="true">Feb 25<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/ruby/'>Ruby</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/web-design-trends-in-2012/" title="Previous Post: 2012十大Web设计趋势">&laquo; 2012十大Web设计趋势</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/bootstrap-bug-when-responsive-css-with-navbar-fixed-top/" title="Next Post: Bootstrap使用响应式设计(Responsive design)时导航条上部有空白的解决方案">Bootstrap使用响应式设计(Responsive design)时导航条上部有空白的解决方案 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>简介</h1>
+  <p>我的技术博客</p>
+  <p>o(∩_∩)o</p>
+</section>
+<section>
+  <h1>常用链接</h1>
+  <ul>
+    <li>
+      <a href="http://iaieye.com" target="_blank">IAIEYE-我的时间线网站</a>
+    </li>
+    <li>
+      <a href="https://github.com/fancyoung/fancy-emacs/wiki/shortcut" target="_blank">Emacs快捷键</a>
+    </li>
+  </ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/use-octopress-new-post-function-with-zsh/">Octopress在zsh下无法新建博客的问题</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/arch-linux-reinstall-glibc/">Arch升级失败后修复glibc记录</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/tmux-study/">Tmux使用</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/emacs-tramp-hangs-bug-in-zsh/">解决Emacs远程连接时卡住的bug</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/edit-remote-file-with-emacs/">用Emacs远程编辑文件及相关笔记</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/fancyoung">@fancyoung</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'fancyoung',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+<section>
+  <h1>技术博客</h1>
+  <ul>
+    <li>
+      <a href="http://ejohn.org/">John Resig</a>
+      <p>jQuery创始人</p>
+    </li>
+    <li>
+      <a href="http://davidwalsh.name/">David Walsh Blog</a>
+      <p>Mootools开发者</p>
+    </li>
+    <li>
+      <a href="http://lifesinger.wordpress.com/">岁月如歌</a>
+      <p>需翻墙</p>
+    </li>
+  </ul>
+</section>
+<section>
+  <h1>其它博客</h1>
+  <ul>
+    <li>
+      <a href="http://blog.sina.com.cn/twocold">韩寒</a>
+    </li>
+    <li>
+      <a href="http://blog.sina.com.cn/fangzhouzi">方舟子</a>
+    </li>
+    <li>
+      <a href="http://thisisdongdongqiang.com/">东东枪</a>
+    </li>
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - 思扬 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'fancyoung';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://fancyoung.com/blog/deploy-a-website-without-your-own-server/';
+        var disqus_url = 'http://fancyoung.com/blog/deploy-a-website-without-your-own-server/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

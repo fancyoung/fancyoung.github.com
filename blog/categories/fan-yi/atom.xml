@@ -1,0 +1,602 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: 翻译 | 没有标题的博客]]></title>
+  <link href="http://fancyoung.com/blog/categories/fan-yi/atom.xml" rel="self"/>
+  <link href="http://fancyoung.com/"/>
+  <updated>2013-05-17T06:53:44+00:00</updated>
+  <id>http://fancyoung.com/</id>
+  <author>
+    <name><![CDATA[思扬]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[CSS实现背景透明完美解决方案]]></title>
+    <link href="http://fancyoung.com/blog/css-background-transparency/"/>
+    <updated>2011-11-29T16:44:00+00:00</updated>
+    <id>http://fancyoung.com/blog/css-background-transparency</id>
+    <content type="html"><![CDATA[<p>翻译自: <a href="http://robertnyman.com/2010/01/11/css-background-transparency-without-affecting-child-elements-through-rgba-and-filters/">CSS Background Transparency Without Affecting Child Elements, Through RGBa And Filters</a></p>
+
+<p>当今的大部分网页设计都包含了半透明的元素.但用CSS实现想要的效果却没那么简单.</p>
+
+<h2>现存的问题</h2>
+
+<p>如果我们想要一个半透明背景,有两种实现方式:<br/>
+&ndash; 利用CSS和opacity属性<br/>
+&ndash; 建立一个24位PNG背景图片<br/>
+用opacity的问题除了
+<a href="http://robertnyman.com/2008/09/16/you-want-css-opacity-to-go-with-that-well-suit-yourself/">需要通过麻烦的语法来兼容所有浏览器</a>,
+还有不单该元素自身背景透明了,它的子元素也会透明.
+所以里面所有的文字也是透明的,这一般不是想要的效果.
+你可以做一些CSS trick,通过建立额外的元素来解决这个问题,但这种解决方案很恶心.</p>
+
+<p>用PNG的问题是会额外增加HTTP请求,
+而且图片比几行css代码要大得多-
+尤其考虑到图片不能太小以避免
+<a href="http://robertnyman.com/2009/05/26/serious-memory-leak-issue-with-24-bit-png-images-with-alpha-transparency-in-internet-explorer/">IE下24位PNG图透明时引起的内存泄漏</a>.</p>
+
+<!--more-->
+
+
+<h2>解决方案</h2>
+
+<p>这里提供一种方法:
+<a href="http://en.wikipedia.org/wiki/RGBA_color_space">RGBa colors</a>.
+它的美妙之处在于你可以通过设置RGB值和透明值,轻松的实现颜色透明.
+代码如下:
+<code>
+.alpha60 {
+  /* 用于不支持RGBa的浏览器 */
+  background: rgb(0, 0, 0);
+  /* RGBa, 透明度0.6 */
+  background: rgba(0, 0, 0, 0.6);
+}
+</code>
+透明将只对背景生效,很好很强大,对吧:)</p>
+
+<h3>继续</h3>
+
+<p>不幸的是IE不支持RGBa(IE678都不行).
+幸运的是微软在2000年时疯狂的给IE加上了各种过滤器.
+其中有一个是<a href="http://msdn.microsoft.com/en-us/library/ms532997(VS.85).aspx">渐变过滤器(the gradient filter)</a>,
+我们只需要把开始结束都设置成一个颜色就可以了.
+你现在会想,&ldquo;那我们怎么将其透明呢?&rdquo;.
+你只需要用16进制值来定义颜色就可以了.
+下面是用渐变过滤器实现和上面同等透明效果的代码:
+<code>
+.alpha60 {
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
+}
+</code>
+你可以看到定义里的8位16进制数字,
+前两位代表透明度,接下来两位是红色,接着就是绿色和蓝色.
+注意两位16进制颜色的范围是0~255(ff).
+那我们怎么将<code>0.6</code>转化为16进制数呢?</p>
+
+<p>这里就需要用到一些数学知识了.
+基本上,我们只需要将需要的透明度(比如0.6)乘以255,再转化为16进制即可.
+还有一个简单的办法是利用
+<a href="http://www.google.com/help/features.html">Google’s Search Features</a>,
+你只需要在Google里搜索
+<a href="http://www.google.se/search?q=0.6+*+255+in+hex">0.6 * 255 in hex</a>
+就能得到答案.
+不过Google计算器仿佛只能处理整数,而
+<a href="http://www.google.se/search?q=0.3+*+255+in+hex">0.3 * 255 in hex</a>
+它便无法得出结果.</p>
+
+<p>还有一种更快的方法就是利用JavaScript,
+只需要在浏览器控制行里输入
+<code>
+Math.floor(0.6 * 255).toString(16);
+</code>
+便能得出结果.</p>
+
+<h3>整合</h3>
+
+<p>根据上面的方法,我们来写一个完整的实现:
+<code>
+.alpha60 {
+  /* Fallback for web browsers that doesn't support RGBa */
+  background: rgb(0, 0, 0);
+  /* RGBa with 0.6 opacity */
+  background: rgba(0, 0, 0, 0.6);
+  /* For IE 5.5 - 7*/
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
+  /* For IE 8*/
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
+}
+</code>
+注意,我们还需要额外为IE定义<code>background: transparent</code>,
+我们可以通过条件注释来解决.</p>
+
+<h2>浏览器支持</h2>
+
+<p>支持RGBa的有:<br/>
+&ndash; firefox 3+<br/>
+&ndash; Safari 2+<br/>
+&ndash; Opera 10<br/>
+IE过滤器支持IE5.5及以上版本.</p>
+
+<p>所以这种方式几乎支持了所有浏览器.</p>
+
+<h3>感谢</h3>
+
+<p>Thanks to <a href="http://css-tricks.com/rgba-browser-support/">RGBa Browser Support</a> and
+<a href="http://leaverou.me/2009/02/bulletproof-cross-browser-rgba-backgrounds/">Bulletproof, cross-browser RGBA backgrounds, today</a>
+for the information and inspiration.</p>
+
+<p>Thanks to <a href="http://friendlybit.com/">Emil Stenström</a> and <a href="http://kodfabrik.se/">Pelle Wessman</a>
+for coming up with countless alternatives for hex conversion, and explaining basic math to stupid me.</p>
+
+<h2>译者总结</h2>
+
+<p>大家使用时可直接复制下面代码:
+<code>
+/* 白色背景,透明度0.6 */
+.alpha60 {
+  background: rgb(255, 255, 255);
+  background: rgba(255, 255, 255, 0.6);
+  background: transparent\9;
+  zoom: 1;
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99ffffff, endColorstr=#99ffffff);
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99ffffff, endColorstr=#99ffffff)";
+}
+</code>
+最后来个效果图,顺便试试jsfiddle的嵌入:<br/>
+<iframe style="width: 100%; height: 300px" src="http://jsfiddle.net/nMKGs/embedded/result,html,css/light/"></iframe></p>
+
+<p>(2012-05-01 更新)<br/>
+因为自己用的是Sass，所以封装了一下，Sass的功能很强大：<br/>
+<a href="/blog/better-transparentize-mixin-for-sass">Sass中通过mixin封装透明背景模块</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Blueprint教程]]></title>
+    <link href="http://fancyoung.com/blog/blueprint-tutorial/"/>
+    <updated>2011-11-17T13:15:00+00:00</updated>
+    <id>http://fancyoung.com/blog/blueprint-tutorial</id>
+    <content type="html"><![CDATA[<p>翻译自: <a href="https://github.com/joshuaclayton/blueprint-css/wiki/Quick-start-tutorial">Blueprint CSS Framework Tutorial</a></p>
+
+<p>Blueprint是个好框架，本教程会深入介绍你可以用它来做什么，也会说到什么时候不适合用。</p>
+
+<h2>Blueprint简介</h2>
+
+<p>Blueprint是一个CSS框架，为减少开发时间而设计。它可以构架起有坚实基础的CSS，其中包含合理的排版（typography）、可定制的网格(grid)、打印样式等。</p>
+
+<p>但是Blueprint不是银弹，它适用于每个页面都需要独特的设计。在决定使用Blueprint前建议先看看Blueprint例子以决定是否适合你。你可以检出<code>tests</code>目录，里面例子展示大部分Blueprint样式。</p>
+
+<p>“框架”这个词也许有些误导，Blueprint并不会建议你如何组织你的CSS文件。它更像一个工具箱，你可以从中选出你需要的。</p>
+
+<!--more-->
+
+
+<h2>结构概述</h2>
+
+<p>自下而上的看Blueprint：</p>
+
+<p>CSS布局：
+CSS reset: 移除浏览器的默认规则。
+Typography: 默认提供一些漂亮的排版和颜色。
+Grid: 提供一组样式来制作网格。</p>
+
+<p>第二部分是脚本。你可以它来自定义框架，可以是列数、宽度等外观，还可以是路径、命名空间等。我们有两个脚本：
+1. Compressor: 用于压缩和自定义源文件。
+2. Validator: 用于验证Blueprint核心文件。</p>
+
+<p>以上是简单介绍，接下来让我们进入细节。首先，我们看看CSS部分。然后我们再介绍脚本，以及如何通过它数和自定制框架。</p>
+
+<h2>设置Blueprint</h2>
+
+<p>为了使用Blueprint，你必须包含以下三个文件在你的HTML中：</p>
+
+<ul>
+<li><code>blueprint/screen.css</code>: 主要文件，页面展示的样式都在里面。</li>
+<li><code>blueprint/print.css</code>: 用于打印。</li>
+<li><code>blueprint/ie.css</code>: 用于IE浏览器下的校正。</li>
+</ul>
+
+
+<p>在HTML中嵌入下面代码来引用（请确认路径正确）：
+```
+<link rel="stylesheet" href="css/blueprint/screen.css" type="text/css" media="screen, projection" />
+<link rel="stylesheet" href="css/blueprint/print.css" type="text/css" media="print" /></p>
+
+<!--[if lt IE 8]>
+  <link rel="stylesheet" href="css/blueprint/ie.css" type="text/css" media="screen, projection" />
+<![endif]-->
+
+
+<p>```
+（原文提示XHTML需要用"/>&ldquo;结束标签，上面代码中我已经直接加上了）</p>
+
+<h2>使用Blueprint里的CSS</h2>
+
+<p>之前已经提过，Blueprint有三个布局，前两个布局，CSS reset和默认排版用于设置默认HTML样式。所以你不需要更改这两个文件。如果你想更改全局字体大小等，建议你写在自己的CSS文件里，以便将来更新Blueprint版本。</p>
+
+<h4>排版相关class</h4>
+
+<p>While the typography of Blueprint mainly applies itself, there’s a few classes
+provided. 下面是一个它们名字的列表和介绍它们的作用:</p>
+
+<p><code>.hide</code>
+隐藏元素<br/>
+<code>.quiet</code>
+使字体颜色柔和<br/>
+<code>.loud</code>
+黑色字体<br/>
+<code>highlight</code>
+黄色背景<br/>
+<code>.added</code>
+绿色背景<br/>
+<code>.removed</code>
+红色背景<br/>
+<code>.first</code>
+移除左侧margin/padding<br/>
+<code>.last</code>
+移除右侧margin/padding<br/>
+<code>.top</code>
+移除顶部margin/padding<br/>
+<code>.bottom</code>
+移除底部margin/padding</p>
+
+<h4>表格样式</h4>
+
+<p>Blueprint可以通过给输入元素加<code>.text</code>, <code>.title</code>类来控制，其中<code>.text</code>表示普通大小，<code>.title</code>提供一个大字体的输入框。</p>
+
+<p>这里还有一些类可以用于成功或失败信息：</p>
+
+<p><code>div.error</code>
+建议一个失败框（红色）。<br/>
+<code>div.notice</code>
+建议一个提示框（黄色）。<br/>
+<code>div.success</code>
+建议一个成功框（绿色）。</p>
+
+<h4>建立网格</h4>
+
+<p>第三个布局是网格，是一个给你网站建立各样网格的工具。记住网格背后的大部分CSS都可以自定义（下面会讲到）。在这个部分我会使用默认设置。</p>
+
+<p>默认网格有24列，每列宽30px，边距(margin)10px。总共宽为950px，适合1024x768的分辨率。如果你想要更窄的设计，可以看下面自定义网格一节。</p>
+
+<p>怎么用Blueprint来建立网格呢？新建一个<code>&lt;div/&gt;</code>来代表一列，并且给它加一个<code>.span-x</code>的class。比如，如果你想要一个三列的布局，两窄一宽，并且包含头尾，可以参考下面的代码:
+```</p>
+
+<div class="container">
+  <div class="span-24">
+    头部
+  </div>
+
+  <div class="span-4">
+    第一列
+  </div>
+  <div class="span-16">
+    中间列
+  </div>
+  <div class="span-4 last">
+    最后一列
+  </div>
+ 
+  <div class="span-24">
+    尾部
+  </div>
+</div>
+
+
+<p><code>``
+此外，还有两个class你应该知道。首先，每个Blueprint页面应该包含在一个class为</code>.container`的div里，一般紧跟在body标签后。</p>
+
+<p>第二，每行的最后一列（默认24列），应该用class<code>.last</code>来移除右侧的边距(margin)。可以参考<code>tests/parts/</code>里的例子。这些文件告诉了你Blueprint的网格能做些什么。</p>
+
+<p>这里是一个其他网格相关class的快速概述：<br/>
+<code>.append-x</code>
+附加（在后面加）x条空列。<br/>
+<code>.prepend-x</code>
+追加（在前面）x条空列。<br/>
+<code>.push-x</code>
+推送x列到左侧。可用于切换列。<br/>
+<code>.pull-x</code>
+推送x列到右侧。可用于切换列。<br/>
+<code>.border</code>
+列右侧加分界线。<br/>
+<code>.colborder</code>
+建立新列，分界线在中部。<br/>
+<code>.clear</code>
+换行，无论是否有空。<br/>
+<code>.showgrid</code>
+给容器或列添加后能看见网格和基线。</p>
+
+<p>在这个列表中，<code>x</code>用于append/prepend时范围是1-23，用于push/pull时是1-24。如果你自定义了新的列数，这个范围会随之变化。</p>
+
+<p>下面是另一个例子，包含4列等宽，前两列间有分界线，后两列间也有，4列的中间有段空白。
+```</p>
+
+<div class="container">
+  <div class="span-5 border">
+    第一列
+  </div>
+  <div class="span-5 append-4">
+    第二列
+  </div>
+  <div class="span-5 border">
+    第三列
+  </div>
+  <div class="span-5 last">
+    第四列
+  </div>
+</div>
+
+
+<p>```</p>
+
+<p>你也可以通过嵌套列来实现想要的布局。下面例子展现的是页面左半部有四个长方形，两上两下，右半部有一个长方形。
+```</p>
+
+<div class="container">
+  <div class="span-12">
+    <div class="span-6">
+      左上
+    </div>
+    <div class="span-6 last">
+      右上
+    </div>
+    <div class="span-6">
+      左下
+    </div>
+    <div class="span-6 last">
+      右下
+    </div>
+  </div>
+  <div class="span-12 last">
+    另一块
+  </div>
+</div>
+
+
+<p><code>``
+如果不理解可以在浏览器里尝试上面的代码。想看更过的如何使用class的例子，请看</code>/tests/parts/grid.html`。</p>
+
+<h2>脚本</h2>
+
+<p>Blueprint有两个脚本：一个用于压缩和自定义CSS，另一个是验证核心CSS文件，以免你修改了某些文件。</p>
+
+<h4>验证器(The Validator)</h4>
+
+<p>验证器的工作很简单——检查Blueprint核心CSS里的文件。脚本使用配套版本的W3C CSS验证器来完成。为了运行，你需要安装Ruby。然后你可以运行<code>$ ruby validate.rb</code>。</p>
+
+<p>请注意Blueprint有几个验证错误。它们是已知的，来自于几个为了保持浏览器一致性的CSS hack。</p>
+
+<h4>压缩器(The Compressor)</h4>
+
+<p>你的HTML里引用压缩版的核心CSS文件时，当你做过修改，需要重新压缩。这是压缩器脚本的作用。</p>
+
+<p>另外，你可以在这里自定义网格。为了自定义网格，需要使用一个特殊的设置文件，当你运行压缩器时，就会生成新的CSS。新压缩的文件将会使用你的设置。</p>
+
+<p>你之需要重新运行脚本来重新压缩。这会解析核心CSS文件并在blueprint文件夹里生成新文件。与验证器一样，需要安装Ruby。在<code>lib</code>目录里执行<code>$ ruby compress.rb</code>。</p>
+
+<p>执行这个文件会将<code>blueprint/src</code>下的文件合并成三个文件：<code>ie.css</code>, <code>print.css</code>, <code>screen.css</code>。<br/>
+但是你可以通过加参数来改变行为。执行<code>$ ruby compress.rb -h</code>查看你可以使用的基本参数。</p>
+
+<h4>自定义设置</h4>
+
+<p>你可以阅读<code>lib/compress.rb</code>里的文档来学习如何自定义设置。</p>
+
+<h2>参考</h2>
+
+<p><a href="https://github.com/joshuaclayton/blueprint-css/wiki/Quick-start-tutorial">Blueprint CSS Framework Tutorial(官方原文)</a><br/>
+<a href="http://blueprintcss.org/">官网</a><br/>
+<a href="http://blueprintcss.org/tests/">Demo</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[将Arch Linux从32位升到64位]]></title>
+    <link href="http://fancyoung.com/blog/migrating-between-architectures-without-reinstalling/"/>
+    <updated>2011-11-07T14:37:00+00:00</updated>
+    <id>http://fancyoung.com/blog/migrating-between-architectures-without-reinstalling</id>
+    <content type="html"><![CDATA[<ul>
+<li>翻译自Arch Wiki：<a href="https://wiki.archlinux.org/index.php/Migrating_Between_Architectures_Without_Reinstalling">Migrating Between Architectures Without Reinstalling</a></li>
+<li>i686为32位，x86_64位64位</li>
+<li>升级有风险，操作须谨慎。本人使用文中方法2升级时无意间重启了电脑，催悲了。</li>
+</ul>
+
+
+<!--more-->
+
+
+<h2>准备工作</h2>
+
+<h3>确认为64位平台</h3>
+
+<p>如果你已经正在使用x86_64但是想安装i686，可以跳过此步。
+为了运行64位软件，你的CPU必须支持64位。现在大部分CPU都支持64位。你可以通过运行一下命令来确认：
+<code>
+$ grep --color 'lm' /proc/cpuinfo
+</code>
+（原文中为<code>grep --color '\' /proc/cpuinfo</code>， 应该不对）
+当CPU为x86_64平台时，输出结果里会出现高亮的 <code>lm</code> （“long mode”）。
+注意不是<code>lahf_lm</code>，它和64位无关。</p>
+
+<h3>硬盘空间</h3>
+
+<p>在迁移过程中，<code>/var/cache/pacman/pkg</code>的大小将翻倍，请为此做好准备。这是假定cache里只有当前安装的包，就像<code>$ pacman -Sc</code>（clean）刚运行过一样。使用空间增长是因为所有包同时有i686和x86_64两个版本。
+如果你没有足够的空间，可以使用<a href="https://wiki.archlinux.org/index.php/Gparted">gparted</a>来调整相关分区大小，或者mount另一个分区到<code>/var/cache/pacman</code>。
+在迁移过程中请不要移除老框架的软件包，知道完全升级成功。过早的移除会使你无法回退和还原变更。</p>
+
+<h3>电源支持</h3>
+
+<p>升级时间比较长，并且不可中断。根据你的 安装包大小及网络速度，你最好为此准备至少一个小时的升级时间（虽然你可以先把它们下载下来）。请保证你的电源稳定。</p>
+
+<h3>回退准备</h3>
+
+<p>如果迁移过程中失败，有些包可以帮助你解决此时的问题，但是需要你在迁移之前安装。详情可以参考后面的 #Troubleshooting 。
+包<a href="https://www.archlinux.org/packages/?name=busybox">busybox</a>可以用来还原变更。它不依赖于其他包，可以单独安装。通过下面命令可以安装32位（i686）的版本
+<code>
+$ pacman -S busybox
+</code>
+另一个包是<a href="https://www.archlinux.org/packages/?name=lib32-glibc">lib32-glibc</a>，在<a href="https://wiki.archlinux.org/index.php/Multilib_Project">Multilib</a>的x86_64资源库里。这个只有当你从32位迁移至其它版本时才可能使用（It is probably only useful when migrating away from 32 bits）;无论如何你可能安全跳过这个包。你可以用这个包来运行32位程序，通过明确的调用<code>/lib/ld-linux-x86-32.so.2</code>。可用下面命令行安装。
+<code>
+$ pacman -S lib32-glibc
+</code></p>
+
+<h2>方法1：使用Arch LiveCD</h2>
+
+<ol>
+<li>下载、刻录并启动64位Arch ISO LiveCD。</li>
+<li>配置LiveCD的网络，然后pacman用新的库。</li>
+<li>将现在的安装挂在到<code>/mnt</code>目录。如：<code>mount /dev/sda1 /mnt</code></li>
+<li>使用下面的脚本来执行：升级本地pacman数据库、取得本地安装包列表并重新安装：
+```
+
+<h1>!/bin/bash</h1></li>
+</ol>
+
+
+<p>MOUNTED_INSTALL=&lsquo;/mnt&rsquo;
+TEMP_FILE=&lsquo;/tmp/packages.list&rsquo;</p>
+
+<p>pacman &mdash;root $MOUNTED_INSTALL -Sy
+pacman &mdash;root $MOUNTED_INSTALL -Qqet > $TEMP_FILE</p>
+
+<p>for PKG in $(cat $TEMP_FILE) ; do
+   pacman &mdash;root $MOUNTED_INSTALL -S $PKG &mdash;noconfirm
+done</p>
+
+<p>exit 0
+```</p>
+
+<h2>方法2：从当前系统升级</h2>
+
+<h3>准备</h3>
+
+<h4>Cache old packages</h4>
+
+<blockquote><p>注意：如果你有从AUR或第三方库的包，并且在新的平台里查询不到，pacman会告知找不到相应替代。将这些包记录下来，以便在升级成功后重新安装，并用<code>$ pacman -Rsn package_name</code>来卸载。</p></blockquote>
+
+<p>确保你现在的包都在你的cache里，下载它们（老平台的）以便回退。
+<code>
+$ pacman -Sw $(comm -23 &lt;(pacman -Qq) &lt;(pacman -Qmq))
+</code>
+或者用pacman-contrib包里的bacman来生成它们。
+如果你是从32位迁移，现在可以安装32位的Busybox
+<code>
+$ pacman -S busybox
+</code></p>
+
+<h4>更换pacman平台</h4>
+
+<p>编辑配置文件<code>/etc/pacman.conf</code>并且把<code>Architecture</code>从<code>auto</code>改为新值。你可以参考下面的sed命令：
+For x86_64
+<code>
+$ sed -i -e s/'Architecture = auto'/'Architecture = x86_64'/g /etc/pacman.conf
+</code>
+For i686
+<code>
+$ sed -i -e s/'Architecture = auto'/'Architecture = i686'/g /etc/pacman.conf
+</code>
+手动移除Pacman软件仓库的数据库，强制同步新的软件仓库：
+<code>
+$ rm -rf /var/lib/pacman/sync/*   # remove existing repository cache
+$ pacman -Sy                      # sync new architecture repositories
+</code></p>
+
+<h4>下载新包</h4>
+
+<p>给所有当前安装包下载新平台版本
+<code>
+$ pacman -Sw $(pacman -Qq|sed '/^lib32-/ d')  # download new package versions
+</code>
+如果有些包不能下载，请删除它们。
+如果是迁移到32位，安装32位的Busybox fallback now that Pacman has been configured with the 32-bit architecture:
+<code>
+$ pacman -S busybox
+</code>
+或者，如果是迁移到64位，安装lib-32-glibc fallback:
+<code>
+$ pacman -S lib32-glibc
+</code></p>
+
+<h3>安装包</h3>
+
+<h4>安装内核（64位）</h4>
+
+<p>将内核升级到64位（x86_64）很安全很简单：32位和64位的应用在64位内核下都能很好的运行。如果是从64位迁移至其它平台，leave the 64-bit kernel installed and running for now and skip this step.
+用下面命令安装Arch Linux内核：
+<code>
+$ pacman -S linux
+</code>
+启动新的64位内核，并确认它运行x86_64平台：
+<code>
+$ uname -m
+</code></p>
+
+<h4>控制台终端</h4>
+
+<p>现在切换到一个text-mode虚拟控制台（可以通过Ctrl+Alt+F1）来完成接下来的步骤。你可以使用SSH之类的伪终端，但不建议你这么做。有些包会被移除或者被替换，可能会导致X11桌面不稳定，以至于系统无法启动。</p>
+
+<h4>安装Pacman</h4>
+
+<blockquote><p>警告：一旦你开始升级pacman及相关依赖，便不能中断。Pacman及相关依赖必须在同一条命令行上同时安装。
+<code>
+$ pacman -S pacman glibc libfetch libarchive openssl acl attr xz-utils bzip2 zlib readline bash ncurses expat
+</code>
+Immediately following this command only Busybox, Bash and Pacman will be executable until the other packages are migrated below. 安装成功前不能重启。</p></blockquote>
+
+<h4>安装已存在的包</h4>
+
+<p>为新平台安装所有之前下载的替换。（此时可以休息休息，因为需要花费一段时间。）
+<code>
+$ pacman -S $(pacman -Qq)
+</code>
+For migration away from 64 bits, you may want to skip installing a 32-bit kernel in the command above, since the old 64-bit kernel will still run 32-bit programs.
+完整这步迁移后，各方面都已经完成并且可以重启电脑。</p>
+
+<h3>清理</h3>
+
+<p>你现在可以移除Busybox和lib32-glibc。
+<code>
+$ pacman -Rcn busybox lib32-glibc
+</code></p>
+
+<h4>Makepkg compiler flags</h4>
+
+<p>升级中新版的<code>/etc/makepkg.conf</code>可能会被保存至<code>/etc/makepkg.conf.pacnew</code>。如果你以后要用<a href="https://wiki.archlinux.org/index.php/Makepkg">makepkg</a>进行编译，你必须替换或修改老版本。
+<code>
+$ mv /etc/makepkg.conf /etc/makepkg.conf.backup &amp;&amp; mv /etc/makepkg.conf.pacnew /etc/makepkg.conf
+</code>
+It might also be a good idea to just get a list of &ldquo;new&rdquo; additions to /etc. You can get a list with the following command:
+<code>
+$ find /etc/ -type f -name \*.pac\*
+</code></p>
+
+<h2>问题解决</h2>
+
+<p>在升级过程中，当glibc替换为新版本后，许多老版本的程序将不能运行。如果发生此类问题，你可以用<a href="https://www.archlinux.org/packages/?name=busybox">busybox</a>和<a href="https://www.archlinux.org/packages/?name=lib32-glibc">lib32-glibc</a>来解决。</p>
+
+<h3>Busybox</h3>
+
+<p>In Arch, Busybox is statically linked; it can run without any libraries. There are many commands available to you. For example, to extract an i686 version of Pacman from a cached package:
+<code>
+$ busybox tar xf /var/cache/pacman/pkg/pacman-3.3.2-1-i686.pkg.tar.gz -C &lt;some folder&gt;
+</code></p>
+
+<h3>Lib32-glibc</h3>
+
+<p>Example run 32 bit /bin/ls:
+<code>
+$ /lib/ld-linux-x86-32.so.2 /bin/ls
+</code></p>
+
+<h2>其它</h2>
+
+<ul>
+<li><a href="https://wiki.archlinux.org/index.php/Migrate_installation_to_new_hardware">Migrate installation to new hardware</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Tools | 没有标题的博客]]></title>
+  <link href="http://fancyoung.com/blog/categories/tools/atom.xml" rel="self"/>
+  <link href="http://fancyoung.com/"/>
+  <updated>2013-05-17T06:53:44+00:00</updated>
+  <id>http://fancyoung.com/</id>
+  <author>
+    <name><![CDATA[思扬]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[tmux使用]]></title>
+    <link href="http://fancyoung.com/blog/tmux-study/"/>
+    <updated>2012-07-12T15:29:00+00:00</updated>
+    <id>http://fancyoung.com/blog/tmux-study</id>
+    <content type="html"><![CDATA[<h2>快捷键</h2>
+
+<p><code>C-b</code>激活控制台，然后输入下面命令</p>
+
+<h4>系统</h4>
+
+<table>
+<thead>
+<tr>
+<th>快捷键   </th>
+<th> 功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>?       </td>
+<td> 快捷键帮助</td>
+</tr>
+<tr>
+<td>[       </td>
+<td> 进入视图模式</td>
+</tr>
+</tbody>
+</table>
+
+
+<h4>窗口</h4>
+
+<table>
+<thead>
+<tr>
+<th>快捷键   </th>
+<th> 功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>c       </td>
+<td> 新建窗口</td>
+</tr>
+<tr>
+<td>l       </td>
+<td> 前一个窗口</td>
+</tr>
+<tr>
+<td>n/p     </td>
+<td> 下/上一个窗口</td>
+</tr>
+<tr>
+<td>数字     </td>
+<td> 跳到相应窗口</td>
+</tr>
+<tr>
+<td>w       </td>
+<td> 列出所有窗口</td>
+</tr>
+<tr>
+<td>,       </td>
+<td> 重命名当前窗口</td>
+</tr>
+<tr>
+<td>&amp;       </td>
+<td> 关闭窗口</td>
+</tr>
+<tr>
+<td>f       </td>
+<td> 查找</td>
+</tr>
+</tbody>
+</table>
+
+
+<h4>面板</h4>
+
+<table>
+<thead>
+<tr>
+<th>快捷键   </th>
+<th> 功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&ldquo;/%     </td>
+<td> 上下/左右分割面板</td>
+</tr>
+<tr>
+<td>x       </td>
+<td> 关闭当前面板</td>
+</tr>
+<tr>
+<td>!       </td>
+<td> 关闭除当前面板外的其它面板</td>
+</tr>
+<tr>
+<td>o       </td>
+<td> 移到下一面板</td>
+</tr>
+<tr>
+<td>q       </td>
+<td> 显示面板编号，当时输入数字可跳到相应面板</td>
+</tr>
+<tr>
+<td>C-方向   </td>
+<td> 调节面板尺寸</td>
+</tr>
+<tr>
+<td>{/}     </td>
+<td> 调节当前面板顺序</td>
+</tr>
+</tbody>
+</table>
+
+
+<h2>配置</h2>
+
+<p><code>~/.tmux.conf</code>
+```</p>
+
+<h1>将键绑定与Emacs相同</h1>
+
+<p>unbind C-b
+set -g prefix C-x
+```</p>
+]]></content>
+  </entry>
+  
+</feed>

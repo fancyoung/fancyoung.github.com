@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Ruby | 没有标题的博客]]></title>
+  <link href="http://fancyoung.com/blog/categories/ruby/atom.xml" rel="self"/>
+  <link href="http://fancyoung.com/"/>
+  <updated>2013-05-17T06:53:44+00:00</updated>
+  <id>http://fancyoung.com/</id>
+  <author>
+    <name><![CDATA[思扬]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress在zsh下无法新建博客的问题]]></title>
+    <link href="http://fancyoung.com/blog/use-octopress-new-post-function-with-zsh/"/>
+    <updated>2012-08-12T16:50:00+00:00</updated>
+    <id>http://fancyoung.com/blog/use-octopress-new-post-function-with-zsh</id>
+    <content type="html"><![CDATA[<p>执行：<code>$ rake new_post["arch-linux-reinstall-glibc.markdown"]</code></p>
+
+<p>报错：<code>zsh: no matches found: new_post[arch-linux-reinstall-glibc]</code></p>
+
+<p>原因：zsh中若出现‘*’, ‘(’, ‘|’, ‘&lt;’, ‘[’, or ‘?’符号，则将其识别为查找文件名的通配符</p>
+
+<p>快速解决：用引号括起来<code>$ rake "new_post[arch-linux-reinstall-glibc.markdown]"</code></p>
+
+<p>彻底解决：取消zsh的通配(GLOB),
+在<code>.zshrc</code>中加入<code>alias rake="noglob rake"</code></p>
+
+<hr />
+
+<p>PS：在git回滚操作<code>git reset --soft HEAD^</code>时出现报错：
+<code>zsh: no matches found HEAD^</code>，</p>
+
+<p>也为同样原因，因为<code>^</code>也为正则中的符号，
+需要转义为<code>git reset --soft HEAD\^</code>。</p>
+
+<h2>参考</h2>
+
+<p><a href="https://github.com/imathis/octopress/issues/117">Not compatible with Zsh</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[bundle install时的一些灵异bug]]></title>
+    <link href="http://fancyoung.com/blog/solve-bundle-install-problems/"/>
+    <updated>2012-05-02T13:12:00+00:00</updated>
+    <id>http://fancyoung.com/blog/solve-bundle-install-problems</id>
+    <content type="html"><![CDATA[<p>升级博客后，在另一台电脑上无法启动了。</p>
+
+<h2>在新电脑上Octopress写博客时没法<code>$ bundle install</code></h2>
+
+<h4>现象：</h4>
+
+<p><code>$ bundle install</code>安装到fast-stemmer时报一大堆错，
+无法继续。</p>
+
+<h4>原因：</h4>
+
+<p>不详，可能是rvm里的bundle没升级</p>
+
+<h4>解决</h4>
+
+<p>做了一通操作，不知怎么就好了。。。
+其中包括：
+<code>
+$ rvm gem update
+</code>
+不过我2次都引发了下面几个问题</p>
+
+<!--more-->
+
+
+<h2><code>$ bundle install RedCloth</code>时报错</h2>
+
+<h4>现象:</h4>
+
+<p>无法make，出错提示为：
+```
+Building native extensions.  This could take a while&hellip;
+ERROR:  Error installing RedCloth:</p>
+
+<pre><code>    ERROR: Failed to build gem native extension.
+</code></pre>
+
+<p>&hellip;
+make: /bin/install: Command not found
+&hellip;
+```</p>
+
+<h4>原因：</h4>
+
+<p>查看发现<code>/bin/install</code>文件不存在</p>
+
+<h4>解决：</h4>
+
+<p><code>
+$ ln -s /usr/bin/install /bin/install
+</code>
+参考：<a href="http://jgarber.lighthouseapp.com/projects/13054/tickets/245">网上有人给出了解决方案</a></p>
+
+<h2><code>$ bundle install</code>时直接安装到了当前目录</h2>
+
+<h4>现象：</h4>
+
+<p>安装成功后提示：
+<code>Your bundle is complete! It was installed into ./fast-stemmer</code>
+用git等版本控制的话，会发现有新目录</p>
+
+<h4>原因：</h4>
+
+<p>发现不知什么时候冒出了个新文件<code>.bundle/config</code>，里面的配置将安装指到当前目录。</p>
+
+<h4>解决：</h4>
+
+<p>```</p>
+
+<h1>直接删除配置，一般用不到</h1>
+
+<p>$ rm -rf .bundle</p>
+
+<h1>这个目录也删掉，当然目录名不一定是fast-stemmer，可能需要修改</h1>
+
+<p>$ rm -rf fast-stemmer</p>
+
+<h1>重新安装，完成</h1>
+
+<p>$ bundle install
+```</p>
+
+<h2>最后祭出大招：重装</h2>
+
+<p>根本问题仿佛是更新后gem版本混乱，可以尝试
+```</p>
+
+<h1>xxx为某个gem名</h1>
+
+<p>$ gem list xxx
+$ gem uninstall xxx
+$ gem install xxx
+<code>
+也可以试试直接重装，这个很好使
+</code>
+$ rvm uninstall ruby-1.9.2-p290
+$ rvm install ruby-1.9.2-p290
+```
+重装后记得重新bundle install啊</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[将一切放在云端]]></title>
+    <link href="http://fancyoung.com/blog/deploy-a-website-without-your-own-server/"/>
+    <updated>2012-02-25T00:17:00+00:00</updated>
+    <id>http://fancyoung.com/blog/deploy-a-website-without-your-own-server</id>
+    <content type="html"><![CDATA[<blockquote><p>Github<br/>
+Heroku<br/>
+MongoHQ<br/>
+UpYun<br/>
+name.com</p></blockquote>
+
+<p>一切在拖延症患者眼里都是障碍,
+尤其是: 技术, 设计, 域名, 服务器.</p>
+
+<h2>技术</h2>
+
+<h4>语言</h4>
+
+<p>一个想法在脑子里几年了,
+首要问题是怎么做.<br/>
+从Java, PHP, Ruby一路走来,
+从Rails1, 2, 3, 中途好几次刚建好项目便放弃.<br/>
+到今天的3.2.1, 看上去最佳解决方案已经出炉.
+同时还要忍住去捯饬NodeJS的冲动.</p>
+
+<p>数据库用MongoDB,
+单是不用像MySQL一样migrate的特性,
+就让我深深爱上它.</p>
+
+<h4>前端代码模板很有意思.</h4>
+
+<ul>
+<li>HTML<br/>
+先前流行的是HAML,
+我也很喜欢它的格式.<br/>
+不过这回还是玩玩SLiM吧,
+虽然它的可读性不如前者.</li>
+<li>CSS<br/>
+三选一: SASS, SCSS, LESS.<br/>
+选定SASS.
+一是因为之前用过比较熟,
+使用缩进的风格也是我喜欢的类型.<br/>
+一直不明白后来要推出SCSS这种不伦不类的东西.<br/>
+LESS偏向NodeJS系的, 以后有空再研究吧.</li>
+<li>JS<br/>
+CoffeeScript就先不考虑,
+JS是我最擅长的部分,
+就让我敲敲正常的代码吧.<br/>
+自从用jQuery后我就很少写真正的JS了,
+我恨jQuery!<br/>
+另外, UJS被Rails放弃也给我留下了一定的心理阴影.</li>
+</ul>
+
+
+<h4>功能模块</h4>
+
+<p>我不是个NB的程序员, 我最喜欢做的事是用别人的轮子.<br/>
+与抄袭不同, 这一切都是开源的.<br/>
+我懂得欣赏它们, 也知道该如何更好的去用, 这大概算是我的一个优点.</p>
+
+<ul>
+<li>jQuery<br/>
+虽然我恨他, 但还是先用着吧.
+怀念MooTools的日子.</li>
+<li>Mongoid<br/>
+Ruby里MongoDB的ODM(Object-Document-Mapper)框架.<br/>
+MongoMapper和Mongoid我选择了后者.</li>
+<li>devise<br/>
+用户身份验证(Authentication)模块.</li>
+<li>CarrierWave<br/>
+Rails的文件上传模块.<br/>
+其实Paperclip用的人更多, 不过不支持Mongoid.</li>
+<li>图片处理<br/>
+图片处理肯定离不开ImageMagick,
+Ruby下的接口gem包有: RMagick和Mini magick.<br/>
+不过这回我打算使用又拍云(UpYun)存储图片,
+顺便就把图片处理也交给它做吧, 后面还会提到.</li>
+</ul>
+
+
+<h2>设计</h2>
+
+<p>还好有Bootstrip,
+有了它前期可以把更多的精力放在功能上.<br/>
+轻量级的Blueprint也是一个很不错的选择.
+上天赐给我一名设计师吧!</p>
+
+<h2>域名</h2>
+
+<p>额&hellip;<br/>
+这个实在太重要了.<br/>
+想了几年终于想到一个还不错的域名,
+<a href="http://iaieye.com">iaieye.com</a>,
+这也是最近比较有动力的原因.</p>
+
+<h2>服务器</h2>
+
+<p>没有自己服务器,
+所以一切这么解决:<br/>
+&ndash; 代码交给Github <br/>
+Github就不介绍了, 最好, 没有之一. <br/>
+需要注意的是免费版不能加私密项目.<br/>
+国内最近有个GitCafe, 观望中.
+&ndash; 项目放在Heroku<br/>
+&ndash; 数据库用MongoHQ<br/>
+免费16M, 先用着吧.
+MongoLab免费240M,
+不过我喜欢前者的Icon.<br/>
+&ndash; 图片存到又拍云(UpYun)<br/>
+前段时间才发现国内已经有一些云服务了.
+又拍云的口碑不错, 还支持图片处理, 先用用看.<br/>
+盛大云仿佛也不错, 有云主机和MongoIC,
+不过备案是个大问题(有朋友推荐DNSPod来解决).</p>
+
+<h2>笔记</h2>
+
+<h4>配置文件里私密信息（尤其是密码不要进SVN）</h4>
+
+<ul>
+<li><p>用环境变量传递<br/>
+如: <code>uri: &lt;%= ENV['USERNAME'] %&gt;</code></p></li>
+<li><p>环境变量在Heroku里的设置<br/>
+添加: <code>$ heroku config:add USERNAME=fancyoung PASSWORD=123456 ......</code><br/>
+查看: <code>heroku config</code><br/>
+UpYun需要通过此方式配置</p></li>
+</ul>
+
+
+<h4>MongoHQ配置</h4>
+
+<p>修改配置文件: <code>config/mongoid.yml</code>
+<code>
+...
+production:
+  uri: &lt;%= ENV['MONGOHQ_URL'] %&gt;
+...
+</code></p>
+
+<h4>发布到Heroku</h4>
+
+<p><code>$ git push heroku master</code></p>
+
+<h4>绑定自己的域名</h4>
+
+<p><del>添加Heroku插件(Add-on): Custom Domain.</del><br/>
+<del>Heroku里添加插件需要先用信用卡(需国际信用卡)认证.</del><br/>
+(根据@joel 提醒，现在已可以直接设置，无需插件，<br/>
+Custom Domains已打上REPLACED标记。)</p>
+
+<p>配置过程中, 发现3个IP都ping不通, 发现是被墙. <br/>
+最后用过设置CNAME的方式完成配置.</p>
+
+<h2>参考</h2>
+
+<p><a href="http://devcenter.heroku.com/articles/mongohq">Heroku绑定MongoHQ方法</a><br/>
+<a href="http://devcenter.heroku.com/articles/custom-domains">用Heroku插件Custom Domain自定义域名</a><br/>
+<a href="http://devcenter.heroku.com/articles/config-vars">配置Heroku上的变量</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby on Rails使用时灵异的Bug]]></title>
+    <link href="http://fancyoung.com/blog/rubygems-problem/"/>
+    <updated>2011-11-17T20:33:00+00:00</updated>
+    <id>http://fancyoung.com/blog/rubygems-problem</id>
+    <content type="html"><![CDATA[<blockquote><p>送给敬爱的GFW</p></blockquote>
+
+<h2>问题</h2>
+
+<p><code>$ rails new</code>报错<br/>
+<code>$ bundle install</code>报错<br/>
+等等一切灵异问题<br/>
+据说是因为rubygems.org用的是Amazon的S3服务，而部分s3服务器被GFW拦于墙外。</p>
+
+<h2>解决</h2>
+
+<ul>
+<li><p>2012.12.31更新：淘宝提供了<a href="http://ruby.taobao.org/">镜像</a><br/>
+添加source地址:
+先<code>$ gem sources -a http://ruby.taobao.org/</code>,<br/>
+用<code>$ gem sources -l</code>查看source列表,<br/>
+然后用<code>$ gem sources -r 不需要的source地址</code>命令来删除之前的.</p></li>
+<li><p><del>曾经解决方案，单独下载安装包</del><br/>
+<del>可能需要安装的包</del><br/>
+<del>multi_json</del><br/>
+<del>activesupport</del></p></li>
+</ul>
+
+
+<h2>链接</h2>
+
+<p><a href="http://rubygems.org/">Rubygems</a></p>
+]]></content>
+  </entry>
+  
+</feed>

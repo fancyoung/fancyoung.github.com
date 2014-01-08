@@ -1,0 +1,422 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>技术博客利器——Octopress - 没有标题的博客</title>
+  <meta name="author" content="思扬">
+
+  
+  <meta name="description" content="Octopress简介 Octopress is a framework designed by Brandon Mathis for Jekyll, the blog aware static site generator powering Github Pages. 优点 用文件方式储存数据， &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://fancyoung.com/blog/octopress-study">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="没有标题的博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-1694311-5']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">没有标题的博客</a></h1>
+  
+    <h2>记录与分享</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:fancyoung.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">关于我</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">技术博客利器——Octopress</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-11-04T12:59:00+00:00" pubdate data-updated="true">Nov 4<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h2>Octopress简介</h2>
+
+<blockquote><p><a href="https://github.com/imathis/octopress">Octopress</a> is a framework designed by Brandon Mathis for <a href="https://github.com/mojombo/jekyll">Jekyll</a>, the blog aware static site generator powering Github Pages.</p></blockquote>
+
+<!--more-->
+
+
+<h4>优点</h4>
+
+<p>用文件方式储存数据，无需数据库<br/>
+以静态方式发布，可直接挂在github等地方<br/>
+用markdown格式写博客<br/>
+可以轻松的配置和发布</p>
+
+<h2>常用命令</h2>
+
+<h4>注意</h4>
+
+<p>有些机子上运行可能会报错，需要在命令前加上<code>bundle exec</code></p>
+
+<h4>添加文章</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rake new_post["title"]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>运行后会通过<code>title</code>生成相关文件、链接，可在文件里修改显示出来的标题。<br/>
+<code>title</code>可以使用中文，会自动转化为拼音（个人不建议，因为链接会比较无意义）。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rake generate       #发布文件到public目录
+</span><span class='line'>$ rake watch          #监控source和sass目录的变动
+</span><span class='line'>$ rake preview        #启动服务器并监控变动，通过http://localhost:4000预览</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>发布</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rake generate
+</span><span class='line'>$ rake deploy</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>保存源代码</h4>
+
+<p>因为发布的只是生成的静态页面，<br/>
+需要在项目里建立source分支用于保存整个项目源代码（配置、markdown文件等）。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git add .
+</span><span class='line'>$ git commit -m 'blog'
+</span><span class='line'>$ git push origin source</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>更多设置</h2>
+
+<h4>添加&#8221;关于我&#8221;</h4>
+
+<p>在<code>source</code>下新建<code>about</code>目录，并在里面添加<code>index.markdown</code>文件。<br/>
+编辑导航条<code>source/_includes/custom/navigation.html</code><br/>
+注意:<code>index.markdown</code>文件需要加上头，否则会找不到。</p>
+
+<h4>首页只显示摘要</h4>
+
+<ul>
+<li>在文中加入<code>&lt;!--more--&gt;</code>来控制摘要截取位置</li>
+<li>修改<code>_config.yml</code>里的<code>excerpt_link</code>控制链接文字</li>
+</ul>
+
+
+<h4>部署到Github</h4>
+
+<p>操作步骤参考：<a href="http://octopress.org/docs/deploying/github/">Deploying to Github Pages</a><br/>
+如果你有自己的域名，可参考：<a href="http://fancyoung.com/blog/host-to-github/">Github Page绑定自己域名</a></p>
+
+<h2>Bug Fix</h2>
+
+<h4>不能进行deploy(Github)</h4>
+
+<p>问题：有次发现<code>$ rake deploy</code>不能发布，但是预览正常。检查github上source分支代码已更新，但master仍为老代码。<br/>
+原因：发现是因为代码是新从github下clone下来的，未进行初始化deploy。<br/>
+解决：需要执行<code>$ rake setup_github_pages</code>进行初始化。<br/>
+注意：rake操作应该在source分支下进行，若是刚从github里clone下来的，请先执行<code>$ git checkout source</code>。</p>
+
+<h4>修改的样式preview时不生效</h4>
+
+<p>问题：预览时发现之前设置成功的自定义样式不生效，变回默认样式。<br/>
+解决：<code>$ rake generate</code>即可，会重新生成css。</p>
+
+<h4>无法update octopress</h4>
+
+<p>每过一段时间，可能需要<a href="http://octopress.org/docs/updating/">更新一下Octopress版本</a>，<br/>
+问题：执行<code>$ git pull octopress master</code>时报错：<code>fatal: 'octopress' does not appear to be a git repository</code><br/>
+原因：没有相应远程分支（第一次生成博客的项目中才有？）。打开<code>.git/config</code>查看，应该不包含<code>[remote "octopress"]</code>块。<br/>
+解决：手动添加，或者在命令行执行：<code>$ git remote add octopress https://github.com/imathis/octopress.git</code></p>
+
+<h2>参考</h2>
+
+<p><a href="http://octopress.org/docs/">Octopress官方文档</a><br/>
+<a href="http://daringfireball.net/projects/markdown/syntax">markdown语法</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">思扬</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-11-04T12:59:00+00:00" pubdate data-updated="true">Nov 4<span>th</span>, 2011</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/octopress/'>Octopress</a>, <a class='category' href='/blog/categories/chang-yong/'>常用</a>, <a class='category' href='/blog/categories/jiao-cheng/'>教程</a>, <a class='category' href='/blog/categories/wen-ti-jie-jue/'>问题解决</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/host-to-github/" title="Previous Post: Github Page绑定自己域名">&laquo; Github Page绑定自己域名</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/migrating-between-architectures-without-reinstalling/" title="Next Post: 将Arch Linux从32位升到64位">将Arch Linux从32位升到64位 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>简介</h1>
+  <p>我的技术博客</p>
+  <p>o(∩_∩)o</p>
+</section>
+<section>
+  <h1>常用链接</h1>
+  <ul>
+    <li>
+      <a href="http://iaieye.com" target="_blank">IAIEYE-我的时间线网站</a>
+    </li>
+    <li>
+      <a href="https://github.com/fancyoung/fancy-emacs/wiki/shortcut" target="_blank">Emacs快捷键</a>
+    </li>
+  </ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/use-octopress-new-post-function-with-zsh/">Octopress在zsh下无法新建博客的问题</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/arch-linux-reinstall-glibc/">Arch升级失败后修复glibc记录</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/tmux-study/">Tmux使用</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/emacs-tramp-hangs-bug-in-zsh/">解决Emacs远程连接时卡住的bug</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/edit-remote-file-with-emacs/">用Emacs远程编辑文件及相关笔记</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/fancyoung">@fancyoung</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'fancyoung',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+<section>
+  <h1>技术博客</h1>
+  <ul>
+    <li>
+      <a href="http://ejohn.org/">John Resig</a>
+      <p>jQuery创始人</p>
+    </li>
+    <li>
+      <a href="http://davidwalsh.name/">David Walsh Blog</a>
+      <p>Mootools开发者</p>
+    </li>
+    <li>
+      <a href="http://lifesinger.wordpress.com/">岁月如歌</a>
+      <p>需翻墙</p>
+    </li>
+  </ul>
+</section>
+<section>
+  <h1>其它博客</h1>
+  <ul>
+    <li>
+      <a href="http://blog.sina.com.cn/twocold">韩寒</a>
+    </li>
+    <li>
+      <a href="http://blog.sina.com.cn/fangzhouzi">方舟子</a>
+    </li>
+    <li>
+      <a href="http://thisisdongdongqiang.com/">东东枪</a>
+    </li>
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - 思扬 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'fancyoung';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://fancyoung.com/blog/octopress-study/';
+        var disqus_url = 'http://fancyoung.com/blog/octopress-study/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Bug | 没有标题的博客]]></title>
+  <link href="http://fancyoung.com/blog/categories/bug/atom.xml" rel="self"/>
+  <link href="http://fancyoung.com/"/>
+  <updated>2013-05-17T06:53:44+00:00</updated>
+  <id>http://fancyoung.com/</id>
+  <author>
+    <name><![CDATA[思扬]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[bundle install时的一些灵异bug]]></title>
+    <link href="http://fancyoung.com/blog/solve-bundle-install-problems/"/>
+    <updated>2012-05-02T13:12:00+00:00</updated>
+    <id>http://fancyoung.com/blog/solve-bundle-install-problems</id>
+    <content type="html"><![CDATA[<p>升级博客后，在另一台电脑上无法启动了。</p>
+
+<h2>在新电脑上Octopress写博客时没法<code>$ bundle install</code></h2>
+
+<h4>现象：</h4>
+
+<p><code>$ bundle install</code>安装到fast-stemmer时报一大堆错，
+无法继续。</p>
+
+<h4>原因：</h4>
+
+<p>不详，可能是rvm里的bundle没升级</p>
+
+<h4>解决</h4>
+
+<p>做了一通操作，不知怎么就好了。。。
+其中包括：
+<code>
+$ rvm gem update
+</code>
+不过我2次都引发了下面几个问题</p>
+
+<!--more-->
+
+
+<h2><code>$ bundle install RedCloth</code>时报错</h2>
+
+<h4>现象:</h4>
+
+<p>无法make，出错提示为：
+```
+Building native extensions.  This could take a while&hellip;
+ERROR:  Error installing RedCloth:</p>
+
+<pre><code>    ERROR: Failed to build gem native extension.
+</code></pre>
+
+<p>&hellip;
+make: /bin/install: Command not found
+&hellip;
+```</p>
+
+<h4>原因：</h4>
+
+<p>查看发现<code>/bin/install</code>文件不存在</p>
+
+<h4>解决：</h4>
+
+<p><code>
+$ ln -s /usr/bin/install /bin/install
+</code>
+参考：<a href="http://jgarber.lighthouseapp.com/projects/13054/tickets/245">网上有人给出了解决方案</a></p>
+
+<h2><code>$ bundle install</code>时直接安装到了当前目录</h2>
+
+<h4>现象：</h4>
+
+<p>安装成功后提示：
+<code>Your bundle is complete! It was installed into ./fast-stemmer</code>
+用git等版本控制的话，会发现有新目录</p>
+
+<h4>原因：</h4>
+
+<p>发现不知什么时候冒出了个新文件<code>.bundle/config</code>，里面的配置将安装指到当前目录。</p>
+
+<h4>解决：</h4>
+
+<p>```</p>
+
+<h1>直接删除配置，一般用不到</h1>
+
+<p>$ rm -rf .bundle</p>
+
+<h1>这个目录也删掉，当然目录名不一定是fast-stemmer，可能需要修改</h1>
+
+<p>$ rm -rf fast-stemmer</p>
+
+<h1>重新安装，完成</h1>
+
+<p>$ bundle install
+```</p>
+
+<h2>最后祭出大招：重装</h2>
+
+<p>根本问题仿佛是更新后gem版本混乱，可以尝试
+```</p>
+
+<h1>xxx为某个gem名</h1>
+
+<p>$ gem list xxx
+$ gem uninstall xxx
+$ gem install xxx
+<code>
+也可以试试直接重装，这个很好使
+</code>
+$ rvm uninstall ruby-1.9.2-p290
+$ rvm install ruby-1.9.2-p290
+```
+重装后记得重新bundle install啊</p>
+]]></content>
+  </entry>
+  
+</feed>
