@@ -179,3 +179,6 @@ cd ~/.vim/bundle/command-t/ruby/command-t (包含extconf.rb文件的目录)
 ruby extconf.rb 
 make 
 ```
+
+## 其他参技
+[一些不起眼但非常有用的 Vim 命令](http://www.admin10000.com/document/6015.html)
