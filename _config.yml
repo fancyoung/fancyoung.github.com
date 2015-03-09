@@ -99,3 +99,7 @@ google_analytics_tracking_id: UA-1694311-5
 
 # Facebook Like
 facebook_like: false
+
+collections:
+  notes:
+    output: true
