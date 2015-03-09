@@ -32,12 +32,14 @@ categories: [前端]
 Sass的文档不全，为了查找一些计算函数，我只好去源码里找。  
 开始想寻求的是一个转十六进制的方法，结果发现`ie_hex_str`已经实现了。  
 在这里贴段里面的实现代码，来看看Sass的计算功能：  
+
 ```
 # Sass
 alpha = (color.alpha * 255).round.to_s(16).rjust(2, '0')
 # 等价于JS中的：
 Math.round(0.6 * 255).toString(16);
 ```
+
 最后的rjust方法，应该是空位补零。
 
 非常有用的两个页面：

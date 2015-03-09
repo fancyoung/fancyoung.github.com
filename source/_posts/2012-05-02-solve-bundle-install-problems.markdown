@@ -62,12 +62,14 @@ $ bundle install
 
 ## 最后祭出大招：重装
 根本问题仿佛是更新后gem版本混乱，可以尝试
+
 ```
 # xxx为某个gem名
 $ gem list xxx
 $ gem uninstall xxx
 $ gem install xxx
 ```
+
 也可以试试直接重装，这个很好使
 ```
 $ rvm uninstall ruby-1.9.2-p290
