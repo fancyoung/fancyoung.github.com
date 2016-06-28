@@ -1,5 +1,5 @@
 GEM
-  remote: http://ruby.taobao.org/
+  remote: https://ruby.taobao.org/
   specs:
     RedCloth (4.2.9)
     blankslate (2.1.2.4)
