@@ -260,7 +260,10 @@ $ git cherry-pick ca32a6da
 ```
 
 #### 43 全项目搜索
-这个和 git 无关，为 Linux 命令行技巧。
+```
+$ git grep TODO
+```
+其实 linux 下直接 grep 也可以
 ```
 $ grep -Rn TODO
 ```
