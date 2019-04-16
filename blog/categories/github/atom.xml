@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: github | 没有标题的博客]]></title>
+  <link href="http://fancyoung.com/blog/categories/github/atom.xml" rel="self"/>
+  <link href="http://fancyoung.com/"/>
+  <updated>2019-04-16T21:20:18+08:00</updated>
+  <id>http://fancyoung.com/</id>
+  <author>
+    <name><![CDATA[思扬]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Githug通关全攻略]]></title>
+    <link href="http://fancyoung.com/blog/githug-cheat-sheet/"/>
+    <updated>2012-05-02T12:49:00+08:00</updated>
+    <id>http://fancyoung.com/blog/githug-cheat-sheet</id>
+    <content type="html"><![CDATA[<p><a href="https://github.com/Gazler/githug">Githug</a>将git的入门与游戏相结合，太有意思了。<br/>
+游戏过程中少不了网上查找资料，man，难度4以后不停的hint。<br/>
+通关后对git的了解又加深了许多。<br/>
+取连接名时很是矛盾，写完博客后还是将链接中的walkthrough改为了cheat sheet。<br/>
+希望大家不需要使用到这篇博客吧。</p>
+
+<p>因关卡随时处于更新状态，可能会稍有不同<br/>
+<del>- 最后更新时间2012-11-14</del><br/>
+<del>- 最后更新时间2013-05-17</del> <br/>
+- 最后更新时间2016-02-25</p>
+
+<h2>准备</h2>
+
+<p>安装Githug：<code>$ gem install githug</code>。<br/>
+安装完成后直接执行<code>$ githug</code>开始游戏，同一条命令进入下一关。<br/>
+<code>$ githug hint</code>查看过关提示，<br/>
+当操作错误无法过关时，可以<code>$ githug reset</code>重置当前关卡。</p>
+
+<h2>开始</h2>
+
+<h4>0</h4>
+
+<pre><code>y
+</code></pre>
+
+<h4>1 初始化git项目</h4>
+
+<pre><code>$ cd git_hug
+$ git init
+</code></pre>
+
+<h4>2 配置git用户信息</h4>
+
+<pre><code>$ git config user.name xxx
+$ git config user.email xxx@gmail.com
+</code></pre>
+
+<p>或者直接在<code>.git/config</code>文件里添加
+<code>
+[user]
+        name = xxx
+        email = xxx@gmail.com
+</code>
+回答时分别输入<code>xxx</code>和<code>xxx@gmail.com</code><br/>
+- 扩展<br/>
+使用<code>--global</code>参数修改本机全局设置
+<code>
+$ git config --global user.name = xxx
+</code>
+- 问题<br/>
+命令行里不要带等号<code>$ git config user.name = xxx</code>,
+否则去文件里查时会发现等号变成值<code>name = =</code>。
+(之前好像可以用的？待解决)</p>
+
+<h4>3 stage一个文件</h4>
+
+<pre><code>$ git add README
+</code></pre>
+
+<h4>4 提交已stage的文件</h4>
+
+<pre><code>$ git commit -m '-'
+</code></pre>
+
+<!--more-->
+
+
+<h4>5 检出一个已有项目</h4>
+
+<pre><code>$ git clone https://github.com/Gazler/cloneme
+</code></pre>
+
+<h4>6 检出项目并重命名</h4>
+
+<pre><code>$ git clone https://github.com/Gazler/cloneme my_cloned_repo
+</code></pre>
+
+<h4>7 配置忽略文件规则</h4>
+
+<p>使用<code>!</code>可从忽略文件中排除。<br/>
+在<code>.gitignore</code>文件里添加
+<code>
+*.swp
+</code></p>
+
+<h4>8 忽略文件中排除特定名称</h4>
+
+<p>在<code>.gitignore</code>文件里添加
+<code>
+*.a
+!lib.a
+</code></p>
+
+<h4>9 查看状态</h4>
+
+<p><code>$ git status</code>查看，
+得到答案为<code>database.yml</code></p>
+
+<h4>10 查看状态，分辨状态</h4>
+
+<p><code>$ git status</code>查看。分为：可以被commit的，修改后但未stage的，新文件从未被stage的。<br/>
+得到答案为<code>2</code></p>
+
+<h4>11 删除文件</h4>
+
+<p><code>$ git status</code>查看，发现被删文件名为<code>deleteme.rb</code>
+<code>
+$ git rm deleteme.rb
+</code></p>
+
+<h4>12 将文件移出git但不删除文件</h4>
+
+<pre><code>$ git rm --cached deleteme.rb
+</code></pre>
+
+<h4>13 保存项目当前状态但不提交（新，实用）</h4>
+
+<p>用于保存中间态，方便临时切换分支，用<code>git stash list</code>可查看<code>git stash apply</code>可取出(多个时后面可加<code>stash@{2}</code>之类的名字)。
+<code>
+$ git stash
+</code></p>
+
+<h4>14 重命名文件</h4>
+
+<pre><code>$ git mv oldfile.txt newfile.txt
+</code></pre>
+
+<h4>15 修改目录结构</h4>
+
+<pre><code>$ mkdir src
+$ git mv *.html src/
+</code></pre>
+
+<h4>16 查看提交历史</h4>
+
+<p><code>$ git log</code>查看提交历史记录，答案为commit后长字符串的前7位</p>
+
+<h4>17 tag</h4>
+
+<pre><code>$ git tag 'new_tag'
+</code></pre>
+
+<h4>18 推送 tag</h4>
+
+<p>因为默认<code>push</code>不会处理<code>tag</code>
+<code>
+$ git push --tags
+</code></p>
+
+<h4>19 将新修改并入上一次提交</h4>
+
+<pre><code>$ git add forgotten_file.rb
+$ git commit --amend
+</code></pre>
+
+<p>写完注释后保存退出（vi是<code>:qw</code>，应该都会吧）</p>
+
+<h4>20 修改提交时间</h4>
+
+<p>使用<code>--date</code>参数将时间修改到指定时间
+<code>
+$ git commit -m '-' --date 2099.01.01
+</code></p>
+
+<h4>21 unstage一个文件</h4>
+
+<pre><code>$ git reset HEAD to_commit_second.rb
+</code></pre>
+
+<h4>22 取消上一次提交</h4>
+
+<pre><code>$ git reset --soft HEAD^
+</code></pre>
+
+<h4>23 恢复文件修改</h4>
+
+<pre><code>$ git checkout config.rb
+</code></pre>
+
+<h4>24 查看remote信息</h4>
+
+<p><code>$ tail .git/config</code>查看remote信息，
+答案为<code>my_remote_repo</code>
+(应该有其他方法，直接通过命令)</p>
+
+<h4>25 查看remote链接</h4>
+
+<p>同上，答案为<code>https://github.com/githug/not_a_repo</code>
+(有其他方法)</p>
+
+<h4>26 pull</h4>
+
+<pre><code>$ git pull origin master
+</code></pre>
+
+<h4>27 关联远程库(新项目必备)</h4>
+
+<pre><code>$ git remote add origin https://github.com/githug/githug
+</code></pre>
+
+<h4>28 合并：rebase(与merge做对比)</h4>
+
+<pre><code>$ git rebase origin/master
+$ git push
+</code></pre>
+
+<h4>29 查看变动</h4>
+
+<p>通过<code>$ git diff app.rb</code>查看文件改动，<br/>
+显示行号为23，改动在下面第3行，所以答案为<code>26</code>。</p>
+
+<h4>30 跟踪具体代码行作者</h4>
+
+<p><code>$ git blame config.rb</code>查看修改记录，发现密码出现在第五行。
+在这行的左边可以看到提交者为<code>Spider Man</code>（卖萌了）。</p>
+
+<h4>31 新建分支</h4>
+
+<pre><code>$ git branch test_code
+</code></pre>
+
+<h4>32 新建并进入分支</h4>
+
+<pre><code>$ git checkout -b my_branch
+</code></pre>
+
+<h4>33 按标签检出</h4>
+
+<pre><code>$ git checkout v1.2
+</code></pre>
+
+<h4>34 仅按标签检出</h4>
+
+<p>当标签和分支名相同时，需要指定标签检出
+<code>
+$ git checkout tags/v1.2
+</code></p>
+
+<h4>35 按版本编号检出至新分支</h4>
+
+<p>查看提交历史，找到第二条的id，输入时只需要输入前几位即可
+<code>
+$ git branch test_branch -v 7cd3aa021
+</code></p>
+
+<h4>36 删除分支</h4>
+
+<pre><code>$ git branch -d delete_me
+</code></pre>
+
+<h4>37 推送分支</h4>
+
+<pre><code>$ git push origin test_branch
+</code></pre>
+
+<h4>38 合并分支</h4>
+
+<pre><code>$ git merge feature
+</code></pre>
+
+<h4>39 拉取分支</h4>
+
+<pre><code>$ git fetch origin
+</code></pre>
+
+<h4>40 rebase分支</h4>
+
+<pre><code>$ git checkout feature
+$ git rebase master
+</code></pre>
+
+<h4>41 压缩空间</h4>
+
+<pre><code>$ git repack -d
+</code></pre>
+
+<h4>42 仅从分支合并指定提交</h4>
+
+<p><code>$ git branch</code>查看分支列表，得到分支名。<br/>
+<code>$ git log new-feature</code>查看分支提交记录。
+最后合并：
+<code>
+$ git cherry-pick ca32a6da
+</code></p>
+
+<h4>43 全项目搜索</h4>
+
+<pre><code>$ git grep TODO
+</code></pre>
+
+<p>其实 linux 下直接 grep 也可以
+<code>
+$ grep -Rn TODO
+</code>
+可以看到有4条，答案为<code>4</code>。</p>
+
+<h4>44 修改历史提交日志</h4>
+
+<p>查看历史记录，发现错误在倒数第二次提交上
+<code>
+$ git rebase -i HEAD~2
+</code>
+进入编辑页面，将需要改动的行（第一行）的<code>pick</code>改为<code>reword</code>
+（注意，只需要通过<code>reword</code>来标记，不要修改拼写）。
+保存退出后在弹出的第二个窗口里修改拼写错误<code>commmit</code>改为<code>commit</code>。</p>
+
+<h4>45 合并历史提交（清洁日志，实用）</h4>
+
+<p>查看历史记录发现最后3次都为同一个文件的修改，可以合并
+<code>
+$ git rebase -i HEAD~4
+</code>
+将弹出编辑页的第2、3、4行的<code>pick</code>改为<code>squash</code>，
+第二个弹出页直接保存退出即可。</p>
+
+<h4>46 从分支合并时仅保存为一次提交</h4>
+
+<pre><code>$ git merge --squash long-feature-branch
+$ git commit'
+</code></pre>
+
+<h4>47 更改历史提交顺序</h4>
+
+<p>查看历史记录发现最后两次提交顺序错误
+<code>
+$ git rebase -i HEAD~2
+</code>
+然后在弹出编辑页的前两行顺序调换。</p>
+
+<h4>48 二叉树排错（很强大，侧面看出测试驱动重要性） *</h4>
+
+<p><code>$ git log --reverse -p prog.rb</code>查看最初一次为正确提交，版本号为<code>f608824888</code>
+<code>
+$ git bisect start
+$ git bisect good f608824888
+$ git bisect bad
+$ git bisect run make test
+//$ git reset
+</code>
+日志里<code>…… is the first bad commit</code>
+所以回答<code>18ed2ac</code></p>
+
+<h4>49 仅stage一个文件的一部分 *</h4>
+
+<p>查看文件可知需要stage的是第二行（&hellip;the first feature）。
+<code>
+$ git add -p feature.rb
+</code>
+出现提示如何处理，输入<code>e</code>来编辑提交内容，<br/>
+在弹出编辑页面删除第5行（&hellip;the first feature），
+因为不在本次stage操作内，保存退出。</p>
+
+<h4>50 查看操作历史</h4>
+
+<pre><code>$ git reflog
+</code></pre>
+
+<p>查看到日志第2行<code>...checkout: moving from solve_world_hunger to kill_the_batman...</code>
+<code>
+$ git checkout solve_world_hunger
+</code></p>
+
+<h4>51 回滚某次提交历史</h4>
+
+<p>查看历史记录，发现倒数第二次提交需要取消
+<code>
+$ git revert HEAD~1
+</code>
+直接保存并退出</p>
+
+<h4>52 通过操作日志，挽救<code>git reset --hard HEAD^</code>的误操作</h4>
+
+<p><code>$ git reflog</code>查看日志，发现需要回覆至版本<code>804db65</code>(每次版本号可能不同)，或直接写<code>HEAD@{1}</code>。
+<code>
+$ git checkout 804db65
+</code></p>
+
+<h4>53 合并分支并处理冲突</h4>
+
+<pre><code>$ git merge mybranch
+</code></pre>
+
+<p>编辑<code>poem.txt</code>文件，处理冲突
+<code>
+$ git add poem.txt
+$ git ci -m 'merge mybranch`
+</code></p>
+
+<h4>54 子模块</h4>
+
+<pre><code>git submodule add https://github.com/jackmaney/githug-include-me
+</code></pre>
+
+<h4>55</h4>
+
+<p>最后一关！！！
+内容是什么，就留点悬念吧:)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Github Page绑定自己域名]]></title>
+    <link href="http://fancyoung.com/blog/host-to-github/"/>
+    <updated>2011-11-04T11:31:00+08:00</updated>
+    <id>http://fancyoung.com/blog/host-to-github</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<ul>
+<li>在项目根目录下建立一文件，名为<code>CNAME</code>，里面写上域名，如<code>fancyoung.com</code>
+或者在命令行里执行：
+<code>
+$ echo 'fancyoung.com' &gt;&gt; source/CNAME
+</code></li>
+<li><p>去自己的域名运营商（我是name.com）处修改:<br/>
+CNAME: www.fancyoung.com => fancyoung.github.com<br/>
+A: fancyoung.com => 207.97.227.245</p></li>
+<li><p>注意：<br/>
+文中fancyoung请替换为自己的域名</p></li>
+</ul>
+
+
+<p><a href="http://pages.github.com/">官方教程</a></p>
+]]></content>
+  </entry>
+  
+</feed>

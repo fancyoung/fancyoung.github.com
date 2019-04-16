@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: arch linux | 没有标题的博客]]></title>
+  <link href="http://fancyoung.com/blog/categories/arch-linux/atom.xml" rel="self"/>
+  <link href="http://fancyoung.com/"/>
+  <updated>2019-04-16T21:20:18+08:00</updated>
+  <id>http://fancyoung.com/</id>
+  <author>
+    <name><![CDATA[思扬]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Arch升级失败后修复glibc记录]]></title>
+    <link href="http://fancyoung.com/blog/arch-linux-reinstall-glibc/"/>
+    <updated>2012-08-10T00:27:00+08:00</updated>
+    <id>http://fancyoung.com/blog/arch-linux-reinstall-glibc</id>
+    <content type="html"><![CDATA[<h2>起因</h2>
+
+<p><code>$ pacman -Syu</code>时提示错误，
+因为Arch前段时间将<code>/lib</code>目录链到了<code>/usr/lib</code>，
+见公告<a href="http://www.archlinux.org/news/the-lib-directory-becomes-a-symlink/">The /lib directory becomes a symlink</a>。
+当时没有看到这篇公告，而在网上搜到某贴说使用<code>--force</code>参数，
+结果执行完后系统挂掉，因<code>glibc</code>不存在，所有命令行不可使用。</p>
+
+<h2>解决方法</h2>
+
+<ul>
+<li>从光盘启动Arch。</li>
+<li><code>$ fdisk -l</code>查看磁盘状态，
+我的系统分区为<code>/dev/sda6</code>。</li>
+<li>创建目录：<code>$ mkdir /root/tmp_disk</code>。</li>
+<li>mount分区，我机子上是：<code>$ mount /dev/sda6 /root/tmp_disk</code>。</li>
+<li>下载<a href="http://www.archlinux.org/packages/?q=glibc">相应的</a><code>glibc</code>安装包（网络或U盘，配置网络参考下面相关部分）,
+我的为<a href="http://www.archlinux.org/packages/core/x86_64/glibc/">x86_64 v2.16.0-2</a>，
+所以<code>wget http://www.archlinux.org/packages/core/x86_64/glibc/download/</code></li>
+<li>安装<code>pacman -U glibc-2.16.0-2-x86_64.pkg.tar.xz -r /root/tmp_disk</code></li>
+<li><code>pacman -Su</code></li>
+</ul>
+
+
+<h4>注意</h4>
+
+<h2>其它</h2>
+
+<h4>配置网络</h4>
+
+<p>用启动光盘进入系统后，需要配置网络来下载最新glibc。
+配置<code>/etc/rc.conf</code>
+<code>
+interface=eth0
+address=192.168.0.2
+netmask=255.255.255.0
+gateway=192.168.22.1
+</code>
+配置<code>/etc/resolv.conf</code>
+<code>
+nameserver 8.8.8.8
+</code>
+最后重启网络服务<code>$ /etc/rc.d/network restart</code></p>
+
+<h4>目录</h4>
+
+<p><code>/lib</code>、<code>/lib64</code>皆应软链到<code>/usr/lib</code>目录。
+在修复过程中查看<code>/lib</code>发现里面只有一个<code>modules</code>目录，
+将其移至<code>/usr/lib</code>里后建立软链。
+系统正常运行，但之后执行<code>pacman</code>后无法升级。
+移除<code>/usr/lib/modules</code>目录后<code>$ pacman -Su</code>解决问题。</p>
+
+<h4>时间错误的解决</h4>
+
+<p>遇到报错
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;strong&gt;&lt;strong&gt;&lt;strong&gt;&lt;strong&gt;&lt;strong&gt;&lt;strong&gt;&lt;em&gt;****** FILESYSTEM CHECK FAILED &lt;/em&gt;&lt;/strong&gt;&lt;/strong&gt;&lt;/strong&gt;&lt;/strong&gt;&lt;/strong&gt;&lt;/strong&gt;
+</span><span class='line'>* Please repair manually and reboot. Note that the root *
+</span><span class='line'>* filesystem is currently mounted read-only. To remount *
+</span><span class='line'>* it read-write type: mount -n -o remount,rw / *
+</span><span class='line'>* When you exit the mantenance shel the system will *
+</span><span class='line'>* reboot automatically. *&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;hr /&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;```
+</span><span class='line'>因为BIOS时间设置有问题。&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h2&gt;参考&lt;/h2&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;&lt;a href="https://bbs.archlinux.org/viewtopic.php?id=142459"&gt;bug修复方案：How to re-install glibc?&lt;/a&gt;&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;&lt;a href="https://wiki.archlinux.org/index.php/Configuring_Network"&gt;Arch网络配置：Configuring Network&lt;/a&gt;&lt;/p&gt;
+</span><span class='line'>]]&gt;&lt;/content&gt;
+</span><span class='line'>  &lt;/entry&gt;
+</span><span class='line'>  
+</span><span class='line'>  &lt;entry&gt;
+</span><span class='line'>    &lt;title type="html"&gt;&lt;![CDATA[将Arch Linux从32位升到64位]]&gt;&lt;/title&gt;
+</span><span class='line'>    &lt;link href="http://fancyoung.com/blog/migrating-between-architectures-without-reinstalling/"/&gt;
+</span><span class='line'>    &lt;updated&gt;2011-11-07T14:37:00+08:00&lt;/updated&gt;
+</span><span class='line'>    &lt;id&gt;http://fancyoung.com/blog/migrating-between-architectures-without-reinstalling&lt;/id&gt;
+</span><span class='line'>    &lt;content type="html"&gt;&lt;![CDATA[&lt;ul&gt;
+</span><span class='line'>&lt;li&gt;翻译自Arch Wiki：&lt;a href="https://wiki.archlinux.org/index.php/Migrating_Between_Architectures_Without_Reinstalling"&gt;Migrating Between Architectures Without Reinstalling&lt;/a&gt;&lt;/li&gt;
+</span><span class='line'>&lt;li&gt;i686为32位，x86_64位64位&lt;/li&gt;
+</span><span class='line'>&lt;li&gt;升级有风险，操作须谨慎。本人使用文中方法2升级时无意间重启了电脑，催悲了。&lt;/li&gt;
+</span><span class='line'>&lt;/ul&gt;
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>&lt;!--more--&gt;
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>&lt;h2&gt;准备工作&lt;/h2&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h3&gt;确认为64位平台&lt;/h3&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;如果你已经正在使用x86_64但是想安装i686，可以跳过此步。
+</span><span class='line'>为了运行64位软件，你的CPU必须支持64位。现在大部分CPU都支持64位。你可以通过运行一下命令来确认：
+</span><span class='line'>&lt;code&gt;
+</span><span class='line'>$ grep --color 'lm' /proc/cpuinfo
+</span><span class='line'>&lt;/code&gt;
+</span><span class='line'>（原文中为&lt;code&gt;grep --color '\' /proc/cpuinfo&lt;/code&gt;， 应该不对）
+</span><span class='line'>当CPU为x86_64平台时，输出结果里会出现高亮的 &lt;code&gt;lm&lt;/code&gt; （“long mode”）。
+</span><span class='line'>注意不是&lt;code&gt;lahf_lm&lt;/code&gt;，它和64位无关。&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h3&gt;硬盘空间&lt;/h3&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;在迁移过程中，&lt;code&gt;/var/cache/pacman/pkg&lt;/code&gt;的大小将翻倍，请为此做好准备。这是假定cache里只有当前安装的包，就像&lt;code&gt;$ pacman -Sc&lt;/code&gt;（clean）刚运行过一样。使用空间增长是因为所有包同时有i686和x86_64两个版本。
+</span><span class='line'>如果你没有足够的空间，可以使用&lt;a href="https://wiki.archlinux.org/index.php/Gparted"&gt;gparted&lt;/a&gt;来调整相关分区大小，或者mount另一个分区到&lt;code&gt;/var/cache/pacman&lt;/code&gt;。
+</span><span class='line'>在迁移过程中请不要移除老框架的软件包，知道完全升级成功。过早的移除会使你无法回退和还原变更。&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h3&gt;电源支持&lt;/h3&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;升级时间比较长，并且不可中断。根据你的 安装包大小及网络速度，你最好为此准备至少一个小时的升级时间（虽然你可以先把它们下载下来）。请保证你的电源稳定。&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h3&gt;回退准备&lt;/h3&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;如果迁移过程中失败，有些包可以帮助你解决此时的问题，但是需要你在迁移之前安装。详情可以参考后面的 #Troubleshooting 。
+</span><span class='line'>包&lt;a href="https://www.archlinux.org/packages/?name=busybox"&gt;busybox&lt;/a&gt;可以用来还原变更。它不依赖于其他包，可以单独安装。通过下面命令可以安装32位（i686）的版本
+</span><span class='line'>&lt;code&gt;
+</span><span class='line'>$ pacman -S busybox
+</span><span class='line'>&lt;/code&gt;
+</span><span class='line'>另一个包是&lt;a href="https://www.archlinux.org/packages/?name=lib32-glibc"&gt;lib32-glibc&lt;/a&gt;，在&lt;a href="https://wiki.archlinux.org/index.php/Multilib_Project"&gt;Multilib&lt;/a&gt;的x86_64资源库里。这个只有当你从32位迁移至其它版本时才可能使用（It is probably only useful when migrating away from 32 bits）;无论如何你可能安全跳过这个包。你可以用这个包来运行32位程序，通过明确的调用&lt;code&gt;/lib/ld-linux-x86-32.so.2&lt;/code&gt;。可用下面命令行安装。
+</span><span class='line'>&lt;code&gt;
+</span><span class='line'>$ pacman -S lib32-glibc
+</span><span class='line'>&lt;/code&gt;&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h2&gt;方法1：使用Arch LiveCD&lt;/h2&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;ol&gt;
+</span><span class='line'>&lt;li&gt;下载、刻录并启动64位Arch ISO LiveCD。&lt;/li&gt;
+</span><span class='line'>&lt;li&gt;配置LiveCD的网络，然后pacman用新的库。&lt;/li&gt;
+</span><span class='line'>&lt;li&gt;将现在的安装挂在到&lt;code&gt;/mnt&lt;/code&gt;目录。如：&lt;code&gt;mount /dev/sda1 /mnt&lt;/code&gt;&lt;/li&gt;
+</span><span class='line'>&lt;li&gt;使用下面的脚本来执行：升级本地pacman数据库、取得本地安装包列表并重新安装：</span></code></pre></td></tr></table></div></figure>
+
+<h1>!/bin/bash</h1></li>
+</ol>
+
+
+<p>MOUNTED_INSTALL=&lsquo;/mnt&rsquo;
+TEMP_FILE=&lsquo;/tmp/packages.list&rsquo;</p>
+
+<p>pacman &ndash;root $MOUNTED_INSTALL -Sy
+pacman &ndash;root $MOUNTED_INSTALL -Qqet > $TEMP_FILE</p>
+
+<p>for PKG in $(cat $TEMP_FILE) ; do
+   pacman &ndash;root $MOUNTED_INSTALL -S $PKG &ndash;noconfirm
+done</p>
+
+<p>exit 0
+```</p>
+
+<h2>方法2：从当前系统升级</h2>
+
+<h3>准备</h3>
+
+<h4>Cache old packages</h4>
+
+<blockquote><p>注意：如果你有从AUR或第三方库的包，并且在新的平台里查询不到，pacman会告知找不到相应替代。将这些包记录下来，以便在升级成功后重新安装，并用<code>$ pacman -Rsn package_name</code>来卸载。</p></blockquote>
+
+<p>确保你现在的包都在你的cache里，下载它们（老平台的）以便回退。
+<code>
+$ pacman -Sw $(comm -23 &lt;(pacman -Qq) &lt;(pacman -Qmq))
+</code>
+或者用pacman-contrib包里的bacman来生成它们。
+如果你是从32位迁移，现在可以安装32位的Busybox
+<code>
+$ pacman -S busybox
+</code></p>
+
+<h4>更换pacman平台</h4>
+
+<p>编辑配置文件<code>/etc/pacman.conf</code>并且把<code>Architecture</code>从<code>auto</code>改为新值。你可以参考下面的sed命令：
+For x86_64
+<code>
+$ sed -i -e s/'Architecture = auto'/'Architecture = x86_64'/g /etc/pacman.conf
+</code>
+For i686
+<code>
+$ sed -i -e s/'Architecture = auto'/'Architecture = i686'/g /etc/pacman.conf
+</code>
+手动移除Pacman软件仓库的数据库，强制同步新的软件仓库：
+<code>
+$ rm -rf /var/lib/pacman/sync/*   # remove existing repository cache
+$ pacman -Sy                      # sync new architecture repositories
+</code></p>
+
+<h4>下载新包</h4>
+
+<p>给所有当前安装包下载新平台版本
+<code>
+$ pacman -Sw $(pacman -Qq|sed '/^lib32-/ d')  # download new package versions
+</code>
+如果有些包不能下载，请删除它们。
+如果是迁移到32位，安装32位的Busybox fallback now that Pacman has been configured with the 32-bit architecture:
+<code>
+$ pacman -S busybox
+</code>
+或者，如果是迁移到64位，安装lib-32-glibc fallback:
+<code>
+$ pacman -S lib32-glibc
+</code></p>
+
+<h3>安装包</h3>
+
+<h4>安装内核（64位）</h4>
+
+<p>将内核升级到64位（x86_64）很安全很简单：32位和64位的应用在64位内核下都能很好的运行。如果是从64位迁移至其它平台，leave the 64-bit kernel installed and running for now and skip this step.
+用下面命令安装Arch Linux内核：
+<code>
+$ pacman -S linux
+</code>
+启动新的64位内核，并确认它运行x86_64平台：
+<code>
+$ uname -m
+</code></p>
+
+<h4>控制台终端</h4>
+
+<p>现在切换到一个text-mode虚拟控制台（可以通过Ctrl+Alt+F1）来完成接下来的步骤。你可以使用SSH之类的伪终端，但不建议你这么做。有些包会被移除或者被替换，可能会导致X11桌面不稳定，以至于系统无法启动。</p>
+
+<h4>安装Pacman</h4>
+
+<blockquote><p>警告：一旦你开始升级pacman及相关依赖，便不能中断。Pacman及相关依赖必须在同一条命令行上同时安装。
+<code>
+$ pacman -S pacman glibc libfetch libarchive openssl acl attr xz-utils bzip2 zlib readline bash ncurses expat
+</code>
+Immediately following this command only Busybox, Bash and Pacman will be executable until the other packages are migrated below. 安装成功前不能重启。</p></blockquote>
+
+<h4>安装已存在的包</h4>
+
+<p>为新平台安装所有之前下载的替换。（此时可以休息休息，因为需要花费一段时间。）
+<code>
+$ pacman -S $(pacman -Qq)
+</code>
+For migration away from 64 bits, you may want to skip installing a 32-bit kernel in the command above, since the old 64-bit kernel will still run 32-bit programs.
+完整这步迁移后，各方面都已经完成并且可以重启电脑。</p>
+
+<h3>清理</h3>
+
+<p>你现在可以移除Busybox和lib32-glibc。
+<code>
+$ pacman -Rcn busybox lib32-glibc
+</code></p>
+
+<h4>Makepkg compiler flags</h4>
+
+<p>升级中新版的<code>/etc/makepkg.conf</code>可能会被保存至<code>/etc/makepkg.conf.pacnew</code>。如果你以后要用<a href="https://wiki.archlinux.org/index.php/Makepkg">makepkg</a>进行编译，你必须替换或修改老版本。
+<code>
+$ mv /etc/makepkg.conf /etc/makepkg.conf.backup &amp;&amp; mv /etc/makepkg.conf.pacnew /etc/makepkg.conf
+</code>
+It might also be a good idea to just get a list of &ldquo;new&rdquo; additions to /etc. You can get a list with the following command:
+<code>
+$ find /etc/ -type f -name \*.pac\*
+</code></p>
+
+<h2>问题解决</h2>
+
+<p>在升级过程中，当glibc替换为新版本后，许多老版本的程序将不能运行。如果发生此类问题，你可以用<a href="https://www.archlinux.org/packages/?name=busybox">busybox</a>和<a href="https://www.archlinux.org/packages/?name=lib32-glibc">lib32-glibc</a>来解决。</p>
+
+<h3>Busybox</h3>
+
+<p>In Arch, Busybox is statically linked; it can run without any libraries. There are many commands available to you. For example, to extract an i686 version of Pacman from a cached package:
+<code>
+$ busybox tar xf /var/cache/pacman/pkg/pacman-3.3.2-1-i686.pkg.tar.gz -C &lt;some folder&gt;
+</code></p>
+
+<h3>Lib32-glibc</h3>
+
+<p>Example run 32 bit /bin/ls:
+<code>
+$ /lib/ld-linux-x86-32.so.2 /bin/ls
+</code></p>
+
+<h2>其它</h2>
+
+<ul>
+<li><a href="https://wiki.archlinux.org/index.php/Migrate_installation_to_new_hardware">Migrate installation to new hardware</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

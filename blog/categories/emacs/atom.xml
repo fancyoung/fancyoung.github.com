@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: emacs | 没有标题的博客]]></title>
+  <link href="http://fancyoung.com/blog/categories/emacs/atom.xml" rel="self"/>
+  <link href="http://fancyoung.com/"/>
+  <updated>2019-04-16T21:20:18+08:00</updated>
+  <id>http://fancyoung.com/</id>
+  <author>
+    <name><![CDATA[思扬]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[解决Emacs远程连接时卡住的bug]]></title>
+    <link href="http://fancyoung.com/blog/emacs-tramp-hangs-bug-in-zsh/"/>
+    <updated>2012-07-04T00:14:00+08:00</updated>
+    <id>http://fancyoung.com/blog/emacs-tramp-hangs-bug-in-zsh</id>
+    <content type="html"><![CDATA[<p>前几天终于买了Linode的VPS，配置过程中遇见一个灵异问题：<br/>
+Emacs无法远程SSH编辑文件，状态一直卡在<code>Tramp: Waiting for prompts from remote shell</code>。</p>
+
+<p>折腾了好久，终于定位到zsh的配置oh-my-zsh上。<br/>
+最后查到原来Emacs Wiki上已经有解决方案，在<code>.zshrc</code>底部加上：
+<code>
+if [[ "$TERM" == "dumb" ]]
+then
+  unsetopt zle
+  unsetopt prompt_cr
+  unsetopt prompt_subst
+  unfunction precmd
+  unfunction preexec
+  PS1='$ '
+fi
+</code></p>
+
+<p>参考：<a href="http://emacswiki.org/emacs/TrampMode#toc6">TrampMode Troubleshooting</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[用Emacs远程编辑文件及相关笔记]]></title>
+    <link href="http://fancyoung.com/blog/edit-remote-file-with-emacs/"/>
+    <updated>2012-06-02T10:16:00+08:00</updated>
+    <id>http://fancyoung.com/blog/edit-remote-file-with-emacs</id>
+    <content type="html"><![CDATA[<h4>Emacs编辑远程文件</h4>
+
+<p>非常简单：<code>C-x C-f</code>后<code>/ssh:user@host#port:file</code></p>
+
+<p>由此可以推出一个小技巧：</p>
+
+<h4>Emacs编辑本地需要sudo的文件</h4>
+
+<p><code>/ssh:root@locahost:file</code></p>
+
+<p>过程中可能会遇到的问题：</p>
+
+<ul>
+<li><p>1<br/>
+问题：<code>ssh: connect to host localhost port 22: Connection refused</code><br/>
+原因：没装openssh-server<br/>
+解决：安装即可</p></li>
+<li><p>2<br/>
+问题：<code>ssh root@localhost</code>并输入密码后报<code>permission denied</code><br/>
+原因：发现直接用<code>su</code>也不行（之前一直都只是sudo），因为没设root密码<br/>
+解决：<code>sudo passwd root</code><br/>
+注：
+<code>/etc/ssh/sshd_config</code>中有个参数<code>PermitRootLogin</code>需设置为<code>yes</code>。<br/>
+虽然有安全问题，不过是本机，问题不大。<br/>
+修改配置后需重启服务：<code>sudo /etc/init.d/ssh restart</code></p></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

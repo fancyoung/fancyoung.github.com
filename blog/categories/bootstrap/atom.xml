@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: bootstrap | 没有标题的博客]]></title>
+  <link href="http://fancyoung.com/blog/categories/bootstrap/atom.xml" rel="self"/>
+  <link href="http://fancyoung.com/"/>
+  <updated>2019-04-16T21:20:18+08:00</updated>
+  <id>http://fancyoung.com/</id>
+  <author>
+    <name><![CDATA[思扬]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Bootstrap使用响应式设计(Responsive design)时导航条上部有空白的解决方案]]></title>
+    <link href="http://fancyoung.com/blog/bootstrap-bug-when-responsive-css-with-navbar-fixed-top/"/>
+    <updated>2012-03-07T17:32:00+08:00</updated>
+    <id>http://fancyoung.com/blog/bootstrap-bug-when-responsive-css-with-navbar-fixed-top</id>
+    <content type="html"><![CDATA[<h4>原因</h4>
+
+<p>Bug出现需要同时满足以下3个条件:<br/>
+- 顶部导航条navbar使用class<code>navbar-fixed-top</code><br/>
+- 参考Bootstrap官方网站, 给body添加样式<code>padding-top: 60px;</code><br/>
+- 使用响应式(Responsive design), 并且处在此状态下(默认为宽度&lt;=980时触发)</p>
+
+<h4>解决方案1</h4>
+
+<p>给此段样式加上条件<br/>
+<code>
+@media (min-width: 981px) {
+    body {
+        padding-top: 60px;
+    }
+}
+</code></p>
+
+<h4>解决方案2</h4>
+
+<p>将bootstrap-responsive.css放在body样式之后<br/>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;link href="../css/bootstrap.css" rel="stylesheet"&gt;&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;&lt;link href="../css/bootstrap-responsive.css" rel="stylesheet"&gt;
+</span><span class='line'>&lt;code&gt;
+</span><span class='line'>Rails3.2的Asset Pipeline就更方便了，放在import中即可（我用的是Sass）
+</span><span class='line'>&lt;/code&gt;
+</span><span class='line'>@import compass
+</span><span class='line'>$baseFontSize: 15px
+</span><span class='line'>@import compass_twitter_bootstrap
+</span><span class='line'>body
+</span><span class='line'>  padding-top: 60px
+</span><span class='line'>@import compass_twitter_bootstrap_responsive</span></code></pre></td></tr></table></div></figure></p>
+
+<h4>结论</h4>
+
+<p>我在某项目中因为使用的是customize出来的单个css文件, 所以采用了解决方案1.<br/>
+在另一RoR项目中考虑使用解决方案2.</p>
+
+<h4>参考</h4>
+
+<p><a href="https://github.com/twitter/bootstrap/issues/1570">navbar-fixed-top breaks when using responsive css</a></p>
+]]></content>
+  </entry>
+  
+</feed>

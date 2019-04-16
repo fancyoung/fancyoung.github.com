@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: tools | 没有标题的博客]]></title>
+  <link href="http://fancyoung.com/blog/categories/tools/atom.xml" rel="self"/>
+  <link href="http://fancyoung.com/"/>
+  <updated>2019-04-16T21:20:18+08:00</updated>
+  <id>http://fancyoung.com/</id>
+  <author>
+    <name><![CDATA[思扬]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[tmux使用]]></title>
+    <link href="http://fancyoung.com/blog/tmux-study/"/>
+    <updated>2012-07-12T15:29:00+08:00</updated>
+    <id>http://fancyoung.com/blog/tmux-study</id>
+    <content type="html"><![CDATA[<h2>简介</h2>
+
+<p>tmux是与screen类似的工具，但是功能更强大。</p>
+
+<p>tmux的三个层级概念：<br/>
+- session(会话)<br/>
+- window(窗口)<br/>
+- pane(面板)</p>
+
+<p>命令：<br/>
+<code>$ tmux</code><br/>
+<code>$ tmux attach -t session</code></p>
+
+<h2>快捷键</h2>
+
+<p><code>C-b</code>激活控制台，然后输入下面命令</p>
+
+<h4>系统</h4>
+
+<table>
+<thead>
+<tr>
+<th>快捷键   </th>
+<th> 功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>?       </td>
+<td> 快捷键帮助</td>
+</tr>
+<tr>
+<td>[       </td>
+<td> 进入视图模式</td>
+</tr>
+<tr>
+<td>s       </td>
+<td> 切换会话</td>
+</tr>
+<tr>
+<td>d       </td>
+<td> 脱离当前会话，<code>$ tmux attach</code>继续</td>
+</tr>
+</tbody>
+</table>
+
+
+<h4>窗口</h4>
+
+<table>
+<thead>
+<tr>
+<th>快捷键   </th>
+<th> 功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>c       </td>
+<td> 新建窗口</td>
+</tr>
+<tr>
+<td>&amp;       </td>
+<td> 关闭窗口</td>
+</tr>
+<tr>
+<td>l       </td>
+<td> 前一个窗口</td>
+</tr>
+<tr>
+<td>n/p     </td>
+<td> 下/上一个窗口</td>
+</tr>
+<tr>
+<td>数字     </td>
+<td> 跳到相应窗口</td>
+</tr>
+<tr>
+<td>w       </td>
+<td> 列出所有窗口</td>
+</tr>
+<tr>
+<td>,       </td>
+<td> 重命名当前窗口</td>
+</tr>
+<tr>
+<td>.       </td>
+<td> 修改窗口编号，相当于排序</td>
+</tr>
+<tr>
+<td>f       </td>
+<td> 查找</td>
+</tr>
+</tbody>
+</table>
+
+
+<h4>面板</h4>
+
+<table>
+<thead>
+<tr>
+<th>快捷键   </th>
+<th> 功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&ldquo;/%     </td>
+<td> 上下/左右分割面板</td>
+</tr>
+<tr>
+<td>x       </td>
+<td> 关闭当前面板</td>
+</tr>
+<tr>
+<td>!       </td>
+<td> 将当前面板置于新窗口</td>
+</tr>
+<tr>
+<td>o       </td>
+<td> 移到下一面板</td>
+</tr>
+<tr>
+<td>q       </td>
+<td> 显示面板编号，当时输入数字可跳到相应面板</td>
+</tr>
+<tr>
+<td>C/M-方向</td>
+<td> 以1/5的速度调节面板尺寸</td>
+</tr>
+<tr>
+<td>SPACE    </td>
+<td> 调整布局</td>
+</tr>
+<tr>
+<td>{/}     </td>
+<td> 向前/后调节当前面板顺序</td>
+</tr>
+<tr>
+<td>C/M-o   </td>
+<td> 逆/顺时针旋转窗口中的面板</td>
+</tr>
+</tbody>
+</table>
+
+
+<h4>复制/粘贴模式</h4>
+
+<p>(以Emacs模式为例)<br/>
+1. <code>C-b [</code>进入视图模式<br/>
+2. <code>C-Space</code>开始选择（可能与输入法快捷键冲突，最简单的办法是使用<code>C-@</code>，同样效果）<br/>
+3. <code>C-n/p/f/b/...</code>选择结束后<code>C-w</code>复制<br/>
+4. <code>C-]</code>粘贴</p>
+
+<h2>配置</h2>
+
+<p><code>~/.tmux.conf</code></p>
+
+<pre><code>#将激活控制台键绑定与Emacs相同
+unbind C-b
+set -g prefix C-x
+</code></pre>
+
+<h2>其他</h2>
+
+<ul>
+<li>默认快捷键为Emacs模式，也可设置为vi模式。</li>
+<li>Ubuntu下翻页的M-v与菜单键可能有冲突，需要在终端窗口菜单<code>Edit -&gt; Keyboard Shortcuts</code>取消<code>Enable menu access keys</code>前面的勾。</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

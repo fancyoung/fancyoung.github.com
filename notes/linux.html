@@ -1,0 +1,381 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Linux常用命令 - 没有标题的博客</title>
+  <meta name="author" content="思扬">
+
+  
+  <meta name="description" content="Linux常用命令 Alt + .
+插入上一个命令的最后一个参数 $ wc -l
+统计行数，常配合其它命令使用 $ du -sh dirname
+查看某目录大小 $ scp frompath username@xxx.xxx.xxx:/path/on/server
+与远程之间传文件 grep - &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://fancyoung.com/notes/linux.html">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="没有标题的博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="https://lib.baomitu.com/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="https://fonts.loli.net/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="https://fonts.loli.net/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = 'https://hm.baidu.com/hm.js?00da83c9dca8db90150561e426211e08';
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">没有标题的博客</a></h1>
+  
+    <h2>记录与分享</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="fancyoung.com">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives">博客</a></li>
+  <li><a href="/notes">笔记</a></li>
+  <li><a href="/about">关于我</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article role="article">
+  
+  <header>
+    <h1 class="entry-title">Linux常用命令</h1>
+    <p class="meta">
+
+
+
+
+</p>
+  </header>
+  
+  <p><code>Alt + .</code>
+插入上一个命令的最后一个参数</p>
+
+<p><code>$ wc -l</code>
+统计行数，常配合其它命令使用</p>
+
+<p><code>$ du -sh dirname</code>
+查看某目录大小</p>
+
+<p><code>$ scp frompath username@xxx.xxx.xxx:/path/on/server</code>
+与远程之间传文件</p>
+
+<p><code>grep -R 关键字 目录</code>
+在目录所有文件里搜索关键字（<code>-Rn</code>为显示行号， <code>-Rl</code>为仅显示文件名）</p>
+
+<h2>进阶命令</h2>
+
+<p><code>$ history | awk '{print $2}' | sort | uniq -c | sort -rn | head</code>
+查看常用命令</p>
+
+<h2>网络</h2>
+
+<p><code>$ netstat -anp |awk '{print $6}'|sort|uniq -c |sort -rn</code>
+查看SYN数量</p>
+
+<p><code>$ netstat -an | grep SYN | awk '{print $5}' | awk -F: '{print $1}' | sort | uniq -c | sort -nr | more</code>
+查看最高的ip</p>
+
+<h2>权限</h2>
+
+<p><code>$ cat /etc/passwd</code>
+查看所有用户列表</p>
+
+<p><code>$ cat /etc/group</code>
+查看所有组</p>
+
+<p><code>$ group</code>
+查看当前用户所在组（后面加用户名可查相应组）</p>
+
+<h2>其它工具</h2>
+
+<h3>截屏 scrot</h3>
+
+<p><code>$ scrot path/filename</code></p>
+
+<p><code>-s</code>鼠标选定区域，
+<code>-bs</code>抓取窗口，
+<code>-cd 10</code>延时10秒</p>
+
+<h3>screen</h3>
+
+<ul>
+<li>进入screen前：
+查看 <code>$ screen -ls</code>
+以某名新建 <code>$ screen -S session_name</code>
+进入某名 <code>$ screen -r session_name</code>
+kill <code>$ screen -X -S session_name quit</code>
+attach未detached的 <code>$ screen -r -D session_name</code>
+协同操作 <code>$screen -x session_name</code></li>
+</ul>
+
+
+<p><code>su</code>进别人账户用screen报错<code>Cannot open your terminal '/dev/pts/1'</code>，
+执行<code>$ script /dev/null</code>解决。</p>
+
+<ul>
+<li>进入后
+前缀默认<code>Ctrl-a</code>，因为键冲突，我改成<code>Ctrl-o</code>。
+编辑<code>.screenrc</code>，添加行<code>escape ^oo</code></li>
+</ul>
+
+
+<p>查看子窗口列表<code>w</code>，
+杀死子窗口<code>k</code>，
+挂起screen<code>d</code>，
+子窗口间切换<code>n/p</code>,
+分屏<code>S</code>，
+分屏间切换<code>Tab</code></p>
+
+<h2>其他</h2>
+
+<p><a href="http://www.admin10000.com/document/4655.html">15 个鲜为人知的Unix命令</a></p>
+
+  
+    <footer>
+      <p class="meta">
+        
+        
+
+
+
+
+
+        
+      </p>
+      
+        <div class="sharing">
+  
+  
+  
+</div>
+
+      
+    </footer>
+  
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>简介</h1>
+  <p>我的技术博客</p>
+  <p>o(∩_∩)o</p>
+</section>
+<section>
+  <h1>常用链接</h1>
+  <ul>
+    <li>
+      <a href="http://iaieye.com" target="_blank">IAIEYE-我的时间线网站</a>
+    </li>
+    <li>
+      <a href="https://github.com/fancyoung/fancy-emacs/wiki/shortcut" target="_blank">Emacs快捷键</a>
+    </li>
+  </ul>
+</section>
+<section>
+  <h1>Podcast播客</h1>
+  <ul>
+    <li>
+      <a href="http://english.cri.cn/easyfm/08program_morning.htm" target="_blank">飞鱼秀</a>
+      <p>不是播客，但是我最爱的广播</p>
+    </li>
+    <li>
+      <a href="http://teahour.fm/" target="_blank">Teahour</a>
+      <p>技术&创业必听</p>
+    </li>
+    <li>
+      <a href="http://dongwu.21cbr.com/" target="_blank">冬吴相对论</a>
+      <p>正常的三观，有深度的话题</p>
+    </li>
+    <li>
+      <a href="http://ydlbk.com/" target="_blank">友的聊播客</a>
+      <p>一群游戏玩家的大杂烩</p>
+    </li>
+  </ul>
+</section>
+<section>
+  <h1>技术博客</h1>
+  <ul>
+    <li>
+      <a href="http://ejohn.org/" target="_blank">John Resig</a>
+      <p>jQuery创始人</p>
+    </li>
+    <li>
+      <a href="http://davidwalsh.name/" target="_blank">David Walsh Blog</a>
+      <p>Mootools开发者</p>
+    </li>
+    <li>
+      <a href="http://lifesinger.wordpress.com/" target="_blank">岁月如歌</a>
+      <p>需翻墙</p>
+    </li>
+  </ul>
+</section>
+<section>
+  <h1>其它博客</h1>
+  <ul>
+    <li>
+      <a href="http://blog.sina.com.cn/twocold" target="_blank">韩寒</a>
+    </li>
+    <li>
+      <a href="http://blog.sina.com.cn/fangzhouzi" target="_blank">方舟子</a>
+    </li>
+    <li>
+      <a href="http://thisisdongdongqiang.com/" target="_blank">东东枪</a>
+    </li>
+  </ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/a-better-way-to-learn-angularjs/">学习AngularJS方法（翻译）</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/use-octopress-new-post-function-with-zsh/">Octopress在zsh下无法新建博客的问题</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/arch-linux-reinstall-glibc/">Arch升级失败后修复glibc记录</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/tmux-study/">Tmux使用</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/emacs-tramp-hangs-bug-in-zsh/">解决Emacs远程连接时卡住的bug</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/fancyoung">@fancyoung</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'fancyoung',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2019 - 思扬 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'fancyoung';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://fancyoung.com/notes/linux.html';
+        var disqus_url = 'http://fancyoung.com/notes/linux.html';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

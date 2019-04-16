@@ -1,0 +1,492 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>CSS实现背景透明完美解决方案 - 没有标题的博客</title>
+  <meta name="author" content="思扬">
+
+  
+  <meta name="description" content="翻译自: CSS Background Transparency Without Affecting Child Elements, Through RGBa And Filters 当今的大部分网页设计都包含了半透明的元素.但用CSS实现想要的效果却没那么简单. 现存的问题 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://fancyoung.com/blog/css-background-transparency/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="没有标题的博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="https://lib.baomitu.com/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="https://fonts.loli.net/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="https://fonts.loli.net/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = 'https://hm.baidu.com/hm.js?00da83c9dca8db90150561e426211e08';
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">没有标题的博客</a></h1>
+  
+    <h2>记录与分享</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="fancyoung.com">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives">博客</a></li>
+  <li><a href="/notes">笔记</a></li>
+  <li><a href="/about">关于我</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">CSS实现背景透明完美解决方案</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2011-11-29T16:44:00+08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2011</span></span> <span class='time'>4:44 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>翻译自: <a href="http://robertnyman.com/2010/01/11/css-background-transparency-without-affecting-child-elements-through-rgba-and-filters/">CSS Background Transparency Without Affecting Child Elements, Through RGBa And Filters</a></p>
+
+<p>当今的大部分网页设计都包含了半透明的元素.但用CSS实现想要的效果却没那么简单.</p>
+
+<h2>现存的问题</h2>
+
+<p>如果我们想要一个半透明背景,有两种实现方式:<br/>
+- 利用CSS和opacity属性<br/>
+- 建立一个24位PNG背景图片<br/>
+用opacity的问题除了
+<a href="http://robertnyman.com/2008/09/16/you-want-css-opacity-to-go-with-that-well-suit-yourself/">需要通过麻烦的语法来兼容所有浏览器</a>,
+还有不单该元素自身背景透明了,它的子元素也会透明.
+所以里面所有的文字也是透明的,这一般不是想要的效果.
+你可以做一些CSS trick,通过建立额外的元素来解决这个问题,但这种解决方案很恶心.</p>
+
+<p>用PNG的问题是会额外增加HTTP请求,
+而且图片比几行css代码要大得多-
+尤其考虑到图片不能太小以避免
+<a href="http://robertnyman.com/2009/05/26/serious-memory-leak-issue-with-24-bit-png-images-with-alpha-transparency-in-internet-explorer/">IE下24位PNG图透明时引起的内存泄漏</a>.</p>
+
+<!--more-->
+
+
+<h2>解决方案</h2>
+
+<p>这里提供一种方法:
+<a href="http://en.wikipedia.org/wiki/RGBA_color_space">RGBa colors</a>.
+它的美妙之处在于你可以通过设置RGB值和透明值,轻松的实现颜色透明.
+代码如下:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>.alpha60 {
+</span><span class='line'>  /* 用于不支持RGBa的浏览器 */
+</span><span class='line'>  background: rgb(0, 0, 0);
+</span><span class='line'>  /* RGBa, 透明度0.6 */
+</span><span class='line'>  background: rgba(0, 0, 0, 0.6);
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>透明将只对背景生效,很好很强大,对吧:)</p>
+
+<h3>继续</h3>
+
+<p>不幸的是IE不支持RGBa(IE678都不行).
+幸运的是微软在2000年时疯狂的给IE加上了各种过滤器.
+其中有一个是<a href="http://msdn.microsoft.com/en-us/library/ms532997(VS.85).aspx">渐变过滤器(the gradient filter)</a>,
+我们只需要把开始结束都设置成一个颜色就可以了.
+你现在会想,&ldquo;那我们怎么将其透明呢?&rdquo;.
+你只需要用16进制值来定义颜色就可以了.
+下面是用渐变过滤器实现和上面同等透明效果的代码:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>.alpha60 {
+</span><span class='line'>  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>你可以看到定义里的8位16进制数字,
+前两位代表透明度,接下来两位是红色,接着就是绿色和蓝色.
+注意两位16进制颜色的范围是0~255(ff).
+那我们怎么将<code>0.6</code>转化为16进制数呢?</p>
+
+<p>这里就需要用到一些数学知识了.
+基本上,我们只需要将需要的透明度(比如0.6)乘以255,再转化为16进制即可.
+还有一个简单的办法是利用
+<a href="http://www.google.com/help/features.html">Google’s Search Features</a>,
+你只需要在Google里搜索
+<a href="http://www.google.se/search?q=0.6+*+255+in+hex">0.6 * 255 in hex</a>
+就能得到答案.
+不过Google计算器仿佛只能处理整数,而
+<a href="http://www.google.se/search?q=0.3+*+255+in+hex">0.3 * 255 in hex</a>
+它便无法得出结果.</p>
+
+<p>还有一种更快的方法就是利用JavaScript,
+只需要在浏览器控制行里输入</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Math.floor(0.6 * 255).toString(16);</span></code></pre></td></tr></table></div></figure>
+
+
+<p>便能得出结果.</p>
+
+<h3>整合</h3>
+
+<p>根据上面的方法,我们来写一个完整的实现:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>.alpha60 {
+</span><span class='line'>  /* Fallback for web browsers that doesn't support RGBa */
+</span><span class='line'>  background: rgb(0, 0, 0);
+</span><span class='line'>  /* RGBa with 0.6 opacity */
+</span><span class='line'>  background: rgba(0, 0, 0, 0.6);
+</span><span class='line'>  /* For IE 5.5 - 7*/
+</span><span class='line'>  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
+</span><span class='line'>  /* For IE 8*/
+</span><span class='line'>  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>注意,我们还需要额外为IE定义<code>background: transparent</code>,
+我们可以通过条件注释来解决.</p>
+
+<h2>浏览器支持</h2>
+
+<p>支持RGBa的有:<br/>
+- firefox 3+<br/>
+- Safari 2+<br/>
+- Opera 10<br/>
+IE过滤器支持IE5.5及以上版本.</p>
+
+<p>所以这种方式几乎支持了所有浏览器.</p>
+
+<h3>感谢</h3>
+
+<p>Thanks to <a href="http://css-tricks.com/rgba-browser-support/">RGBa Browser Support</a> and
+<a href="http://leaverou.me/2009/02/bulletproof-cross-browser-rgba-backgrounds/">Bulletproof, cross-browser RGBA backgrounds, today</a>
+for the information and inspiration.</p>
+
+<p>Thanks to <a href="http://friendlybit.com/">Emil Stenström</a> and <a href="http://kodfabrik.se/">Pelle Wessman</a>
+for coming up with countless alternatives for hex conversion, and explaining basic math to stupid me.</p>
+
+<h2>译者总结</h2>
+
+<p>大家使用时可直接复制下面代码:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>/* 白色背景,透明度0.6 */
+</span><span class='line'>.alpha60 {
+</span><span class='line'>  background: rgb(255, 255, 255);
+</span><span class='line'>  background: rgba(255, 255, 255, 0.6);
+</span><span class='line'>  background: transparent\9;
+</span><span class='line'>  zoom: 1;
+</span><span class='line'>  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99ffffff, endColorstr=#99ffffff);
+</span><span class='line'>  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99ffffff, endColorstr=#99ffffff)";
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>最后来个效果图,顺便试试jsfiddle的嵌入:</p>
+
+<iframe style="width: 100%; height: 300px" frameborder="0" seamless="seamless" src="http://jsfiddle.net/nMKGs/embedded/result,html,css/light/"></iframe>
+
+
+<p>(2012-05-01 更新)<br/>
+因为自己用的是Sass，所以封装了一下，Sass的功能很强大：<br/>
+<a href="/blog/better-transparentize-mixin-for-sass">Sass中通过mixin封装透明背景模块</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">思扬</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2011-11-29T16:44:00+08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2011</span></span> <span class='time'>4:44 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/qian-duan/'>前端</a>, <a class='category' href='/blog/categories/chang-yong/'>常用</a>, <a class='category' href='/blog/categories/fan-yi/'>翻译</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/html-template/" title="Previous Post: HTML模板">&laquo; HTML模板</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/web-design-trends-in-2012/" title="Next Post: 2012十大Web设计趋势">2012十大Web设计趋势 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>简介</h1>
+  <p>我的技术博客</p>
+  <p>o(∩_∩)o</p>
+</section>
+<section>
+  <h1>常用链接</h1>
+  <ul>
+    <li>
+      <a href="http://iaieye.com" target="_blank">IAIEYE-我的时间线网站</a>
+    </li>
+    <li>
+      <a href="https://github.com/fancyoung/fancy-emacs/wiki/shortcut" target="_blank">Emacs快捷键</a>
+    </li>
+  </ul>
+</section>
+<section>
+  <h1>Podcast播客</h1>
+  <ul>
+    <li>
+      <a href="http://english.cri.cn/easyfm/08program_morning.htm" target="_blank">飞鱼秀</a>
+      <p>不是播客，但是我最爱的广播</p>
+    </li>
+    <li>
+      <a href="http://teahour.fm/" target="_blank">Teahour</a>
+      <p>技术&创业必听</p>
+    </li>
+    <li>
+      <a href="http://dongwu.21cbr.com/" target="_blank">冬吴相对论</a>
+      <p>正常的三观，有深度的话题</p>
+    </li>
+    <li>
+      <a href="http://ydlbk.com/" target="_blank">友的聊播客</a>
+      <p>一群游戏玩家的大杂烩</p>
+    </li>
+  </ul>
+</section>
+<section>
+  <h1>技术博客</h1>
+  <ul>
+    <li>
+      <a href="http://ejohn.org/" target="_blank">John Resig</a>
+      <p>jQuery创始人</p>
+    </li>
+    <li>
+      <a href="http://davidwalsh.name/" target="_blank">David Walsh Blog</a>
+      <p>Mootools开发者</p>
+    </li>
+    <li>
+      <a href="http://lifesinger.wordpress.com/" target="_blank">岁月如歌</a>
+      <p>需翻墙</p>
+    </li>
+  </ul>
+</section>
+<section>
+  <h1>其它博客</h1>
+  <ul>
+    <li>
+      <a href="http://blog.sina.com.cn/twocold" target="_blank">韩寒</a>
+    </li>
+    <li>
+      <a href="http://blog.sina.com.cn/fangzhouzi" target="_blank">方舟子</a>
+    </li>
+    <li>
+      <a href="http://thisisdongdongqiang.com/" target="_blank">东东枪</a>
+    </li>
+  </ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/a-better-way-to-learn-angularjs/">学习AngularJS方法（翻译）</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/use-octopress-new-post-function-with-zsh/">Octopress在zsh下无法新建博客的问题</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/arch-linux-reinstall-glibc/">Arch升级失败后修复glibc记录</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/tmux-study/">Tmux使用</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/emacs-tramp-hangs-bug-in-zsh/">解决Emacs远程连接时卡住的bug</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/fancyoung">@fancyoung</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'fancyoung',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2019 - 思扬 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'fancyoung';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://fancyoung.com/blog/css-background-transparency/';
+        var disqus_url = 'http://fancyoung.com/blog/css-background-transparency/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

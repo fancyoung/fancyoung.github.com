@@ -1,0 +1,697 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>VI快捷键 - 没有标题的博客</title>
+  <meta name="author" content="思扬">
+
+  
+  <meta name="description" content="VI快捷键 常用快捷键 快捷键说明：&lt;CR&gt;回车 命令模式 快捷键 功能 . 重做（与其他操作配合） / / ? 正/反向查找 Ctrl-o/i 向前/后位置跳转 `Ctrl-] 跳到光标下关键字的定义之处 g; 跳到上次修改处。同u&lt;Ctrl-r&gt;（撤销重做）， `.（ &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://fancyoung.com/notes/vi.html">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="没有标题的博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="https://lib.baomitu.com/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="https://fonts.loli.net/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="https://fonts.loli.net/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = 'https://hm.baidu.com/hm.js?00da83c9dca8db90150561e426211e08';
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">没有标题的博客</a></h1>
+  
+    <h2>记录与分享</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="fancyoung.com">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives">博客</a></li>
+  <li><a href="/notes">笔记</a></li>
+  <li><a href="/about">关于我</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article role="article">
+  
+  <header>
+    <h1 class="entry-title">VI快捷键</h1>
+    <p class="meta">
+
+
+
+
+</p>
+  </header>
+  
+  <h2>常用快捷键</h2>
+
+<p>快捷键说明：<code>&lt;CR&gt;</code>回车</p>
+
+<h4>命令模式</h4>
+
+<table>
+<thead>
+<tr>
+<th>快捷键             </th>
+<th> 功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.</code>                 </td>
+<td> 重做（与其他操作配合）</td>
+</tr>
+<tr>
+<td><code>/</code> / <code>?</code>           </td>
+<td> 正/反向查找</td>
+</tr>
+<tr>
+<td><code>Ctrl-o/i</code>             </td>
+<td> 向前/后位置跳转</td>
+</tr>
+<tr>
+<td>`Ctrl-]          </td>
+<td> 跳到光标下关键字的定义之处 </td>
+</tr>
+<tr>
+<td><code>g;</code>             </td>
+<td> 跳到上次修改处。同<code>u&lt;Ctrl-r&gt;</code>（撤销重做）， <code>`.</code>（仅能返回一层）(NO IDEA)</td>
+</tr>
+<tr>
+<td><code>gi</code>             </td>
+<td> 回到上次编辑处，并切到编辑状态。同<code>`^</code> + <code>i</code></td>
+</tr>
+<tr>
+<td><code>gf</code>             </td>
+<td> 跳到光标下文件(配合<code>C-o</code>返回)(NO IDEA)</td>
+</tr>
+</tbody>
+</table>
+
+
+<h4>光标定位</h4>
+
+<table>
+<thead>
+<tr>
+<th>快捷键 </th>
+<th> 功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>w / W       </td>
+<td> 下一个单词开头(WBE大写时以空白字符识别)</td>
+</tr>
+<tr>
+<td>b / B         </td>
+<td> 单词开头</td>
+</tr>
+<tr>
+<td>e / E         </td>
+<td> 单词末尾</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>0             </td>
+<td> 行首</td>
+</tr>
+<tr>
+<td>^             </td>
+<td> 行首非空白字符</td>
+</tr>
+<tr>
+<td>$             </td>
+<td> 行尾</td>
+</tr>
+<tr>
+<td>+ / -        </td>
+<td> 下/上一行行首</td>
+</tr>
+<tr>
+<td>:n / nG     </td>
+<td> 光标定位到第n行</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>( / )          </td>
+<td> 行首/尾</td>
+</tr>
+<tr>
+<td>{ / }         </td>
+<td> 段落首/尾(空行识别)</td>
+</tr>
+<tr>
+<td>H / M / L </td>
+<td> 光标移动到屏幕的顶/中/底部</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Ctrl + y / e </td>
+<td> 屏幕向下/上滚动一行</td>
+</tr>
+<tr>
+<td>Ctrl + f / b </td>
+<td> 向下/上滚动一页</td>
+</tr>
+<tr>
+<td>Ctrl + d / u </td>
+<td> 向下/上滚动半页</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>J                </td>
+<td> 合并行</td>
+</tr>
+<tr>
+<td>=                </td>
+<td> 格式化代码</td>
+</tr>
+<tr>
+<td>&lt; / >           </td>
+<td> 缩进</td>
+</tr>
+<tr>
+<td>:+y / :+p      </td>
+<td> 使用系统剪切板复制/粘贴</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>参考:
+<a href="http://www.ibm.com/developerworks/cn/linux/l-cn-tip-vim/">http://www.ibm.com/developerworks/cn/linux/l-cn-tip-vim/</a>
+<a href="http://blog.csdn.net/yangzhongxuan/article/details/6542808">http://blog.csdn.net/yangzhongxuan/article/details/6542808</a></p>
+
+<h4>复合命令</h4>
+
+<table>
+<thead>
+<tr>
+<th>快捷键  </th>
+<th> 等效命令    </th>
+<th> 功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C      </td>
+<td> c$         </td>
+<td> 删除光标后的内容并切换到编辑模式</td>
+</tr>
+<tr>
+<td>s      </td>
+<td> cl         </td>
+<td> 删除光标处字符并切换到编辑模式</td>
+</tr>
+<tr>
+<td>S      </td>
+<td> ^c         </td>
+<td> 删除当前行并切换到编辑模式</td>
+</tr>
+<tr>
+<td>I      </td>
+<td> ^i         </td>
+<td> 行头部插入</td>
+</tr>
+<tr>
+<td>A      </td>
+<td> $a         </td>
+<td> 行尾部插入</td>
+</tr>
+<tr>
+<td>o / O  </td>
+<td> A<CR> / ko </td>
+<td> 新增行/往上新增行</td>
+</tr>
+</tbody>
+</table>
+
+
+<h4>快速选择&amp;操作</h4>
+
+<ul>
+<li><p>需要三条命令合用（前端工程师必学）：</p>
+
+<ol>
+<li>操作符：<code>v</code>选择, <code>c</code>删除并进入插入模式, <code>y</code>复制, <code>d</code>删除</li>
+<li>进入模式：<code>a</code>包括分隔符, <code>i</code>不包括分隔符</li>
+<li>输入分隔符：<code>)/b</code>, <code>}/B</code>, <code>]</code>, <code>&gt;</code>, <code>'</code>, <code>"</code>, <code>`</code>, <code>t</code>XML标签内部</li>
+</ol>
+</li>
+<li><p>文本块</p>
+
+<ol>
+<li>操作符（同上）</li>
+<li><code>i</code>当前, <code>a</code>包含一个空格（段落为一个空行）</li>
+<li><code>w</code>单词, <code>W</code>字符串, <code>s</code>句子, <code>p</code>段落<br/>
+常用: <code>d</code>配合<code>a</code>, <code>c</code>配合<code>i</code>。如：<code>daw</code>, <code>ciw</code></li>
+</ol>
+</li>
+</ul>
+
+
+<h4>位置标记</h4>
+
+<p><code>m{a-zA-Z}</code>标记，小写为局部，大写为全局<br/>
+<code>'{mark}</code>跳到标记行首，或<code>`{mark}</code>跳到标记光标处<br/>
+常用: <code>mm</code>配合<code>`m</code></p>
+
+<p><code>`</code>后跟（上次*位置）: <code>`</code>跳转, <code>.</code>修改, <code>^</code>插入, <code>[/]</code>修改或复制起始/结束， <code>&lt;/&gt;</code>高亮起始/结束</p>
+
+<h4>编辑模式</h4>
+
+<h4>更多命令</h4>
+
+<table>
+<thead>
+<tr>
+<th> 命令             </th>
+<th> 功能                        </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> :w !sudo tee %    </td>
+<td> 用sudo权限写入              </td>
+</tr>
+</tbody>
+</table>
+
+
+<p><code>C-v C-m</code> 输入win下的换行符<code>^M</code>(win下是<code>C-q C-m</code>)</p>
+
+<h4>缓冲区 registers</h4>
+
+<ul>
+<li>查询缓冲区: <code>:di</code></li>
+<li>帮助: <code>:h registers</code></li>
+<li><p>不同模式下: 如命令模式中<code>"0p</code>，等价于编辑模式的<code>C-r 0</code>。</p></li>
+<li><p>缓存器参数：<br/>
+<code>[1-9]</code>: 最近删除<br/>
+<code>0</code>: 最后一次复制<br/>
+<code>*</code>: 系统剪切板<br/>
+<code>:</code>: 命令暂存器<br/>
+<code>/</code>: 搜索<br/>
+<code>.</code>: 最近插入的<br/>
+<code>%</code>: 文档名(IDEA插件里不可用)</p></li>
+</ul>
+
+
+<h4>窗口</h4>
+
+<p><code>&lt;C-w&gt;w</code> 窗口间跳转（w也可以使用<code>hjkl</code>方向键，同<code>&lt;C-w&gt;&lt;C-w&gt;</code>(方便)）</p>
+
+<h4>替换</h4>
+
+<p>例子：</p>
+
+<pre><code>a
+说明a
+b
+说明b
+...
+</code></pre>
+
+<p><code>%s/\v(.+)\n(.+)/&lt;label for="\1"&gt;^M  &lt;input type="radio" name="t" id="\1" value="alipay" \/&gt;^M
+ &lt;img src="images\/pay_bank_abc.gif" alt="\2" \/&gt;^M&lt;\/label&gt;</code></p>
+
+<ul>
+<li>其他
+<code>p</code>与<code>"0p</code>的区别：当之前进行过删除操作，前者会取出被删除的值，而后者只取上一次复制的值。</li>
+</ul>
+
+
+<h4>正则</h4>
+
+<p>后置参数<code>e</code>，搜索时定位到末尾（IDEA不可用），如：<code>/div/e</code>。</p>
+
+<h2>配置相关</h2>
+
+<p><code>$ vim -u NONE -N</code> 不加载自定制vimrc文件。（<code>-N</code>防止进入vi兼容模式）</p>
+
+<h2>未整理</h2>
+
+<ul>
+<li><p><code>g + 行操作</code> 屏幕行移动（用于有自动换行，如：gj, gk, g0, g^, g$）</p></li>
+<li><p><code>*</code>查找光标处单词</p></li>
+<li><p><code>f + 字符</code> 当前行查找（配合<code>;</code>或<code>,</code>进行重复或反方向，<code>F</code>可直接向前查找， <code>t/T</code>则是移动到前一个字符）<br/>
+例: <code>f,dt.</code> 删除后面逗号到句号之间的内容。<br/>
+建议：<code>f/F</code>在普通模式使用，<code>t/T</code>配合<code>d/c</code>等操作符使用。</p></li>
+<li><p><code>d{motion}</code> 定位删除<br/>
+例：删除当前位置到<code>get</code>单词间的内容：<code>v + /ge&lt;CR&gt; + h + d</code> == <code>d/ge&lt;CR&gt;</code></p></li>
+<li><p><code>&lt;C-a&gt;</code>/<code>&lt;C-x&gt;</code> 当前行数字加/减 （后者在终端下可能与其他快捷键冲突）</p></li>
+<li><p>very magic模式：<code>\v</code>适合正则时使用（不需输入转义符），<code>\V</code>转义符之外字符都保持原意</p></li>
+<li><p><code>di</code>/<code>da</code>+<code>(</code>/<code>[</code>/<code>{</code> 删除括号内内容/包含括号</p></li>
+</ul>
+
+
+<h4>规则</h4>
+
+<ul>
+<li>操作符 + 动作命令 = 操作</li>
+<li>当一个操作符命令被连续调用两次时，它会作用于当前行</li>
+</ul>
+
+
+<h2>基准</h2>
+
+<h4>操作符</h4>
+
+<table>
+<thead>
+<tr>
+<th>命令 </th>
+<th> 用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>c  </td>
+<td> 修改</td>
+</tr>
+<tr>
+<td>d  </td>
+<td> 删除</td>
+</tr>
+<tr>
+<td>y  </td>
+<td> 复制到寄存器</td>
+</tr>
+<tr>
+<td>g~ </td>
+<td> 反转大小写</td>
+</tr>
+<tr>
+<td>gu </td>
+<td> 转小写</td>
+</tr>
+<tr>
+<td>gU </td>
+<td> 转大写</td>
+</tr>
+<tr>
+<td>>  </td>
+<td> 增加缩进</td>
+</tr>
+<tr>
+<td>&lt;  </td>
+<td> 减小缩进</td>
+</tr>
+<tr>
+<td>=  </td>
+<td> 自动缩进</td>
+</tr>
+<tr>
+<td>!  </td>
+<td> 使用外部程序过滤{motion}所跨越的行</td>
+</tr>
+</tbody>
+</table>
+
+
+<h2>插件</h2>
+
+<h4><a href="https://github.com/gmarik/Vundle.vim">Vundle</a></h4>
+
+<p>插件管理
+编辑<code>.vimrc</code>添加查件，重载vim后<code>:PluginInstall</code></p>
+
+<h4><a href="https://github.com/altercation/vim-colors-solarized">Solarized</a></h4>
+
+<p>配色方案</p>
+
+<h4><a href="https://wincent.com/products/command-t">Comment-T</a></h4>
+
+<p>快速文件定位
+<code>
+cd ~/.vim/bundle/command-t/ruby/command-t (包含extconf.rb文件的目录)
+ruby extconf.rb
+make
+</code></p>
+
+<h2>其他参技</h2>
+
+<p><a href="http://www.admin10000.com/document/6015.html">一些不起眼但非常有用的 Vim 命令</a></p>
+
+  
+    <footer>
+      <p class="meta">
+        
+        
+
+
+
+
+
+        
+      </p>
+      
+        <div class="sharing">
+  
+  
+  
+</div>
+
+      
+    </footer>
+  
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>简介</h1>
+  <p>我的技术博客</p>
+  <p>o(∩_∩)o</p>
+</section>
+<section>
+  <h1>常用链接</h1>
+  <ul>
+    <li>
+      <a href="http://iaieye.com" target="_blank">IAIEYE-我的时间线网站</a>
+    </li>
+    <li>
+      <a href="https://github.com/fancyoung/fancy-emacs/wiki/shortcut" target="_blank">Emacs快捷键</a>
+    </li>
+  </ul>
+</section>
+<section>
+  <h1>Podcast播客</h1>
+  <ul>
+    <li>
+      <a href="http://english.cri.cn/easyfm/08program_morning.htm" target="_blank">飞鱼秀</a>
+      <p>不是播客，但是我最爱的广播</p>
+    </li>
+    <li>
+      <a href="http://teahour.fm/" target="_blank">Teahour</a>
+      <p>技术&创业必听</p>
+    </li>
+    <li>
+      <a href="http://dongwu.21cbr.com/" target="_blank">冬吴相对论</a>
+      <p>正常的三观，有深度的话题</p>
+    </li>
+    <li>
+      <a href="http://ydlbk.com/" target="_blank">友的聊播客</a>
+      <p>一群游戏玩家的大杂烩</p>
+    </li>
+  </ul>
+</section>
+<section>
+  <h1>技术博客</h1>
+  <ul>
+    <li>
+      <a href="http://ejohn.org/" target="_blank">John Resig</a>
+      <p>jQuery创始人</p>
+    </li>
+    <li>
+      <a href="http://davidwalsh.name/" target="_blank">David Walsh Blog</a>
+      <p>Mootools开发者</p>
+    </li>
+    <li>
+      <a href="http://lifesinger.wordpress.com/" target="_blank">岁月如歌</a>
+      <p>需翻墙</p>
+    </li>
+  </ul>
+</section>
+<section>
+  <h1>其它博客</h1>
+  <ul>
+    <li>
+      <a href="http://blog.sina.com.cn/twocold" target="_blank">韩寒</a>
+    </li>
+    <li>
+      <a href="http://blog.sina.com.cn/fangzhouzi" target="_blank">方舟子</a>
+    </li>
+    <li>
+      <a href="http://thisisdongdongqiang.com/" target="_blank">东东枪</a>
+    </li>
+  </ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/a-better-way-to-learn-angularjs/">学习AngularJS方法（翻译）</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/use-octopress-new-post-function-with-zsh/">Octopress在zsh下无法新建博客的问题</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/arch-linux-reinstall-glibc/">Arch升级失败后修复glibc记录</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/tmux-study/">Tmux使用</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/emacs-tramp-hangs-bug-in-zsh/">解决Emacs远程连接时卡住的bug</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/fancyoung">@fancyoung</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'fancyoung',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2019 - 思扬 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'fancyoung';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://fancyoung.com/notes/vi.html';
+        var disqus_url = 'http://fancyoung.com/notes/vi.html';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

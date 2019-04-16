@@ -1,0 +1,385 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Git/Hg常见操作 - 没有标题的博客</title>
+  <meta name="author" content="思扬">
+
+  
+  <meta name="description" content="Git/Hg常见操作 git 对比stage的文件
+$ git diff --cached 修改最后一次提交
+$ git commit --amend 取消上一次的提交(未push前)
+$ git reset --soft HEAD^ 恢复所有被修改的文件
+$ git checkout -f &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://fancyoung.com/notes/git.html">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="没有标题的博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="https://lib.baomitu.com/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="https://fonts.loli.net/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="https://fonts.loli.net/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = 'https://hm.baidu.com/hm.js?00da83c9dca8db90150561e426211e08';
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">没有标题的博客</a></h1>
+  
+    <h2>记录与分享</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="fancyoung.com">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives">博客</a></li>
+  <li><a href="/notes">笔记</a></li>
+  <li><a href="/about">关于我</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article role="article">
+  
+  <header>
+    <h1 class="entry-title">Git/Hg常见操作</h1>
+    <p class="meta">
+
+
+
+
+</p>
+  </header>
+  
+  <h2>git</h2>
+
+<p>对比stage的文件
+<code>$ git diff --cached</code></p>
+
+<p>修改最后一次提交
+<code>$ git commit --amend</code></p>
+
+<p>取消上一次的提交(未push前)
+<code>$ git  reset --soft HEAD^</code></p>
+
+<p>恢复所有被修改的文件
+<code>$ git checkout -f</code></p>
+
+<p>将文件移出版本管理，但不删除
+<code>$ git rm --cached $file</code></p>
+
+<p>提交时显示修改记录(之前都是<code>$ git diff --cached</code> + <code>$ git ci -m</code>)
+<code>$ git ci -v</code></p>
+
+<p>还原曾经被删除的文件
+<code>git checkout $(git rev-list -n 1 HEAD -- "$file")^ -- "$file"</code>
+<a href="http://stackoverflow.com/questions/953481/restore-a-deleted-file-in-a-git-repo">http://stackoverflow.com/questions/953481/restore-a-deleted-file-in-a-git-repo</a></p>
+
+<p>忽略mode权限(chmod)<br/>
+配置：<code>core.fileMode=false</code>， 如<code>git -c core.fileMode=false diff</code>
+<a href="http://stackoverflow.com/questions/1580596/how-do-i-make-git-ignore-file-mode-chmod-changes">http://stackoverflow.com/questions/1580596/how-do-i-make-git-ignore-file-mode-chmod-changes</a></p>
+
+<h4>查看历史 <a href="http://git-scm.com/book/zh/Git-%E5%9F%BA%E7%A1%80-%E6%9F%A5%E7%9C%8B%E6%8F%90%E4%BA%A4%E5%8E%86%E5%8F%B2">详细</a></h4>
+
+<p>限制历史条数
+<code>$ git log -n 3</code>或<code>$ git log -3</code></p>
+
+<p>显示具体变动
+<code>$ git log -p</code></p>
+
+<p>显示变动文件列表
+<code>$ git log --name-only</code>,
+<code>$ git log --name-only -1</code>,
+<code>$ git log --name-only --oneline</code></p>
+
+<p>显示最近2次的具体变动
+<code>$ git log -p -2</code></p>
+
+<p>简要显示增改行数统计
+<code>$ git log --stat</code></p>
+
+<p>格式化输出
+<code>$ git log --pretty=oneline</code>
+(可以为<code>oneline</code>, <code>short</code>, <code>full</code>, <code>fuller</code>, 或者自定制, 如<code>format:"%h - %an, %ar : %s"</code>)</p>
+
+<p>过滤条件
+<code>--graph</code>
+<code>--since/after</code>/<code>--until/before</code>
+<code>--author</code>
+<code>--committer</code>
+<code>--grep</code>
+<code>--all-match</code></p>
+
+<h4>其他</h4>
+
+<p>连子模块一起更新
+<code>$ git pull --recurse-submodules</code> (v1.7.3+)</p>
+
+<p>放弃本地修改提交，强制与服务器同步
+<code>$ git fetch origin</code>
+<code>$ git reset --hard origin/master</code></p>
+
+<h2>hg</h2>
+
+<h4>查看历史</h4>
+
+<p>限制历史条数
+<code>$ hg log -l 3</code></p>
+
+<p>显示修改文件
+<code>$ hg log -v</code></p>
+
+<p>显示具体变动
+<code>$ hg log -p</code></p>
+
+<p>查看具体版本
+<code>$ hg log -r 652</code>
+<code>$ hg log -r a7b97cdfac3c</code>
+<code>$ hg log -r 652:654</code>
+<code>$ hg log -r 650 -r 654</code></p>
+
+  
+    <footer>
+      <p class="meta">
+        
+        
+
+
+
+
+
+        
+      </p>
+      
+        <div class="sharing">
+  
+  
+  
+</div>
+
+      
+    </footer>
+  
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>简介</h1>
+  <p>我的技术博客</p>
+  <p>o(∩_∩)o</p>
+</section>
+<section>
+  <h1>常用链接</h1>
+  <ul>
+    <li>
+      <a href="http://iaieye.com" target="_blank">IAIEYE-我的时间线网站</a>
+    </li>
+    <li>
+      <a href="https://github.com/fancyoung/fancy-emacs/wiki/shortcut" target="_blank">Emacs快捷键</a>
+    </li>
+  </ul>
+</section>
+<section>
+  <h1>Podcast播客</h1>
+  <ul>
+    <li>
+      <a href="http://english.cri.cn/easyfm/08program_morning.htm" target="_blank">飞鱼秀</a>
+      <p>不是播客，但是我最爱的广播</p>
+    </li>
+    <li>
+      <a href="http://teahour.fm/" target="_blank">Teahour</a>
+      <p>技术&创业必听</p>
+    </li>
+    <li>
+      <a href="http://dongwu.21cbr.com/" target="_blank">冬吴相对论</a>
+      <p>正常的三观，有深度的话题</p>
+    </li>
+    <li>
+      <a href="http://ydlbk.com/" target="_blank">友的聊播客</a>
+      <p>一群游戏玩家的大杂烩</p>
+    </li>
+  </ul>
+</section>
+<section>
+  <h1>技术博客</h1>
+  <ul>
+    <li>
+      <a href="http://ejohn.org/" target="_blank">John Resig</a>
+      <p>jQuery创始人</p>
+    </li>
+    <li>
+      <a href="http://davidwalsh.name/" target="_blank">David Walsh Blog</a>
+      <p>Mootools开发者</p>
+    </li>
+    <li>
+      <a href="http://lifesinger.wordpress.com/" target="_blank">岁月如歌</a>
+      <p>需翻墙</p>
+    </li>
+  </ul>
+</section>
+<section>
+  <h1>其它博客</h1>
+  <ul>
+    <li>
+      <a href="http://blog.sina.com.cn/twocold" target="_blank">韩寒</a>
+    </li>
+    <li>
+      <a href="http://blog.sina.com.cn/fangzhouzi" target="_blank">方舟子</a>
+    </li>
+    <li>
+      <a href="http://thisisdongdongqiang.com/" target="_blank">东东枪</a>
+    </li>
+  </ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/a-better-way-to-learn-angularjs/">学习AngularJS方法（翻译）</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/use-octopress-new-post-function-with-zsh/">Octopress在zsh下无法新建博客的问题</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/arch-linux-reinstall-glibc/">Arch升级失败后修复glibc记录</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/tmux-study/">Tmux使用</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/emacs-tramp-hangs-bug-in-zsh/">解决Emacs远程连接时卡住的bug</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/fancyoung">@fancyoung</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'fancyoung',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2019 - 思扬 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'fancyoung';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://fancyoung.com/notes/git.html';
+        var disqus_url = 'http://fancyoung.com/notes/git.html';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
