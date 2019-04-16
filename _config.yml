@@ -97,6 +97,9 @@ disqus_show_comment_count: false
 # Google Analytics
 google_analytics_tracking_id: UA-1694311-5
 
+# Baidu Analytics
+baidu_analytics_tracking_id: 00da83c9dca8db90150561e426211e08
+
 # Facebook Like
 facebook_like: false
 
